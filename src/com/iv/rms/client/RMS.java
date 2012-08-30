@@ -1,6 +1,5 @@
 package com.iv.rms.client;
 
-import com.iv.rms.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,14 +7,21 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DatePicker;
+import com.iv.rms.shared.FieldVerifier;
+import com.summatech.gwt.client.HourMinutePicker;
+import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -37,8 +43,6 @@ public class RMS implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -46,13 +50,50 @@ public class RMS implements EntryPoint {
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
-
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
+		RootPanel rootPanel = RootPanel.get("workspace");
+		RootPanel.get("sendButtonContainer").add(sendButton, 196, 416);
+		
+		Label lblWhen = new Label("When");
+		rootPanel.add(lblWhen, 134, 126);
+		
+		DatePicker datePicker = new DatePicker();
+		datePicker.setValue(DateTimeFormat.getShortDateFormat().parse("2012-08-30"));
+		rootPanel.add(datePicker, 134, 148);
+		datePicker.setSize("223px", "181px");
+		HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
+		hourMinutePicker.setTime("", 00 ,00);
+		rootPanel.add(hourMinutePicker, 360, 148);
+		
+		Label lblHow = new Label("How");
+		rootPanel.add(lblHow, 134, 337);
+		
+		SimpleCheckBox simpleCheckBox = new SimpleCheckBox();
+		simpleCheckBox.setName("Mail");
+		rootPanel.add(simpleCheckBox, 307, 359);
+		
+		SimpleCheckBox simpleCheckBox_1 = new SimpleCheckBox();
+		rootPanel.add(simpleCheckBox_1, 134, 359);
+		
+		SimpleCheckBox simpleCheckBox_2 = new SimpleCheckBox();
+		rootPanel.add(simpleCheckBox_2, 210, 359);
+		
+		InlineLabel nlnlblNewInlinelabel = new InlineLabel("Mail");
+		rootPanel.add(nlnlblNewInlinelabel, 236, 359);
+		
+		InlineLabel nlnlblYm = new InlineLabel("YM");
+		rootPanel.add(nlnlblYm, 160, 359);
+		nlnlblYm.setSize("24px", "16px");
+		
+		InlineLabel nlnlblSms = new InlineLabel("SMS");
+		rootPanel.add(nlnlblSms, 333, 359);
+		nlnlblSms.setSize("24px", "16px");
+		
+		InlineLabel nlnlblWhat = new InlineLabel("What");
+		rootPanel.add(nlnlblWhat, 134, 16);
+		
+		TextArea textArea = new TextArea();
+		rootPanel.add(textArea, 134, 38);
+		textArea.setSize("215px", "69px");
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -106,7 +147,7 @@ public class RMS implements EntryPoint {
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				String textToServer = nameField.getText();
+				String textToServer = "";
 				if (!FieldVerifier.isValidName(textToServer)) {
 					errorLabel.setText("Please enter at least four characters");
 					return;
@@ -140,6 +181,5 @@ public class RMS implements EntryPoint {
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
 	}
 }
