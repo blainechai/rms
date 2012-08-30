@@ -1,0 +1,2 @@
+serviceClass: com.iv.rms.client.GreetingService
+path: 0141E19BA51178A741276F4E9EBCC3AD.gwt.rpc
