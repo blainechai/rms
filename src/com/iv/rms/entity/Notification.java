@@ -1,4 +1,4 @@
-package com.iv.rms;
+package com.iv.rms.entity;
 
 import java.util.Date;
 
@@ -27,19 +27,26 @@ public class Notification {
 	private Date creationDate;
 	
 	@Persistent
-	private Date triggerDate;
+	private Integer triggerDate;
 	
+	@Persistent
+	private Integer minutes;
+	
+	@Persistent
+	private Boolean procesed = Boolean.FALSE;
+
 	public Notification(){
 		
 	}
 	
-	public Notification(Key key, Owner owner, Text message, Date creationDate, Date triggerDate) {
+	public Notification(Key key, Owner owner, Text message, Date creationDate, Integer triggerDate, Integer minutes) {
 		super();
 		this.key = key;
 		this.owner = owner;
 		this.message = message;
 		this.creationDate = creationDate;
 		this.triggerDate = triggerDate;
+		this.minutes = minutes;
 	}
 
 	public Key getKey() {
@@ -74,12 +81,28 @@ public class Notification {
 		this.creationDate = creationDate;
 	}
 
-	public Date getTriggerDate() {
+	public Integer getTriggerDate() {
 		return triggerDate;
 	}
 
-	public void setTriggerDate(Date triggerDate) {
+	public void setTriggerDate(Integer triggerDate) {
 		this.triggerDate = triggerDate;
+	}
+	
+	public Integer getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(Integer minutes) {
+		this.minutes = minutes;
+	}
+
+	public Boolean getProcesed() {
+		return procesed;
+	}
+
+	public void setProcesed(Boolean procesed) {
+		this.procesed = procesed;
 	}
 
 }

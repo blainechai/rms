@@ -16,7 +16,7 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>Web Application Starter Project</title>
+    <title>Remind me this</title>
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
@@ -24,6 +24,7 @@
     <!-- be added before this line.                -->
     <!--                                           -->
     <script type="text/javascript" language="javascript" src="rms/rms.nocache.js"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <!--                                           -->
@@ -32,10 +33,12 @@
   <!-- to create a completely dynamic UI.        -->
   <!--                                           -->
   <body>
-
-    <!-- OPTIONAL: include this if you want history support -->
-    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
-    
+  <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>      
     <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
     <noscript>
       <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
@@ -45,8 +48,26 @@
     </noscript>
 
     <h1></h1>
-
-    <table align="center">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Remind me this</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <table align="center">
       <tr>
         <td colspan="2" style="font-weight:bold;"></td>        
       </tr>
@@ -55,5 +76,7 @@
         <td id="sendButtonContainer"></td>
       </tr>
     </table>
+
+    </div>
   </body>
 </html>

@@ -32,3 +32,20 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+
+#workspace{
+	position:relative;
+	left:20px;
+}
+.verticalContainer{
+	line-height: 15px;
+}
+.howCheckbox label{
+	display: inline;
+	margin: 4px 0 0;
+	vertical-align: middle;
+}
+.howCheckbox input{
+	display: inline;
+	margin: 15px 6px 6px 6px;
+}

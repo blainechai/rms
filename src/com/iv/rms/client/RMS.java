@@ -1,7 +1,11 @@
 package com.iv.rms.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -10,12 +14,13 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -32,68 +37,71 @@ public class RMS implements EntryPoint {
 	 * returns an error.
 	 */
 	private static final String SERVER_ERROR = "An error occurred while " + "attempting to contact the server. Please check your network " + "connection and try again.";
-
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	
+	private final NotificationServiceAsync notificationService = GWT.create(NotificationService.class);
 
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
 		final Label errorLabel = new Label();
-
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel rootPanel = RootPanel.get("workspace");
-		RootPanel.get("sendButtonContainer").add(sendButton, 196, 416);
-		
-		Label lblWhen = new Label("When");
-		rootPanel.add(lblWhen, 134, 126);
-		
-		DatePicker datePicker = new DatePicker();
-		datePicker.setValue(DateTimeFormat.getShortDateFormat().parse("2012-08-30"));
-		rootPanel.add(datePicker, 134, 148);
-		datePicker.setSize("223px", "181px");
-		HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
-		hourMinutePicker.setTime("", 00 ,00);
-		rootPanel.add(hourMinutePicker, 360, 148);
-		
-		Label lblHow = new Label("How");
-		rootPanel.add(lblHow, 134, 337);
-		
-		SimpleCheckBox simpleCheckBox = new SimpleCheckBox();
-		simpleCheckBox.setName("Mail");
-		rootPanel.add(simpleCheckBox, 307, 359);
-		
-		SimpleCheckBox simpleCheckBox_1 = new SimpleCheckBox();
-		rootPanel.add(simpleCheckBox_1, 134, 359);
-		
-		SimpleCheckBox simpleCheckBox_2 = new SimpleCheckBox();
-		rootPanel.add(simpleCheckBox_2, 210, 359);
-		
-		InlineLabel nlnlblNewInlinelabel = new InlineLabel("Mail");
-		rootPanel.add(nlnlblNewInlinelabel, 236, 359);
-		
-		InlineLabel nlnlblYm = new InlineLabel("YM");
-		rootPanel.add(nlnlblYm, 160, 359);
-		nlnlblYm.setSize("24px", "16px");
-		
-		InlineLabel nlnlblSms = new InlineLabel("SMS");
-		rootPanel.add(nlnlblSms, 333, 359);
-		nlnlblSms.setSize("24px", "16px");
-		
-		InlineLabel nlnlblWhat = new InlineLabel("What");
-		rootPanel.add(nlnlblWhat, 134, 16);
-		
-		TextArea textArea = new TextArea();
-		rootPanel.add(textArea, 134, 38);
-		textArea.setSize("215px", "69px");
+		rootPanel.add(errorLabel);
+		rootPanel.getElement().getStyle().setPosition(Position.RELATIVE);
+				
+				VerticalPanel verticalPanel = new VerticalPanel();
+				rootPanel.add(verticalPanel, 184, 10);
+				verticalPanel.setSize("297px", "473px");
+				verticalPanel.getElement().getStyle().setPosition(Position.STATIC);
+				
+				InlineLabel nlnlblWhat = new InlineLabel("What");
+				verticalPanel.add(nlnlblWhat);
+				
+				final TextArea messageBox = new TextArea();
+				verticalPanel.add(messageBox);
+				messageBox.setSize("215px", "69px");
+				
+				Label lblWhen = new Label("When");
+				verticalPanel.add(lblWhen);
+						
+						final DatePicker datePicker = new DatePicker();
+						verticalPanel.add(datePicker);
+						datePicker.setValue(DateTimeFormat.getShortDateFormat().parse("2012-08-30"));
+						datePicker.setSize("223px", "181px");
+						final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
+						hourMinutePicker.setStyleName("verticalContainer");
+						verticalPanel.add(hourMinutePicker);
+						
+						Label lblHow = new Label("How");
+						verticalPanel.add(lblHow);
+						
+						HorizontalPanel horizontalPanel = new HorizontalPanel();
+						horizontalPanel.setSpacing(5);
+						verticalPanel.add(horizontalPanel);
+						horizontalPanel.setWidth("297px");
+						
+						final CheckBox ymCheckBox = new CheckBox("YM");
+						ymCheckBox.setStyleName("howCheckbox");
+						horizontalPanel.add(ymCheckBox);
+						
+						
+						final CheckBox mailCheckBox = new CheckBox("Mail");
+						mailCheckBox.setStyleName("howCheckbox");
+						horizontalPanel.add(mailCheckBox);
+					
+						final Button sendButton = new Button("Send");
+						verticalPanel.add(sendButton);
+						
+								// We can add style names to widgets
+								sendButton.addStyleName("sendButton");
+								
+							
+								
+								
+						hourMinutePicker.setTime("", 00 ,00);
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -124,7 +132,7 @@ public class RMS implements EntryPoint {
 		});
 
 		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
+		class NewNotificationHandler implements ClickHandler, KeyUpHandler {
 			/**
 			 * Fired when the user clicks on the sendButton.
 			 */
@@ -148,38 +156,55 @@ public class RMS implements EntryPoint {
 				// First, we validate the input.
 				errorLabel.setText("");
 				String textToServer = "";
-				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
+				if (!FieldVerifier.isValidName(messageBox.getText())) {
+					errorLabel.setText("Message is too short");
+					
 					return;
 				}
 
 				// Then, we send the input to the server.
-				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
-				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+				SimpleNotification sn = new SimpleNotification();
+				sn.setMessage(messageBox.getText());
+				sn.setMinutes(hourMinutePicker.getMinutes());
+				sn.setDate(datePicker.getValue());
+				List<NotificationViews> selectedViews = new ArrayList<NotificationViews>();
+				if ( ymCheckBox.getValue() ){
+					selectedViews.add(NotificationViews.INSTANT_MESSAGING);
+				}
+				if ( mailCheckBox.getValue() ){
+					selectedViews.add(NotificationViews.MAIL);
+				}
+				sn.setViews(selectedViews);
+				
+				
+
+				notificationService.saveNotification(sn, new AsyncCallback<Void>() {
+					
+					@Override
+					public void onSuccess(Void result) {
+						dialogBox.setText("Remote Procedure Call");
+						serverResponseLabel.removeStyleName("serverResponseLabelError");
+						
+						dialogBox.center();
+						closeButton.setFocus(true);
+						
+					}
+					
+					@Override
 					public void onFailure(Throwable caught) {
-						// Show the RPC error message to the user
 						dialogBox.setText("Remote Procedure Call - Failure");
 						serverResponseLabel.addStyleName("serverResponseLabelError");
 						serverResponseLabel.setHTML(SERVER_ERROR);
 						dialogBox.center();
 						closeButton.setFocus(true);
-					}
-
-					public void onSuccess(String result) {
-						dialogBox.setText("Remote Procedure Call");
-						serverResponseLabel.removeStyleName("serverResponseLabelError");
-						serverResponseLabel.setHTML(result);
-						dialogBox.center();
-						closeButton.setFocus(true);
+						
 					}
 				});
 			}
 		}
 
 		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
+		NewNotificationHandler handler = new NewNotificationHandler();
 		sendButton.addClickHandler(handler);
 	}
 }
