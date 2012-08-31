@@ -1,3 +1,4 @@
 /.git
 /gwt-unitCache
 /test-classes
+*.classes
