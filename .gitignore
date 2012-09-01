@@ -2,3 +2,4 @@
 /gwt-unitCache
 /test-classes
 *.class
+/.gwt
