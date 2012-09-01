@@ -72,7 +72,6 @@ public class RMS implements EntryPoint {
 						datePicker.setValue(DateTimeFormat.getShortDateFormat().parse("2012-08-30"));
 						datePicker.setSize("223px", "181px");
 						final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
-						hourMinutePicker.setStyleName("verticalContainer");
 						verticalPanel.add(hourMinutePicker);
 						
 						Label lblHow = new Label("How");
@@ -182,17 +181,12 @@ public class RMS implements EntryPoint {
 					
 					@Override
 					public void onSuccess(Void result) {
-						dialogBox.setText("Remote Procedure Call");
-						serverResponseLabel.removeStyleName("serverResponseLabelError");
-						
-						dialogBox.center();
-						closeButton.setFocus(true);
-						
+						messageBox.setText("");
 					}
 					
 					@Override
 					public void onFailure(Throwable caught) {
-						dialogBox.setText("Remote Procedure Call - Failure");
+						dialogBox.setText("Operation failed");
 						serverResponseLabel.addStyleName("serverResponseLabelError");
 						serverResponseLabel.setHTML(SERVER_ERROR);
 						dialogBox.center();

@@ -47,7 +47,7 @@
   
   
   <servlet-mapping>
-    <servlet-name>processNotificationa</servlet-name>
+    <servlet-name>processNotifications</servlet-name>
     <url-pattern>/processNotifications</url-pattern>
   </servlet-mapping>
 
