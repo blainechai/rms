@@ -7,6 +7,11 @@
   </servlet>
   
   <servlet>
+    <servlet-name>processNotifications</servlet-name>
+    <servlet-class>com.iv.rms.server.ProcessNotificationJobs</servlet-class>
+  </servlet>
+  
+  <servlet>
     <servlet-name>notification</servlet-name>
     <servlet-class>com.iv.rms.server.NotificationServiceImpl</servlet-class>
   </servlet>
@@ -38,6 +43,12 @@
   <servlet-mapping>
     <servlet-name>SystemServiceServlet</servlet-name>
     <url-pattern>/_ah/spi/*</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet-mapping>
+    <servlet-name>processNotificationa</servlet-name>
+    <url-pattern>/processNotifications</url-pattern>
   </servlet-mapping>
 
 </web-app>

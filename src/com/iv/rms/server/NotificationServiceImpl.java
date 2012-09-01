@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.jdo.PersistenceManager;
 
-import com.google.appengine.api.datastore.Text;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.iv.rms.client.NotificationService;
 import com.iv.rms.client.NotificationViews;
@@ -20,7 +19,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	public void saveNotification(SimpleNotification notification) {
 		Notification n = new Notification();
 		n.setCreationDate(new Date());
-		n.setMessage(new Text(notification.getMessage()));
+		n.setMessage(notification.getMessage());
 		n.setTriggerDate(formatDate(notification.getDate()));
 		n.setMinutes(notification.getMinutes());
 		PersistenceManager pm = PMF.get().getPersistenceManager(); 

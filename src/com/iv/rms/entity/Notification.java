@@ -8,7 +8,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.Text;
 
 @PersistenceCapable
 public class Notification {
@@ -21,7 +20,7 @@ public class Notification {
 	private Owner owner;
 	
 	@Persistent
-	private Text message;
+	private String message;
 	
 	@Persistent
 	private Date creationDate;
@@ -39,7 +38,7 @@ public class Notification {
 		
 	}
 	
-	public Notification(Key key, Owner owner, Text message, Date creationDate, Integer triggerDate, Integer minutes) {
+	public Notification(Key key, Owner owner, String message, Date creationDate, Integer triggerDate, Integer minutes) {
 		super();
 		this.key = key;
 		this.owner = owner;
@@ -65,11 +64,11 @@ public class Notification {
 		this.owner = owner;
 	}
 
-	public Text getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(Text message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 
