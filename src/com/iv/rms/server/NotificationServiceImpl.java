@@ -58,9 +58,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			Integer minutes = Util.getMinutesSinceMidnight(currentDate);
 			pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(Notification.class);
-		    q.setFilter("triggerDate == " + dateInt);
-		    q.setFilter("minutes <= " + minutes);
-		    q.setFilter("procesed == " + Boolean.FALSE);
+		    q.setFilter("triggerDate == " + dateInt + " && minutes <= " + minutes + " && procesed == " + Boolean.FALSE);
 		    List<Notification> results = (List<Notification>) q.execute();
 		    MailService ms = new MailService(); 
 		    if (!results.isEmpty()) {
