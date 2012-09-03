@@ -1,3 +1,0 @@
-# Module rms
-# RPC service class, partial path of RPC policy file
-com.iv.rms.client.NotificationService, B9314213C70363C663ED8E06B04121B4.gwt.rpc

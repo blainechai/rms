@@ -2,7 +2,7 @@
 <cronentries>
   <cron>
     <url>/processNotifications</url>
-    <description>Check notifications</description>
-    <schedule>every 15 minutes</schedule>
+    <description>Check for new notifications</description>
+    <schedule>every 5 minutes</schedule>
   </cron>
 </cronentries>
