@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
-  <!-- Servlets -->
-  
-  <servlet>
-    <servlet-name>processNotifications</servlet-name>
-    <servlet-class>com.iv.rms.server.ProcessNotificationJobs</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <servlet-name>notification</servlet-name>
-    <servlet-class>com.iv.rms.server.NotificationServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>notification</servlet-name>
-    <url-pattern>/rms/notification</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>RMS.html</welcome-file>
-  </welcome-file-list>
-
-  <servlet>
-    <servlet-name>SystemServiceServlet</servlet-name>
-    <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
-    <init-param>
-      <param-name>services</param-name>
-      <param-value/>
-    </init-param>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>SystemServiceServlet</servlet-name>
-    <url-pattern>/_ah/spi/*</url-pattern>
-  </servlet-mapping>
-  
-  
-  <servlet-mapping>
-    <servlet-name>processNotifications</servlet-name>
-    <url-pattern>/processNotifications</url-pattern>
-  </servlet-mapping>
-
+ <filter>
+  <display-name>PreparePageFilter</display-name>
+  <filter-name>PreparePageFilter</filter-name>
+  <filter-class>com.iv.rms.filters.PreparePageFilter</filter-class>
+ </filter>
+ <filter-mapping>
+  <filter-name>PreparePageFilter</filter-name>
+  <url-pattern>*</url-pattern>
+ </filter-mapping>
+ <!-- Servlets -->
+ <servlet>
+  <servlet-name>processNotifications</servlet-name>
+  <servlet-class>com.iv.rms.server.ProcessNotificationJobs</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>notification</servlet-name>
+  <servlet-class>com.iv.rms.server.NotificationServiceImpl</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SystemServiceServlet</servlet-name>
+  <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+  <init-param>
+   <param-name>services</param-name>
+   <param-value/>
+  </init-param>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>notification</servlet-name>
+  <url-pattern>/rms/notification</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SystemServiceServlet</servlet-name>
+  <url-pattern>/_ah/spi/*</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>processNotifications</servlet-name>
+  <url-pattern>/processNotifications</url-pattern>
+ </servlet-mapping>
+ <!-- Default page to serve -->
+ <welcome-file-list>
+  <welcome-file>RMS.html</welcome-file>
+ </welcome-file-list>
 </web-app>

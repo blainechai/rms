@@ -49,6 +49,11 @@ h1 {
 	display: inline;
 	margin: 15px 6px 6px 6px;
 }
-.timepickr-display{
-	width:18px;
+.gwt-Label{
+	font-size: 15px;
+	font-weight: bold;
+}
+.gwt-InlineLabel{
+	font-size: 15px;
+	font-weight: bold
 }

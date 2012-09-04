@@ -1,6 +1,7 @@
 package com.iv.rms.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -27,11 +28,12 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import com.iv.rms.shared.FieldVerifier;
 import com.summatech.gwt.client.HourMinutePicker;
 import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class RMS implements EntryPoint {
+public class HorizontalRMS implements EntryPoint {
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -51,52 +53,70 @@ public class RMS implements EntryPoint {
 		RootPanel rootPanel = RootPanel.get("workspace");
 		rootPanel.add(errorLabel);
 		rootPanel.getElement().getStyle().setPosition(Position.RELATIVE);
-
-		VerticalPanel verticalPanel = new VerticalPanel();
-		rootPanel.add(verticalPanel, 184, 10);
-		verticalPanel.setSize("297px", "473px");
-		verticalPanel.getElement().getStyle().setPosition(Position.STATIC);
-
-		InlineLabel nlnlblWhat = new InlineLabel("What");
-		verticalPanel.add(nlnlblWhat);
-
-		final TextArea messageBox = new TextArea();
-		verticalPanel.add(messageBox);
-		messageBox.setSize("215px", "69px");
-
-		Label lblWhen = new Label("When");
-		verticalPanel.add(lblWhen);
-
-		final DatePicker datePicker = new DatePicker();
-		verticalPanel.add(datePicker);
-		datePicker.setValue(DateTimeFormat.getShortDateFormat().parse("2012-08-30"));
-		datePicker.setSize("223px", "181px");
-		final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
-		verticalPanel.add(hourMinutePicker);
-
-		Label lblHow = new Label("How");
-		verticalPanel.add(lblHow);
-
-		HorizontalPanel horizontalPanel = new HorizontalPanel();
-		horizontalPanel.setSpacing(5);
-		verticalPanel.add(horizontalPanel);
-		horizontalPanel.setWidth("297px");
-
-		final CheckBox ymCheckBox = new CheckBox("YM");
-		ymCheckBox.setStyleName("howCheckbox");
-		horizontalPanel.add(ymCheckBox);
-
-		final CheckBox mailCheckBox = new CheckBox("Mail");
-		mailCheckBox.setStyleName("howCheckbox");
-		horizontalPanel.add(mailCheckBox);
-
-		final Button sendButton = new Button("Send");
-		verticalPanel.add(sendButton);
-
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
-
-		hourMinutePicker.setTime("", 00, 00);
+						
+						VerticalPanel verticalPanel = new VerticalPanel();
+						verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+						rootPanel.add(verticalPanel);
+						
+								HorizontalPanel horizontalPanel_1 = new HorizontalPanel();
+								verticalPanel.add(horizontalPanel_1);
+								horizontalPanel_1.setSpacing(20);
+								horizontalPanel_1.setSize("481px", "400px");
+								horizontalPanel_1.getElement().getStyle().setPosition(Position.STATIC);
+								
+										VerticalPanel whenPanel = new VerticalPanel();
+										whenPanel.setSpacing(20);
+										horizontalPanel_1.add(whenPanel);
+										
+												Label lblWhen = new Label("When");
+												whenPanel.add(lblWhen);
+												
+														final DatePicker datePicker = new DatePicker();
+														whenPanel.add(datePicker);
+														datePicker.setValue(new Date());
+														datePicker.setSize("262px", "182px");
+														final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
+														whenPanel.add(hourMinutePicker);
+														
+																hourMinutePicker.setTime("", 00, 00);
+																
+																		VerticalPanel whatPanel = new VerticalPanel();
+																		whatPanel.setSpacing(20);
+																		horizontalPanel_1.add(whatPanel);
+																		
+																				InlineLabel nlnlblWhat = new InlineLabel("What");
+																				whatPanel.add(nlnlblWhat);
+																				
+																						final TextArea messageBox = new TextArea();
+																						whatPanel.add(messageBox);
+																						messageBox.setSize("262px", "222px");
+																						
+																								VerticalPanel howPanel = new VerticalPanel();
+																								howPanel.setSpacing(20);
+																								horizontalPanel_1.add(howPanel);
+																								
+																										Label lblHow = new Label("How");
+																										howPanel.add(lblHow);
+																										lblHow.setWidth("50px");
+																										
+																												HorizontalPanel horizontalPanel = new HorizontalPanel();
+																												howPanel.add(horizontalPanel);
+																												horizontalPanel.setSpacing(5);
+																												horizontalPanel.setWidth("297px");
+																												
+																														final CheckBox mailCheckBox = new CheckBox("Mail");
+																														mailCheckBox.setEnabled(false);
+																														mailCheckBox.setChecked(true);
+																														mailCheckBox.setStyleName("howCheckbox");
+																														horizontalPanel.add(mailCheckBox);
+																														
+																																final Button sendButton = new Button("Send");
+																																verticalPanel.add(sendButton);
+																																
+																																		// We can add style names to widgets
+																																		sendButton.addStyleName("sendButton");
+																																		
+						
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -164,9 +184,6 @@ public class RMS implements EntryPoint {
 				sn.setMinutes(hourMinutePicker.getMinutes());
 				sn.setDate(datePicker.getValue());
 				List<NotificationViews> selectedViews = new ArrayList<NotificationViews>();
-				if (ymCheckBox.getValue()) {
-					selectedViews.add(NotificationViews.INSTANT_MESSAGING);
-				}
 				if (mailCheckBox.getValue()) {
 					selectedViews.add(NotificationViews.MAIL);
 				}
@@ -194,6 +211,6 @@ public class RMS implements EntryPoint {
 
 		// Add a handler to send the name to the server
 		NewNotificationHandler handler = new NewNotificationHandler();
-		sendButton.addClickHandler(handler);
+		
 	}
 }

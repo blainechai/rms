@@ -7,12 +7,15 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.iv.rms.client.NotificationService;
 import com.iv.rms.client.NotificationViews;
 import com.iv.rms.client.SimpleNotification;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.NotificationView;
+import com.iv.rms.entity.Owner;
 import com.iv.rms.mail.MailService;
 import com.iv.rms.shared.Util;
 
@@ -26,6 +29,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		n.setMessage(notification.getMessage());
 		n.setTriggerDate(formatDate(notification.getDate()));
 		n.setMinutes(notification.getMinutes());
+		n.setOwnerId(getOrCreateOwner().getUserId());
 		PersistenceManager pm = PMF.get().getPersistenceManager(); 
 		try{
 			pm.makePersistent(n);
@@ -63,7 +67,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		    MailService ms = new MailService(); 
 		    if (!results.isEmpty()) {
 	            for (Notification n : results) {
-	                ms.sendMail(n);
+	                ms.sendMail(n, getOwner(n.getOwnerId()));
 	                n.setProcesed(Boolean.TRUE);
 	            }
 	        }
@@ -72,6 +76,51 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}finally{
 			pm.close();
 		}
+	}
+	
+	public Owner getOrCreateOwner(){
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+		if ( user != null ){
+			// check if this user has an owner object
+			Owner owner = getOwner(user.getUserId());
+			if ( owner == null ){
+				//create owner
+				owner = new Owner();
+				owner.setCreationDate(new Date());
+				owner.setUserId(user.getUserId());
+				owner.setEmail(user.getEmail());
+				PersistenceManager pm = PMF.get().getPersistenceManager(); 
+				try{
+					pm.makePersistent(owner);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					pm.close();
+				}
+			}
+			return owner;
+		}
+		return null;
+	}
+	
+	public Owner getOwner(String userId){
+		PersistenceManager pm = null;
+		try{
+			pm = PMF.get().getPersistenceManager();
+			Query q = pm.newQuery(Owner.class);
+		    q.setFilter("userId == userIdParam");
+		    q.declareParameters("String userIdParam");
+		    List<Owner> result = (List<Owner>) q.execute(userId);
+		    if ( result != null ){
+		    	return result.get(0);
+		    }
+		    return null;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			pm.close();
+		}
+		return null;
 	}
 
 }

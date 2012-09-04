@@ -17,8 +17,10 @@ public class Notification {
 	private Key key;
 	
 	@Persistent
-	private Owner owner;
+	private String ownerId;
 	
+	private Owner owner;
+
 	@Persistent
 	private String message;
 	
@@ -38,10 +40,10 @@ public class Notification {
 		
 	}
 	
-	public Notification(Key key, Owner owner, String message, Date creationDate, Integer triggerDate, Integer minutes) {
+	public Notification(Key key, String ownerId, String message, Date creationDate, Integer triggerDate, Integer minutes) {
 		super();
 		this.key = key;
-		this.owner = owner;
+		this.ownerId = ownerId;
 		this.message = message;
 		this.creationDate = creationDate;
 		this.triggerDate = triggerDate;
@@ -56,12 +58,12 @@ public class Notification {
 		this.key = key;
 	}
 
-	public Owner getOwner() {
-		return owner;
+	public String getOwnerId() {
+		return ownerId;
 	}
 
-	public void setOwner(Owner owner) {
-		this.owner = owner;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	public String getMessage() {
@@ -103,5 +105,12 @@ public class Notification {
 	public void setProcesed(Boolean procesed) {
 		this.procesed = procesed;
 	}
+	
+	public Owner getOwner() {
+		return owner;
+	}
 
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
 }
