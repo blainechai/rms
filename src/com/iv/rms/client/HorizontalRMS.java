@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
@@ -25,10 +26,11 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.iv.rms.shared.ApplicationException;
 import com.iv.rms.shared.FieldVerifier;
 import com.summatech.gwt.client.HourMinutePicker;
 import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.ListBox;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -67,6 +69,7 @@ public class HorizontalRMS implements EntryPoint {
 										VerticalPanel whenPanel = new VerticalPanel();
 										whenPanel.setSpacing(20);
 										horizontalPanel_1.add(whenPanel);
+										whenPanel.setHeight("341px");
 										
 												Label lblWhen = new Label("When");
 												whenPanel.add(lblWhen);
@@ -77,6 +80,9 @@ public class HorizontalRMS implements EntryPoint {
 														datePicker.setSize("262px", "182px");
 														final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
 														whenPanel.add(hourMinutePicker);
+														
+														ListBox comboBox = new ListBox();
+														whenPanel.add(comboBox);
 														
 																hourMinutePicker.setTime("", 00, 00);
 																
@@ -90,6 +96,7 @@ public class HorizontalRMS implements EntryPoint {
 																						final TextArea messageBox = new TextArea();
 																						whatPanel.add(messageBox);
 																						messageBox.setSize("262px", "222px");
+																						
 																						
 																								VerticalPanel howPanel = new VerticalPanel();
 																								howPanel.setSpacing(20);
@@ -171,13 +178,12 @@ public class HorizontalRMS implements EntryPoint {
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				String textToServer = "";
 				if (!FieldVerifier.isValidName(messageBox.getText())) {
 					errorLabel.setText("Message is too short");
-
 					return;
 				}
 
+				
 				// Then, we send the input to the server.
 				SimpleNotification sn = new SimpleNotification();
 				sn.setMessage(messageBox.getText());
@@ -193,17 +199,25 @@ public class HorizontalRMS implements EntryPoint {
 
 					@Override
 					public void onSuccess(Void result) {
-						messageBox.setText("");
+						DateTimeFormat sdf = DateTimeFormat.getFormat("dd-MM-yyyy hh:mm");
+						Date d = new Date();
+						System.out.println(hourMinutePicker.getHour() + ":" + hourMinutePicker.getMinute());
+						d.setHours(hourMinutePicker.getHour());
+						d.setMinutes(hourMinutePicker.getMinute());
+						errorLabel.setText("Done. You will receive a notification email on " + sdf.format(d) );
 					}
 
 					@Override
 					public void onFailure(Throwable caught) {
-						dialogBox.setText("Operation failed");
-						serverResponseLabel.addStyleName("serverResponseLabelError");
-						serverResponseLabel.setHTML(SERVER_ERROR);
-						dialogBox.center();
-						closeButton.setFocus(true);
-
+						if ( caught  instanceof ApplicationException){
+							errorLabel.setText(caught.getMessage());
+						}else{
+							dialogBox.setText("Operation failed");
+							serverResponseLabel.addStyleName("serverResponseLabelError");
+							serverResponseLabel.setHTML(SERVER_ERROR);
+							dialogBox.center();
+							closeButton.setFocus(true);
+						}
 					}
 				});
 			}
@@ -211,6 +225,7 @@ public class HorizontalRMS implements EntryPoint {
 
 		// Add a handler to send the name to the server
 		NewNotificationHandler handler = new NewNotificationHandler();
+		sendButton.addClickHandler(handler);
 		
 	}
 }

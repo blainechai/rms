@@ -1,8 +1,10 @@
 package com.iv.rms.server;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -17,13 +19,21 @@ import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.NotificationView;
 import com.iv.rms.entity.Owner;
 import com.iv.rms.mail.MailService;
+import com.iv.rms.shared.ApplicationException;
 import com.iv.rms.shared.Util;
 
 @SuppressWarnings("serial")
 public class NotificationServiceImpl extends RemoteServiceServlet implements NotificationService {
 	
+	private static final Logger log = Logger.getLogger(NotificationServiceImpl.class.getName());
+	
 	@Override
-	public void saveNotification(SimpleNotification notification) {
+	public void saveNotification(SimpleNotification notification) throws ApplicationException{
+		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
+			throw new ApplicationException("Please login first. You can use you Google Id.");
+		}
+		Calendar cal = Calendar.getInstance();
+		log.info(cal.getTimeZone().getDisplayName());
 		Notification n = new Notification();
 		n.setCreationDate(new Date());
 		n.setMessage(notification.getMessage());
