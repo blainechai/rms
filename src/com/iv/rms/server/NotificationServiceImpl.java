@@ -101,6 +101,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	            for (Notification n : results) {
 	                ms.sendMail(n, getOwner(n.getOwnerId()));
 	                n.setProcesed(Boolean.TRUE);
+	                n.setSentDate(currentDate);
 	            }
 	        }
 		}catch (Exception e) {

@@ -35,12 +35,15 @@ public class Notification {
 	
 	@Persistent
 	private Boolean procesed = Boolean.FALSE;
-
+	
+	@Persistent
+	private Date sentDate;
+	
 	public Notification(){
 		
 	}
 	
-	public Notification(Key key, String ownerId, String message, Date creationDate, Integer triggerDate, Integer minutes) {
+	public Notification(Key key, String ownerId, String message, Date creationDate, Integer triggerDate, Integer minutes, Date sentDate) {
 		super();
 		this.key = key;
 		this.ownerId = ownerId;
@@ -48,6 +51,7 @@ public class Notification {
 		this.creationDate = creationDate;
 		this.triggerDate = triggerDate;
 		this.minutes = minutes;
+		this.sentDate = sentDate;
 	}
 
 	public Key getKey() {
@@ -113,4 +117,13 @@ public class Notification {
 	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
+	
+	public Date getSentDate() {
+		return sentDate;
+	}
+
+	public void setSentDate(Date sentDate) {
+		this.sentDate = sentDate;
+	}
+	
 }
