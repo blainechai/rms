@@ -6,3 +6,4 @@ RMS-5 - Add some build system
 RMS-6 - Add Timezone selector
 RMS-7 - Set send date for a notification
 RMS-8 - Since we are sending notifications on through mail, disable notification views
+RMS-9 - Add Jquery.js
