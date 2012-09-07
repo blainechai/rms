@@ -34,22 +34,17 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		Calendar cal = Calendar.getInstance();
 		log(cal.getTimeZone().getDisplayName());
 		Notification n = new Notification();
-		n.setCreationDate(new Date());
-		n.setMessage(notification.getMessage());
-		n.setTriggerDate(formatDate(notification.getDate(), notification.getMinutes()));
-		n.setMinutes(formatMinutes(notification.getDate(), notification.getMinutes()));
-		n.setOwnerId(getOrCreateOwner().getUserId());
-		getTimeZone(notification.getTimeZone());
-		PersistenceManager pm = PMF.get().getPersistenceManager(); 
+		PersistenceManager pm = null;
 		try{
+			n.setCreationDate(new Date());
+			n.setMessage(notification.getMessage());
+			n.setTriggerDate(formatDate(notification.getDate(), notification.getMinutes()));
+			n.setMinutes(formatMinutes(notification.getDate(), notification.getMinutes()));
+			n.setOwnerId(getOrCreateOwner().getUserId());
+			getTimeZone(notification.getTimeZone());
+			pm = PMF.get().getPersistenceManager();
 			pm.makePersistent(n);
 			System.out.println("Id:" + n.getKey());
-//			for(NotificationViews v : notification.getViews()){
-//				NotificationView view = new NotificationView();
-//				view.setNotificationKey(n.getKey().getId());
-//				view.setViewType(v.getCode());
-//				pm.makePersistent(view);
-//			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
