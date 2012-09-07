@@ -15,11 +15,9 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.iv.rms.client.NotificationService;
-import com.iv.rms.client.NotificationViews;
 import com.iv.rms.client.SimpleNotification;
 import com.iv.rms.client.Timezones;
 import com.iv.rms.entity.Notification;
-import com.iv.rms.entity.NotificationView;
 import com.iv.rms.entity.Owner;
 import com.iv.rms.mail.MailService;
 import com.iv.rms.shared.ApplicationException;
@@ -46,12 +44,12 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		try{
 			pm.makePersistent(n);
 			System.out.println("Id:" + n.getKey());
-			for(NotificationViews v : notification.getViews()){
-				NotificationView view = new NotificationView();
-				view.setNotificationKey(n.getKey().getId());
-				view.setViewType(v.getCode());
-				pm.makePersistent(view);
-			}
+//			for(NotificationViews v : notification.getViews()){
+//				NotificationView view = new NotificationView();
+//				view.setNotificationKey(n.getKey().getId());
+//				view.setViewType(v.getCode());
+//				pm.makePersistent(view);
+//			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
