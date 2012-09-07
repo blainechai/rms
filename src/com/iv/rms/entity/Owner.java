@@ -27,17 +27,21 @@ public class Owner {
 	
 	@Persistent
 	private String name;
+	
+	@Persistent
+	private String timeZoneId;
 
 	public Owner(){
 		
 	}
 	
-	public Owner(Key key, String userId, Date creationDate, String email) {
+	public Owner(Key key, String userId, Date creationDate, String email, String timeZoneId) {
 		super();
 		this.key = key;
 		this.userId = userId;
 		this.creationDate = creationDate;
 		this.email = email;
+		this.timeZoneId = timeZoneId;
 	}
 
 	public Key getKey() {
@@ -78,6 +82,14 @@ public class Owner {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getTimeZoneId() {
+		return timeZoneId;
+	}
+
+	public void setTimeZoneId(String timeZoneId) {
+		this.timeZoneId = timeZoneId;
 	}
 
 }

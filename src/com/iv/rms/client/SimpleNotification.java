@@ -14,6 +14,16 @@ public class SimpleNotification implements Serializable {
 	private Integer minutes;
 	
 	private List<NotificationViews> views;
+	
+	private String timeZone;
+
+	public String getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
+	}
 
 	public String getMessage() {
 		return message;

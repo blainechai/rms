@@ -3,8 +3,10 @@ package com.iv.rms.server;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Map;
+import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -15,6 +17,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.iv.rms.client.NotificationService;
 import com.iv.rms.client.NotificationViews;
 import com.iv.rms.client.SimpleNotification;
+import com.iv.rms.client.Timezones;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.NotificationView;
 import com.iv.rms.entity.Owner;
@@ -25,21 +28,20 @@ import com.iv.rms.shared.Util;
 @SuppressWarnings("serial")
 public class NotificationServiceImpl extends RemoteServiceServlet implements NotificationService {
 	
-	private static final Logger log = Logger.getLogger(NotificationServiceImpl.class.getName());
-	
 	@Override
 	public void saveNotification(SimpleNotification notification) throws ApplicationException{
 		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
 			throw new ApplicationException("Please login first. You can use you Google Id.");
 		}
 		Calendar cal = Calendar.getInstance();
-		log.info(cal.getTimeZone().getDisplayName());
+		log(cal.getTimeZone().getDisplayName());
 		Notification n = new Notification();
 		n.setCreationDate(new Date());
 		n.setMessage(notification.getMessage());
-		n.setTriggerDate(formatDate(notification.getDate()));
-		n.setMinutes(notification.getMinutes());
+		n.setTriggerDate(formatDate(notification.getDate(), notification.getMinutes()));
+		n.setMinutes(formatMinutes(notification.getDate(), notification.getMinutes()));
 		n.setOwnerId(getOrCreateOwner().getUserId());
+		getTimeZone(notification.getTimeZone());
 		PersistenceManager pm = PMF.get().getPersistenceManager(); 
 		try{
 			pm.makePersistent(n);
@@ -58,10 +60,30 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		
 	}
 	
-	private Integer formatDate(Date date){
+	private Integer formatDate(Date date, Integer minutes){
+		Calendar cal  = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, minutes / 60);
+		cal.set(Calendar.MINUTE, minutes - ((minutes / 60) * 60 ) );
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String str = sdf.format(date);
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		String str = sdf.format(cal.getTime());
 		return Integer.parseInt(str);
+	}
+	
+	private Integer formatMinutes(Date date, Integer minutes){
+		Calendar cal  = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, minutes / 60);
+		cal.set(Calendar.MINUTE, minutes - ((minutes / 60) * 60 ) );
+		SimpleDateFormat sdf = new SimpleDateFormat("HH");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		int mins = Integer.parseInt(sdf.format(cal.getTime())) * 60;
+		sdf = new SimpleDateFormat("mm");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		mins += Integer.parseInt(sdf.format(cal.getTime()));
+		return mins;
 	}
 	
 	public void processPendingNotification(){
@@ -131,6 +153,51 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			pm.close();
 		}
 		return null;
+	}
+	
+	public Timezones getTimeZones(Date date){
+		Map<String,String> timeZones = new HashMap<String, String>();
+		String[] ids = TimeZone.getAvailableIDs();
+		for (int i = 0; i < ids.length; i++) {
+		        String tz = TimeZone.getTimeZone(ids[i]).getDisplayName();
+		        TimeZone.getTimeZone(ids[i]);
+		        if (!timeZones.containsKey(ids[i])) {
+		        	timeZones.put(ids[i], tz);
+		        }       
+		}
+		
+		return new Timezones(timeZones, guessClientTimeZone(date));
+	}
+	
+	public Boolean hasUserTimeZone(){
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+		if ( user != null ){
+			Owner owner = getOwner(user.getUserId());
+			if ( owner.getTimeZoneId() != null ){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String guessClientTimeZone(Date date){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		TimeZone timeZone = cal.getTimeZone();
+		return timeZone.getID();
+	}
+	
+	private TimeZone getTimeZone(String strTz){
+		String strFromJavaScript = strTz; 
+        int timeZone = Integer.parseInt(strFromJavaScript);  
+        if (timeZone >= 0) {  
+            strFromJavaScript = "+" + timeZone;  
+        }  
+  
+        TimeZone tz = TimeZone.getTimeZone("GMT" + strFromJavaScript);  
+        System.out.println(tz.getDisplayName());  
+        System.out.println(tz.getRawOffset()); 
+        return tz;
 	}
 
 }

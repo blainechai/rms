@@ -1,0 +1,2 @@
+serviceClass: com.iv.rms.client.NotificationService
+path: F9B0D1281FFC46A53E18EA2AE01423D7.gwt.rpc

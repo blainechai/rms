@@ -30,7 +30,6 @@ import com.iv.rms.shared.ApplicationException;
 import com.iv.rms.shared.FieldVerifier;
 import com.summatech.gwt.client.HourMinutePicker;
 import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
-import com.google.gwt.user.client.ui.ListBox;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -66,7 +65,7 @@ public class HorizontalRMS implements EntryPoint {
 								horizontalPanel_1.setSize("481px", "400px");
 								horizontalPanel_1.getElement().getStyle().setPosition(Position.STATIC);
 								
-										VerticalPanel whenPanel = new VerticalPanel();
+										final VerticalPanel whenPanel = new VerticalPanel();
 										whenPanel.setSpacing(20);
 										horizontalPanel_1.add(whenPanel);
 										whenPanel.setHeight("341px");
@@ -81,8 +80,6 @@ public class HorizontalRMS implements EntryPoint {
 														final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
 														whenPanel.add(hourMinutePicker);
 														
-														ListBox comboBox = new ListBox();
-														whenPanel.add(comboBox);
 														
 																hourMinutePicker.setTime("", 00, 00);
 																
@@ -123,8 +120,6 @@ public class HorizontalRMS implements EntryPoint {
 																																		// We can add style names to widgets
 																																		sendButton.addStyleName("sendButton");
 																																		
-						
-
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
 		dialogBox.setText("Remote Procedure Call");
@@ -182,13 +177,13 @@ public class HorizontalRMS implements EntryPoint {
 					errorLabel.setText("Message is too short");
 					return;
 				}
-
 				
 				// Then, we send the input to the server.
 				SimpleNotification sn = new SimpleNotification();
 				sn.setMessage(messageBox.getText());
 				sn.setMinutes(hourMinutePicker.getMinutes());
 				sn.setDate(datePicker.getValue());
+				sn.setTimeZone("" + callGetClientTimeZone());
 				List<NotificationViews> selectedViews = new ArrayList<NotificationViews>();
 				if (mailCheckBox.getValue()) {
 					selectedViews.add(NotificationViews.MAIL);
@@ -199,7 +194,7 @@ public class HorizontalRMS implements EntryPoint {
 
 					@Override
 					public void onSuccess(Void result) {
-						DateTimeFormat sdf = DateTimeFormat.getFormat("dd-MM-yyyy hh:mm");
+						DateTimeFormat sdf = DateTimeFormat.getFormat("dd-MM-yyyy HH:mm");
 						Date d = new Date();
 						System.out.println(hourMinutePicker.getHour() + ":" + hourMinutePicker.getMinute());
 						d.setHours(hourMinutePicker.getHour());
@@ -228,4 +223,9 @@ public class HorizontalRMS implements EntryPoint {
 		sendButton.addClickHandler(handler);
 		
 	}
+	
+	 private native int callGetClientTimeZone() /*-{
+     	return $wnd.getClientTimeZone();
+   	}-*/;
+	
 }
