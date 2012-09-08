@@ -52,10 +52,12 @@ public class Util {
 		return sdf.format(specifiedTime);
 	}
 
-	public static Date getDateInTimeZone(Date currentDate, String timeZoneId) {
+	public static Date getDateInTimeZone(Date currentDate, String currentTimeZoneId, String timeZoneId) {
 		Calendar mbCal = new GregorianCalendar(TimeZone.getTimeZone(timeZoneId));
 		mbCal.setTimeInMillis(currentDate.getTime());
+		
 		Calendar cal = Calendar.getInstance();
+		cal.setTimeZone(TimeZone.getTimeZone(currentTimeZoneId));
 		cal.set(Calendar.YEAR, mbCal.get(Calendar.YEAR));
 		cal.set(Calendar.MONTH, mbCal.get(Calendar.MONTH));
 		cal.set(Calendar.DAY_OF_MONTH, mbCal.get(Calendar.DAY_OF_MONTH));
@@ -70,7 +72,7 @@ public class Util {
 	public static void main(String args[]) throws ParseException {
 		Date date = new Date();
 		System.out.println(date);
-		System.out.println(getDateInTimeZone(date, "GMT"));
+		System.out.println(getDateInTimeZone(date,"Europe/Berlin", "EET"));
 	}
 
 }

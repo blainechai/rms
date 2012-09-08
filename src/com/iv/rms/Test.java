@@ -18,7 +18,7 @@ public class Test {
 		cal.set(Calendar.HOUR_OF_DAY, 00);
 		date = cal.getTime();
 		System.out.println(date);
-		Date newDate = Util.getDateInTimeZone(date, "");
+		Date newDate = Util.getDateInTimeZone(date,"", "");
 		System.out.println(newDate);
 		System.out.println(service.formatDate(newDate));
 	

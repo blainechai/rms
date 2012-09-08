@@ -71,7 +71,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	public void processPendingNotification(){
 		PersistenceManager pm = null;
 		try{
-			Date currentDate = Util.getDateInTimeZone(new Date(), "GMT");
+			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), "GMT");
 			Integer dateInt = Util.formatDate(currentDate);
 			Integer minutes = Util.getMinutesSinceMidnight(currentDate);
 			pm = PMF.get().getPersistenceManager();
@@ -188,7 +188,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		cal.setTime(sn.getDate());
 		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
 		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
-		return Util.getDateInTimeZone(cal.getTime(), "GMT");
+		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), "GMT");
 	}
 
 }
