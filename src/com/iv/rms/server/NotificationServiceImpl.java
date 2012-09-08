@@ -30,7 +30,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	public void saveNotification(SimpleNotification notification) throws ApplicationException{
 		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
 			throw new ApplicationException("Please login first. You can use you Google Id.");
-		}
+		}		
 		Calendar cal = Calendar.getInstance();
 		log(cal.getTimeZone().getDisplayName());
 		Notification n = new Notification();

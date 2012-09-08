@@ -50,7 +50,7 @@
     </noscript>
 
     <h1></h1>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="jsp/header.jsp"/>
     </div>
     <div class="container">
       <table align="center">
