@@ -27,6 +27,7 @@
     <!--                                           -->
     
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="/js/jquery-1.8.1.min.js"></script>
   </head>
 
   <!--                                           -->
@@ -35,15 +36,17 @@
   <!-- to create a completely dynamic UI.        -->
   <!--                                           -->
   <body>
+  <div>
 	Current timezone: <%=Calendar.getInstance().getTimeZone().getDisplayName()%>
     </div>
+    
     <script type="text/javascript">
-
     	function getClientTimeZone(){
     	    var dateVar = new Date();  
     	    var timezone = dateVar.getTimezoneOffset()/60 * (-1);
         	return timezone;
         }
+    	alert(getClientTimeZone());
     </script>
   </body>
 </html>

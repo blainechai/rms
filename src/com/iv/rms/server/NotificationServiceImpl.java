@@ -35,11 +35,12 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		log(cal.getTimeZone().getDisplayName());
 		Notification n = new Notification();
 		PersistenceManager pm = null;
+		Date fullTriggerDate = composeFullTriggerDate(notification);
 		try{
 			n.setCreationDate(new Date());
 			n.setMessage(notification.getMessage());
-			n.setTriggerDate(formatDate(notification.getDate(), notification.getMinutes()));
-			n.setMinutes(formatMinutes(notification.getDate(), notification.getMinutes()));
+			n.setTriggerDate(formatDate(fullTriggerDate));
+			n.setMinutes(formatMinutes(fullTriggerDate));
 			n.setOwnerId(getOrCreateOwner().getUserId());
 			getTimeZone(notification.getTimeZone());
 			pm = PMF.get().getPersistenceManager();
@@ -53,36 +54,24 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		
 	}
 	
-	private Integer formatDate(Date date, Integer minutes){
-		Calendar cal  = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.HOUR_OF_DAY, minutes / 60);
-		cal.set(Calendar.MINUTE, minutes - ((minutes / 60) * 60 ) );
-		
+	public Integer formatDate(Date date){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		String str = sdf.format(cal.getTime());
+		String str = sdf.format(date);
 		return Integer.parseInt(str);
 	}
 	
-	private Integer formatMinutes(Date date, Integer minutes){
-		Calendar cal  = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.HOUR_OF_DAY, minutes / 60);
-		cal.set(Calendar.MINUTE, minutes - ((minutes / 60) * 60 ) );
+	public Integer formatMinutes(Date date){
 		SimpleDateFormat sdf = new SimpleDateFormat("HH");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		int mins = Integer.parseInt(sdf.format(cal.getTime())) * 60;
+		int mins = Integer.parseInt(sdf.format(date)) * 60;
 		sdf = new SimpleDateFormat("mm");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		mins += Integer.parseInt(sdf.format(cal.getTime()));
+		mins += Integer.parseInt(sdf.format(date));
 		return mins;
 	}
 	
 	public void processPendingNotification(){
 		PersistenceManager pm = null;
 		try{
-			Date currentDate = new Date();
+			Date currentDate = Util.getDateInTimeZone(new Date(), "GMT");
 			Integer dateInt = Util.formatDate(currentDate);
 			Integer minutes = Util.getMinutesSinceMidnight(currentDate);
 			pm = PMF.get().getPersistenceManager();
@@ -192,6 +181,14 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
         System.out.println(tz.getDisplayName());  
         System.out.println(tz.getRawOffset()); 
         return tz;
+	}
+	
+	private Date composeFullTriggerDate(SimpleNotification sn){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sn.getDate());
+		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
+		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
+		return Util.getDateInTimeZone(cal.getTime(), "GMT");
 	}
 
 }
