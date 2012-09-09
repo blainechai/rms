@@ -12,7 +12,6 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
 					<li>
 					<% 
 						UserService userService = UserServiceFactory.getUserService();

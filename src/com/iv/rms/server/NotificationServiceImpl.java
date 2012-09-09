@@ -78,8 +78,8 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			Query q = pm.newQuery(Notification.class);
 		    q.setFilter("triggerDate == " + dateInt + " && minutes <= " + minutes + " && procesed == " + Boolean.FALSE);
 		    List<Notification> results = (List<Notification>) q.execute();
-		    MailService ms = new MailService(); 
 		    if (!results.isEmpty()) {
+		    	MailService ms = new MailService(); 
 	            for (Notification n : results) {
 	                ms.sendMail(n, getOwner(n.getOwnerId()));
 	                n.setProcesed(Boolean.TRUE);

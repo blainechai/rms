@@ -9,4 +9,5 @@ RMS-8 - Since we are sending notifications on through mail, disable notification
 RMS-9 - Add Jquery.js [deleted]
 RMS-10 - Clean WAR directory. Place jsp files in jsp directory, etc.
 RMS-11 - SEO
+RMS-12 - About page
 
