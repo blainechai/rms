@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.utils.SystemProperty;
 import com.iv.rms.Constants;
 
 public class PreparePageFilter implements Filter {
@@ -29,6 +30,12 @@ public class PreparePageFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		UserService userService = UserServiceFactory.getUserService();
 		request.setAttribute(Constants.USER_SERVICE, userService);
+		// check if it's dev mode or prod mode
+		if ( SystemProperty.environment.value() == SystemProperty.Environment.Value.Production ){
+			request.setAttribute(Constants.GAE_MODE, true);
+		}else{
+			request.setAttribute(Constants.GAE_MODE, false);
+		}
 		chain.doFilter(request, response);
 	}
 

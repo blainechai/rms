@@ -1,39 +1,26 @@
-<%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!doctype html>
-<!-- The DOCTYPE declaration above will set the     -->
-<!-- browser's rendering engine into                -->
-<!-- "Standards Mode". Replacing this declaration   -->
-<!-- with a "Quirks Mode" doctype is not supported. -->
-
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-    <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
-    <!--                                                               -->
     <link type="text/css" rel="stylesheet" href="RMS.css">
-
-    <!--                                           -->
-    <!-- Any title is fine                         -->
-    <!--                                           -->
     <title>Remind me this</title>
-    
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
     <script type="text/javascript" language="javascript" src="rms/rms.nocache.js"></script>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-34714345-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
   </head>
-
-  <!--                                           -->
-  <!-- The body can have arbitrary html, or      -->
-  <!-- you can leave the body empty if you want  -->
-  <!-- to create a completely dynamic UI.        -->
-  <!--                                           -->
   <body>
   <style>
       body {
@@ -51,7 +38,6 @@
 
     <h1></h1>
     <jsp:include page="jsp/header.jsp"/>
-    </div>
     <div class="container">
       <table align="center">
       <tr>

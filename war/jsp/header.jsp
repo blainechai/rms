@@ -1,14 +1,14 @@
 <%@page import="com.google.appengine.api.users.UserServiceFactory"%>
 <%@page import="com.google.appengine.api.users.UserService"%>
-
-<h1></h1>
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="btn btn-navbar" data-toggle="collapse"
-				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span>
-			</a> <a class="brand" href="#"><h1>Mail reminder</h1></a>
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</a> 
+			<a class="brand" href="#"><h1>Mail reminder</h1></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="#about">About</a></li>
@@ -22,7 +22,7 @@
 							out.print("<a href=\"" + userService.createLoginURL(thisURL) + "\">Sign in</a>");
 						}
 					%>	
-			</li>
+					</li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
