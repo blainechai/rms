@@ -3,8 +3,13 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="Language" content="En" />
+    <meta name="Keywords" lang="En" content="Scheduling,Email Reminder Service,Mail Reminder Service, mail Remind tool,EMail Reminders,Automated Email,Automatic Email"/> 
+	<meta name="Description" lang="En" content="Get reminders on email" /> 
+	<meta name="Author" content="www.mail-reminder.com. " />
+	<meta name="Copyright" content="www.mail-reminder.com" />
     <link type="text/css" rel="stylesheet" href="RMS.css">
-    <title>Remind me this</title>
+    <title>mailRemind</title>
     <script type="text/javascript" language="javascript" src="rms/rms.nocache.js"></script>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
     <script type="text/javascript">
@@ -35,8 +40,6 @@
         in order for this application to display correctly.
       </div>
     </noscript>
-
-    <h1></h1>
     <jsp:include page="jsp/header.jsp"/>
     <div class="container">
       <table align="center">
