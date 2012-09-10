@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html>
   <head>
@@ -6,12 +9,14 @@
     <meta name="Language" content="En" />
     <meta name="Keywords" lang="En" content="Scheduling,Email Reminder Service,Mail Reminder Service, mail Remind tool,EMail Reminders,Automated Email,Automatic Email"/> 
 	<meta name="Description" lang="En" content="Get reminders on email" /> 
-	<meta name="Author" content="www.mail-reminder.com. " />
+	<meta name="Author" content="www.mail-reminder.com" />
 	<meta name="Copyright" content="www.mail-reminder.com" />
-    <link type="text/css" rel="stylesheet" href="RMS.css">
     <title>mailRemind</title>
     <script type="text/javascript" language="javascript" src="rms/rms.nocache.js"></script>
+    <link type="text/css" rel="stylesheet" href="RMS.css">
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
+    <c:if test="${requestScope.GAE_MODE }">
     <script type="text/javascript">
 	
 	  var _gaq = _gaq || [];
@@ -25,6 +30,7 @@
 	  })();
 	
 	</script>
+	</c:if>
   </head>
   <body>
   <style>
