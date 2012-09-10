@@ -8,7 +8,7 @@
 			<a class="btn btn-navbar" data-toggle="collapse"
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 				class="icon-bar"></span> <span class="icon-bar"></span>
-			</a> <a class="brand" href="#">Remind me this</a>
+			</a> <a class="brand" href="#"><h1>Mail reminder</h1></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="#about">About</a></li>
