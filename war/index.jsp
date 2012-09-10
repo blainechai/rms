@@ -1,14 +1,14 @@
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!doctype html>
-<!-- The DOCTYPE declaration above will set the     -->
-<!-- browser's rendering engine into                -->
-<!-- "Standards Mode". Replacing this declaration   -->
-<!-- with a "Quirks Mode" doctype is not supported. -->
-
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="Language" content="En" />
+    <meta name="Keywords" lang="En" content="Scheduling,Email Reminder Service,Mail Reminder Service, mail Remind tool,EMail Reminders,Automated Email,Automatic Email"/> 
+	<meta name="Description" lang="En" content="Get reminders on email" /> 
+	<meta name="Author" content="www.mail-reminder.com. " />
+	<meta name="Copyright" content="www.mail-reminder.com" />
 
     <!--                                                               -->
     <!-- Consider inlining CSS to reduce the number of requested files -->
@@ -18,7 +18,7 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>Remind me this</title>
+    <title>mailRemind</title>
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
@@ -48,8 +48,6 @@
         in order for this application to display correctly.
       </div>
     </noscript>
-
-    <h1></h1>
     <jsp:include page="jsp/header.jsp"/>
     </div>
     <div class="container">
