@@ -11,6 +11,7 @@ import java.util.TimeZone;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -199,7 +200,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}
 		UserContactMessage m = new UserContactMessage();
 		m.setSubject(subject);
-		m.setMessage(message);
+		m.setMessage(new Text(message));
 		m.setCreationDate(new Date());
 		m.setUserId(UserServiceFactory.getUserService().getCurrentUser().getUserId());
 		PersistenceManager pm = null;

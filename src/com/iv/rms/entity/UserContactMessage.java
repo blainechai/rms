@@ -9,6 +9,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.Text;
 
 @SuppressWarnings("serial")
 @PersistenceCapable
@@ -25,7 +26,7 @@ public class UserContactMessage implements Serializable{
 	private String subject;
 	
 	@Persistent
-	private String message;
+	private Text message;
 	
 	@Persistent
 	private Date creationDate;
@@ -62,11 +63,11 @@ public class UserContactMessage implements Serializable{
 		this.subject = subject;
 	}
 
-	public String getMessage() {
+	public Text getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(Text message) {
 		this.message = message;
 	}
 
