@@ -98,6 +98,7 @@ public class HorizontalRMS implements EntryPoint {
 																								VerticalPanel howPanel = new VerticalPanel();
 																								howPanel.setSpacing(20);
 																								horizontalPanel_1.add(howPanel);
+																								howPanel.setSize("50px", "50px");
 																								
 																										Label lblHow = new Label("How");
 																										howPanel.add(lblHow);
@@ -106,7 +107,7 @@ public class HorizontalRMS implements EntryPoint {
 																												HorizontalPanel horizontalPanel = new HorizontalPanel();
 																												howPanel.add(horizontalPanel);
 																												horizontalPanel.setSpacing(5);
-																												horizontalPanel.setWidth("297px");
+																												//horizontalPanel.setWidth("297px");
 																												
 																														final CheckBox mailCheckBox = new CheckBox("Mail");
 																														mailCheckBox.setEnabled(false);

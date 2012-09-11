@@ -11,6 +11,7 @@
 			<a class="brand" href="/">Mail reminder</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
+					<li><a href="whatsthis.jsp">What's this?</a></li>
 					<li><a href="contact.jsp">Contact</a></li>
 					<li>
 					<% 
