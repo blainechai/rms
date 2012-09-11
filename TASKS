@@ -1,4 +1,3 @@
-RMS-3 - Contact page
 RMS-5 - Add some build system
 RMS-10 - Clean WAR directory. Place jsp files in jsp directory, etc.
 RMS-11 - SEO
@@ -6,3 +5,4 @@ RMS-12 - About page
 RMS-13 - User can add other emails
 RMS-14 - Add google analytics (Load Google analytics only for production mode)
 RMS-16 - Clean fields after submit
+RMS-17 - Prevent user from clicking "send button" if the action wasn't completed yet
