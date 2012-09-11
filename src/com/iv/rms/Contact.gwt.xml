@@ -5,6 +5,6 @@
   <entry-point class='com.iv.rms.client.Contact'/>
   <source path='client'/>
   <source path='shared'/>
-  <source path='entity'/>
+  
 
 </module>

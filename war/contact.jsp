@@ -58,13 +58,8 @@
       </tr>
     </table>
     </div>
-   	<script type="text/javascript">
-
-    	function getClientTimeZone(){
-    	    var dateVar = new Date();  
-    	    var timezone = dateVar.getTimezoneOffset()/60 * (-1);
-        	return timezone;
-        }
-    </script>
+    <footer>
+        <p>&copy; ivEleven  2012</p>
+    </footer>
   </body>
 </html>

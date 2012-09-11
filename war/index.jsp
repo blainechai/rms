@@ -53,11 +53,14 @@
         <td colspan="2" style="font-weight:bold;"></td>        
       </tr>
       <tr>
-        <td id="workspace"></td>
+        <td id="workspace"></td>	
         <td id="sendButtonContainer"></td>
       </tr>
     </table>
     </div>
+    <footer>
+        <p>&copy; ivEleven  2012</p>
+    </footer>
    	<script type="text/javascript">
 
     	function getClientTimeZone(){
