@@ -19,6 +19,7 @@ import com.iv.rms.client.SimpleNotification;
 import com.iv.rms.client.Timezones;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.Owner;
+import com.iv.rms.entity.UserContactMessage;
 import com.iv.rms.mail.MailService;
 import com.iv.rms.shared.ApplicationException;
 import com.iv.rms.shared.Util;
@@ -189,6 +190,27 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
 		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
 		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), "GMT");
+	}
+
+	@Override
+	public void saveUserContactMessage(String subject, String message) throws ApplicationException{
+		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
+			throw new ApplicationException("Please login first. You can use you Google Id.");
+		}
+		UserContactMessage m = new UserContactMessage();
+		m.setSubject(subject);
+		m.setMessage(message);
+		m.setUserId(UserServiceFactory.getUserService().getCurrentUser().getUserId());
+		PersistenceManager pm = null;
+		try{
+			pm = PMF.get().getPersistenceManager();
+			pm.makePersistent(m);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			pm.close();
+		}
+		
 	}
 
 }

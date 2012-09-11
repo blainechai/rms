@@ -30,6 +30,10 @@
   <url-pattern>/rms/notification</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
+  <servlet-name>notification</servlet-name>
+  <url-pattern>/contact/notification</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
   <servlet-name>SystemServiceServlet</servlet-name>
   <url-pattern>/_ah/spi/*</url-pattern>
  </servlet-mapping>

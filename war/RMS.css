@@ -57,3 +57,6 @@ h1 {
 	font-size: 15px;
 	font-weight: bold
 }
+.errorLabel{
+	color: red;
+}

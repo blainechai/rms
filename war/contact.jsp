@@ -12,7 +12,7 @@
 	<meta name="Author" content="www.mail-reminder.com" />
 	<meta name="Copyright" content="www.mail-reminder.com" />
     <title>mailRemind</title>
-    <script type="text/javascript" language="javascript" src="rms/contact.nocache.js"></script>
+    <script type="text/javascript" language="javascript" src="contact/contact.nocache.js"></script>
     <link type="text/css" rel="stylesheet" href="RMS.css">
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
     

@@ -8,10 +8,10 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</a> 
-			<a class="brand" href="#">Mail reminder</a>
+			<a class="brand" href="/">Mail reminder</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li><a href="#about">About</a></li>
+					<li><a href="contact.jsp">Contact</a></li>
 					<li>
 					<% 
 						UserService userService = UserServiceFactory.getUserService();
