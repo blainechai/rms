@@ -19,7 +19,7 @@ public class MailService {
 		String msgBody = notification.getMessage();
 		try {
 			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("reminder@mail-remind.com", "www.mail-remind.com"));
+			msg.setFrom(new InternetAddress("mailremind@gmail.com", "www.mail-remind.com"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(owner.getEmail(), owner.getName()));
 			msg.setSubject("Automatc reminder from www.mail-remind.com");
 			msg.setText(msgBody);

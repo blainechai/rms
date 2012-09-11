@@ -8,3 +8,4 @@ RMS-16 - Clean fields after submit
 RMS-17 - Prevent user from clicking "send button" if the action wasn't completed yet
 RMS-18 - What's this?
 RMS-19 - Load hardcoded values from DB
+RMS-20 - Fix contact message text length
