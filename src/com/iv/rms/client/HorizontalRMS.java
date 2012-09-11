@@ -203,7 +203,6 @@ public class HorizontalRMS implements EntryPoint {
 						sendButton.setEnabled(true);
 						DateTimeFormat sdf = DateTimeFormat.getFormat("dd MMM yyyy HH:mm");
 						Date d = datePicker.getValue();
-						System.out.println(hourMinutePicker.getHour() + ":" + hourMinutePicker.getMinute());
 						d.setHours(hourMinutePicker.getHour());
 						d.setMinutes(hourMinutePicker.getMinute());
 						errorLabel.setText("Done. You will receive a notification email on " + sdf.format(d) );
