@@ -1,16 +1,9 @@
-RMS-1 - Cron job that sents notifications [deleted]
-RMS-2 - Login using google id [deleted]
 RMS-3 - Contact page
-RMS-4 - Vertical layout [deleted]
 RMS-5 - Add some build system
-RMS-6 - Add Timezone selector [deleted]
-RMS-7 - Set send date for a notification [deleted]
-RMS-8 - Since we are sending notifications on through mail, disable notification views [deleted]
-RMS-9 - Add Jquery.js [deleted]
 RMS-10 - Clean WAR directory. Place jsp files in jsp directory, etc.
 RMS-11 - SEO
 RMS-12 - About page
 RMS-13 - User can add other emails
 RMS-14 - Add google analytics (Load Googal analytics only for production mode)
-RMS-15 - Change email source and object [deleted]
+RMS-16 - Clean fields after submit
 
