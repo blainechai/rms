@@ -200,6 +200,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		UserContactMessage m = new UserContactMessage();
 		m.setSubject(subject);
 		m.setMessage(message);
+		m.setCreationDate(new Date());
 		m.setUserId(UserServiceFactory.getUserService().getCurrentUser().getUserId());
 		PersistenceManager pm = null;
 		try{
