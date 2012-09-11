@@ -16,6 +16,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -47,17 +48,17 @@ public class HorizontalRMS implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Label errorLabel = new Label();
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel rootPanel = RootPanel.get("workspace");
-		rootPanel.add(errorLabel);
 		rootPanel.getElement().getStyle().setPosition(Position.RELATIVE);
 						
 						VerticalPanel verticalPanel = new VerticalPanel();
 						verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 						rootPanel.add(verticalPanel);
+								final Label errorLabel = new Label();
+								verticalPanel.add(errorLabel);
 						
 								HorizontalPanel horizontalPanel_1 = new HorizontalPanel();
 								verticalPanel.add(horizontalPanel_1);
@@ -71,6 +72,7 @@ public class HorizontalRMS implements EntryPoint {
 										whenPanel.setHeight("341px");
 										
 												Label lblWhen = new Label("When");
+												lblWhen.setStyleName("whenLbl");
 												whenPanel.add(lblWhen);
 												
 														final DatePicker datePicker = new DatePicker();
@@ -88,6 +90,7 @@ public class HorizontalRMS implements EntryPoint {
 																		horizontalPanel_1.add(whatPanel);
 																		
 																				InlineLabel nlnlblWhat = new InlineLabel("What");
+																				nlnlblWhat.setStyleName("whatLbl");
 																				whatPanel.add(nlnlblWhat);
 																				
 																						final TextArea messageBox = new TextArea();
@@ -101,6 +104,7 @@ public class HorizontalRMS implements EntryPoint {
 																								howPanel.setSize("50px", "50px");
 																								
 																										Label lblHow = new Label("How");
+																										lblHow.setStyleName("howLbl");
 																										howPanel.add(lblHow);
 																										lblHow.setWidth("50px");
 																										
@@ -176,6 +180,7 @@ public class HorizontalRMS implements EntryPoint {
 				errorLabel.setText("");
 				if (!FieldVerifier.isValidName(messageBox.getText())) {
 					errorLabel.setText("Message is too short");
+					errorLabel.setStyleName("errorLabel");
 					return;
 				}
 				
@@ -190,21 +195,24 @@ public class HorizontalRMS implements EntryPoint {
 					selectedViews.add(NotificationViews.MAIL);
 				}
 				sn.setViews(selectedViews);
-
+				sendButton.setEnabled(false);
 				notificationService.saveNotification(sn, new AsyncCallback<Void>() {
 
 					@Override
 					public void onSuccess(Void result) {
-						DateTimeFormat sdf = DateTimeFormat.getFormat("dd-MM-yyyy HH:mm");
-						Date d = new Date();
+						sendButton.setEnabled(true);
+						DateTimeFormat sdf = DateTimeFormat.getFormat("dd MMM yyyy HH:mm");
+						Date d = datePicker.getValue();
 						System.out.println(hourMinutePicker.getHour() + ":" + hourMinutePicker.getMinute());
 						d.setHours(hourMinutePicker.getHour());
 						d.setMinutes(hourMinutePicker.getMinute());
 						errorLabel.setText("Done. You will receive a notification email on " + sdf.format(d) );
+						errorLabel.setStyleName("");
 					}
 
 					@Override
 					public void onFailure(Throwable caught) {
+						sendButton.setEnabled(true);
 						if ( caught  instanceof ApplicationException){
 							errorLabel.setText(caught.getMessage());
 						}else{

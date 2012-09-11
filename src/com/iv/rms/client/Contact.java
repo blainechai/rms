@@ -136,6 +136,7 @@ public class Contact implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				errorLabel.setText("");
+				sendButtton.setEnabled(false);
 				notificationService.saveUserContactMessage(subjectText.getText(), messageBox.getText(), new AsyncCallback<Void>() {
 					
 					@Override
@@ -144,10 +145,12 @@ public class Contact implements EntryPoint {
 						subjectText.removeFromParent();
 						sendButtton.removeFromParent();
 						lblNewLabel.setText("Your message has been sent. Thank you.");
+						sendButtton.setEnabled(true);
 					}
 					
 					@Override
 					public void onFailure(Throwable caught) {
+						sendButtton.setEnabled(true);
 						if ( caught instanceof ApplicationException ){
 							errorLabel.setText(caught.getMessage());
 						}
