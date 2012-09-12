@@ -48,7 +48,7 @@ public class PropertyService {
 				}
 			}else{
 				value = prop.getValue();
-				compareValues(prop, loadValueFromPropertiesFile(key));
+				//compareValues(prop, loadValueFromPropertiesFile(key));
 			}
 			simpleCache.put(key, value);
 			

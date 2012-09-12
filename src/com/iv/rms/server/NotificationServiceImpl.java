@@ -2,9 +2,7 @@ package com.iv.rms.server;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
@@ -16,7 +14,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.iv.rms.client.NotificationService;
 import com.iv.rms.client.SimpleNotification;
-import com.iv.rms.client.Timezones;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.Owner;
 import com.iv.rms.entity.UserContactMessage;
@@ -126,20 +123,6 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			pm.close();
 		}
 		return null;
-	}
-	
-	public Timezones getTimeZones(Date date){
-		Map<String,String> timeZones = new HashMap<String, String>();
-		String[] ids = TimeZone.getAvailableIDs();
-		for (int i = 0; i < ids.length; i++) {
-		        String tz = TimeZone.getTimeZone(ids[i]).getDisplayName();
-		        TimeZone.getTimeZone(ids[i]);
-		        if (!timeZones.containsKey(ids[i])) {
-		        	timeZones.put(ids[i], tz);
-		        }       
-		}
-		
-		return new Timezones(timeZones, guessClientTimeZone(date));
 	}
 	
 	public Boolean hasUserTimeZone(){
