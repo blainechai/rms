@@ -17,7 +17,6 @@ public class ChatService {
 		SendResponse status = xmpp.sendMessage(msg);
 		messageSent = (status.getStatusMap().get(jid) == SendResponse.Status.SUCCESS);
 		if (!messageSent) {
-			// Send an email message instead...
 			System.out.println("Failed to send the message");
 		}
 	}
