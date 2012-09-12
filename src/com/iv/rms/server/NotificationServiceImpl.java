@@ -27,6 +27,8 @@ import com.iv.rms.shared.Util;
 @SuppressWarnings("serial")
 public class NotificationServiceImpl extends RemoteServiceServlet implements NotificationService {
 	
+	private static final String DEFAULT_TIMEZONE = PropertyService.getInstance().getValue("defaultTimeZoneId");
+	
 	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
 
 	@Override
@@ -59,9 +61,9 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	public void processPendingNotification(){
 		PersistenceManager pm = null;
 		try{
-			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), "GMT");
-			Integer dateInt = Util.formatDate(currentDate);// TODO: don't use this method
-			Integer minutes = Util.getMinutesSinceMidnight(currentDate);
+			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), DEFAULT_TIMEZONE);
+			Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));// TODO: don't use this method
+			Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));
 			pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(Notification.class);
 		    q.setFilter("triggerDate == " + dateInt + " && minutes <= " + minutes + " && procesed == " + Boolean.FALSE);
@@ -164,7 +166,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
         if (timeZone >= 0) {  
             strFromJavaScript = "+" + timeZone;  
         }
-        TimeZone tz = TimeZone.getTimeZone("GMT" + strFromJavaScript);  
+        TimeZone tz = TimeZone.getTimeZone(DEFAULT_TIMEZONE + strFromJavaScript);  
         return tz;
 	}
 	
@@ -173,7 +175,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		cal.setTime(sn.getDate());
 		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
 		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
-		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), "GMT");
+		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), DEFAULT_TIMEZONE);
 	}
 
 	@Override
