@@ -32,6 +32,14 @@ import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class RMS implements EntryPoint {
+	private static final String MAIL = "Mail";
+
+	private static final String WHEN = "When";
+
+	private static final String HOW = "How";
+
+	private static final String WHAT = "What";
+
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -57,14 +65,14 @@ public class RMS implements EntryPoint {
 		verticalPanel.setSize("297px", "473px");
 		verticalPanel.getElement().getStyle().setPosition(Position.STATIC);
 
-		InlineLabel nlnlblWhat = new InlineLabel("What");
+		InlineLabel nlnlblWhat = new InlineLabel(WHAT);
 		verticalPanel.add(nlnlblWhat);
 
 		final TextArea messageBox = new TextArea();
 		verticalPanel.add(messageBox);
 		messageBox.setSize("215px", "69px");
 
-		Label lblWhen = new Label("When");
+		Label lblWhen = new Label(WHEN);
 		verticalPanel.add(lblWhen);
 
 		final DatePicker datePicker = new DatePicker();
@@ -74,7 +82,7 @@ public class RMS implements EntryPoint {
 		final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
 		verticalPanel.add(hourMinutePicker);
 
-		Label lblHow = new Label("How");
+		Label lblHow = new Label(HOW);
 		verticalPanel.add(lblHow);
 
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
@@ -86,7 +94,7 @@ public class RMS implements EntryPoint {
 		ymCheckBox.setStyleName("howCheckbox");
 		horizontalPanel.add(ymCheckBox);
 
-		final CheckBox mailCheckBox = new CheckBox("Mail");
+		final CheckBox mailCheckBox = new CheckBox(MAIL);
 		mailCheckBox.setStyleName("howCheckbox");
 		horizontalPanel.add(mailCheckBox);
 
@@ -99,6 +107,7 @@ public class RMS implements EntryPoint {
 		hourMinutePicker.setTime("", 00, 00);
 
 		// Create the popup dialog box
+
 		final DialogBox dialogBox = new DialogBox();
 		dialogBox.setText("Remote Procedure Call");
 		dialogBox.setAnimationEnabled(true);

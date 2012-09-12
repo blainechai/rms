@@ -1,6 +1,5 @@
 package com.iv.rms.server;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,10 +27,12 @@ import com.iv.rms.shared.Util;
 @SuppressWarnings("serial")
 public class NotificationServiceImpl extends RemoteServiceServlet implements NotificationService {
 	
+	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
+
 	@Override
 	public void saveNotification(SimpleNotification notification) throws ApplicationException{
 		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
-			throw new ApplicationException("Please login first. You can use you Google Id.");
+			throw new ApplicationException(PropertyService.getInstance().getValue(PLEASE_LOGIN_MSG));
 		}		
 		Calendar cal = Calendar.getInstance();
 		log(cal.getTimeZone().getDisplayName());
@@ -41,13 +42,12 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		try{
 			n.setCreationDate(new Date());
 			n.setMessage(notification.getMessage());
-			n.setTriggerDate(formatDate(fullTriggerDate));
-			n.setMinutes(formatMinutes(fullTriggerDate));
+			n.setTriggerDate(Util.extractTriggerDate(fullTriggerDate));
+			n.setMinutes(Util.formatMinutes(fullTriggerDate));
 			n.setOwnerId(getOrCreateOwner().getUserId());
 			getTimeZone(notification.getTimeZone());
 			pm = PMF.get().getPersistenceManager();
 			pm.makePersistent(n);
-			System.out.println("Id:" + n.getKey());
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -56,25 +56,11 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		
 	}
 	
-	public Integer formatDate(Date date){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String str = sdf.format(date);
-		return Integer.parseInt(str);
-	}
-	
-	public Integer formatMinutes(Date date){
-		SimpleDateFormat sdf = new SimpleDateFormat("HH");
-		int mins = Integer.parseInt(sdf.format(date)) * 60;
-		sdf = new SimpleDateFormat("mm");
-		mins += Integer.parseInt(sdf.format(date));
-		return mins;
-	}
-	
 	public void processPendingNotification(){
 		PersistenceManager pm = null;
 		try{
 			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), "GMT");
-			Integer dateInt = Util.formatDate(currentDate);
+			Integer dateInt = Util.formatDate(currentDate);// TODO: don't use this method
 			Integer minutes = Util.getMinutesSinceMidnight(currentDate);
 			pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(Notification.class);
@@ -177,11 +163,8 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
         int timeZone = Integer.parseInt(strFromJavaScript);  
         if (timeZone >= 0) {  
             strFromJavaScript = "+" + timeZone;  
-        }  
-  
+        }
         TimeZone tz = TimeZone.getTimeZone("GMT" + strFromJavaScript);  
-        System.out.println(tz.getDisplayName());  
-        System.out.println(tz.getRawOffset()); 
         return tz;
 	}
 	
@@ -196,7 +179,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	@Override
 	public void saveUserContactMessage(String subject, String message) throws ApplicationException{
 		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
-			throw new ApplicationException("Please login first. You can use you Google Id.");
+			throw new ApplicationException(PropertyService.getInstance().getValue(PLEASE_LOGIN_MSG));
 		}
 		UserContactMessage m = new UserContactMessage();
 		m.setSubject(subject);

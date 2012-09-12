@@ -15,7 +15,6 @@ public class Timezones implements Serializable{
 	}
 
 	public Timezones(Map<String, String> timeZoneIds, String selectedId) {
-		super();
 		this.timeZoneIds = timeZoneIds;
 		this.selectedId = selectedId;
 	}

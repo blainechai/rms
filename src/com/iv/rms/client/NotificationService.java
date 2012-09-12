@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.iv.rms.entity.UserContactMessage;
 import com.iv.rms.shared.ApplicationException;
 
 @RemoteServiceRelativePath("notification")

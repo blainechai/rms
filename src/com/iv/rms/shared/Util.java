@@ -1,6 +1,5 @@
 package com.iv.rms.shared;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,31 +26,6 @@ public class Util {
 		return minutes;
 	}
 
-	private static String convTimeZone(String time, String sourceTZ, String destTZ) {
-		final String DATE_TIME_FORMAT = "yyyyMMdd-HH:mm:ss";
-		SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT);
-		Date specifiedTime;
-		try {
-			if (sourceTZ != null) {
-				sdf.setTimeZone(TimeZone.getTimeZone(sourceTZ));
-			} else {
-				sdf.setTimeZone(TimeZone.getDefault()); // default to server's
-														// timezone
-			}
-			specifiedTime = sdf.parse(time);
-		} catch (Exception e1) {
-			return "";
-		}
-		// switch timezone
-		if (destTZ != null) {
-			sdf.setTimeZone(TimeZone.getTimeZone(destTZ));
-		} else {
-			sdf.setTimeZone(TimeZone.getDefault()); // default to server's
-													// timezone
-		}
-		return sdf.format(specifiedTime);
-	}
-
 	public static Date getDateInTimeZone(Date currentDate, String currentTimeZoneId, String timeZoneId) {
 		Calendar mbCal = new GregorianCalendar(TimeZone.getTimeZone(timeZoneId));
 		mbCal.setTimeInMillis(currentDate.getTime());
@@ -69,10 +43,18 @@ public class Util {
 		return cal.getTime();
 	}
 
-	public static void main(String args[]) throws ParseException {
-		Date date = new Date();
-		System.out.println(date);
-		System.out.println(getDateInTimeZone(date,"Europe/Berlin", "EET"));
+	public static Integer formatMinutes(Date date){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH");
+		int mins = Integer.parseInt(sdf.format(date)) * 60;
+		sdf = new SimpleDateFormat("mm");
+		mins += Integer.parseInt(sdf.format(date));
+		return mins;
 	}
-
+	
+	public static Integer extractTriggerDate(Date date){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String str = sdf.format(date);
+		return Integer.parseInt(str);
+	}
+	
 }

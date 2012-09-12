@@ -3,8 +3,6 @@ package com.iv.rms.client;
 import java.util.Date;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.iv.rms.entity.UserContactMessage;
-import com.iv.rms.shared.ApplicationException;
 
 public interface NotificationServiceAsync {
 

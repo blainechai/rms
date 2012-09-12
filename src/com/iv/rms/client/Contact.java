@@ -22,13 +22,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.iv.rms.shared.ApplicationException;
 
 public class Contact implements EntryPoint {
+	
+	private static final String YOUR_MESSAGE_HAS_BEEN_SENT_THANK_YOU = "Your message has been sent. Thank you.";
+
+	private static final String SUBMIT = "Submit";
+
+	private static final String CONTACT_US = "Contact us";
+
 	private static final String SUBJECT = "Subject";
+	
 	private static final String YOUR_MESSAGE_GOES_HERE = "Your message goes here";
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while " + "attempting to contact the server. Please check your network " + "connection and try again.";
 	
 	private final NotificationServiceAsync notificationService = GWT.create(NotificationService.class);
 
@@ -46,13 +49,13 @@ public class Contact implements EntryPoint {
 		rootPanel.add(verticalPanel);
 		verticalPanel.setSize("430px", "199px");
 		
-		final Button sendButtton = new Button("Submit");
+		final Button sendButtton = new Button(SUBMIT);
 		sendButtton.setEnabled(false);
 		
 		final Label errorLabel = new Label("");
 		errorLabel.setStyleName("errorLabel");
 		verticalPanel.add(errorLabel);
-		final Label lblNewLabel = new Label("Contact us");
+		final Label lblNewLabel = new Label(CONTACT_US);
 		lblNewLabel.setStyleName("contactUsLabel");
 		verticalPanel.add(lblNewLabel);
 		
@@ -144,7 +147,7 @@ public class Contact implements EntryPoint {
 						messageBox.removeFromParent();
 						subjectText.removeFromParent();
 						sendButtton.removeFromParent();
-						lblNewLabel.setText("Your message has been sent. Thank you.");
+						lblNewLabel.setText(YOUR_MESSAGE_HAS_BEEN_SENT_THANK_YOU);
 						sendButtton.setEnabled(true);
 					}
 					
