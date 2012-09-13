@@ -58,7 +58,7 @@
       </tr>
     </table>
     </div>
-    <footer>
+    <footer style="position:absolute;bottom:0;">
         <p>&copy; ivEleven  2012</p>
     </footer>
   </body>
