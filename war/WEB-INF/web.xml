@@ -22,6 +22,10 @@
 		<servlet-class>com.iv.rms.chat.ChatTest</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>loginOpenId</servlet-name>
+		<servlet-class>com.iv.rms.openid.OpenIdDemoServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>SystemServiceServlet</servlet-name>
 		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
 		<init-param>
@@ -48,6 +52,10 @@
 	<servlet-mapping>
 		<servlet-name>chat</servlet-name>
 		<url-pattern>/chat</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>loginOpenId</servlet-name>
+		<url-pattern>/loginOpenId</url-pattern>
 	</servlet-mapping>
 	<!-- Default page to serve -->
 	<welcome-file-list>
