@@ -49,7 +49,7 @@ public class PropertyService {
 				}
 			}else{
 				value = prop.getValue();
-				compareValues(prop, loadValueFromPropertiesFile(key));
+				//compareValues(prop, loadValueFromPropertiesFile(key));
 			}
 			simpleCache.put(key, value);
 			compareValues(prop, value);
@@ -65,6 +65,7 @@ public class PropertyService {
 			pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(Property.class);
 		    q.setFilter(" propertyKey == keyParam");
+		    q.declareParameters("String keyParam");
 		    List<Property> result = (List<Property>) q.execute(key);
 		    if ( !result.isEmpty() ){
 		    	p = result.get(0);
