@@ -57,6 +57,8 @@ public class HorizontalRMS implements EntryPoint {
 						verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 						rootPanel.add(verticalPanel);
 								final Label errorLabel = new Label();
+								errorLabel.getElement().setId("messsageLabel");
+								errorLabel.setText(" ");
 								verticalPanel.add(errorLabel);
 						
 								HorizontalPanel horizontalPanel_1 = new HorizontalPanel();
@@ -106,17 +108,15 @@ public class HorizontalRMS implements EntryPoint {
 																										lblHow.setStyleName("howLbl");
 																										howPanel.add(lblHow);
 																										lblHow.setWidth("50px");
-																										
-																												HorizontalPanel horizontalPanel = new HorizontalPanel();
-																												howPanel.add(horizontalPanel);
-																												horizontalPanel.setSpacing(5);
 																												//horizontalPanel.setWidth("297px");
 																												
 																														final CheckBox mailCheckBox = new CheckBox("Mail");
+																														mailCheckBox.setWordWrap(false);
+																														howPanel.add(mailCheckBox);
+																														mailCheckBox.setWidth("60px");
 																														mailCheckBox.setEnabled(false);
 																														mailCheckBox.setChecked(true);
 																														mailCheckBox.setStyleName("howCheckbox");
-																														horizontalPanel.add(mailCheckBox);
 																														
 																																final Button sendButton = new Button("Send");
 																																verticalPanel.add(sendButton);
