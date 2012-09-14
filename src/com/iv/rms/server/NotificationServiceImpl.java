@@ -91,6 +91,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 				owner.setCreationDate(new Date());
 				owner.setUserId(user.getUserId());
 				owner.setEmail(user.getEmail());
+				owner.setName(user.getNickname());
 				PersistenceManager pm = PMF.get().getPersistenceManager(); 
 				try{
 					pm.makePersistent(owner);
