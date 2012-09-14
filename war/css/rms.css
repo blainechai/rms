@@ -42,12 +42,11 @@ h1 {
 }
 .howCheckbox label{
 	display: inline;
-	margin: 4px 0 0;
 	vertical-align: middle;
 }
 .howCheckbox input{
 	display: inline;
-	margin: 15px 6px 6px 6px;
+	margin: 6px 6px;
 }
 .gwt-InlineLabel{
 	font-size: 15px;
@@ -63,4 +62,11 @@ h1 {
 .whatsThisHeader{
 	font-size: 15px;
 	font-weight: bold;
+}
+#messsageLabel{
+	display:block;
+	height:20px;
+}
+.timepickr-display{
+	line-height: 15px;
 }
