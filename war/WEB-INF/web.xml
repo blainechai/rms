@@ -23,7 +23,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>loginOpenId</servlet-name>
-		<servlet-class>com.iv.rms.openid.OpenIdDemoServlet</servlet-class>
+		<servlet-class>com.iv.rms.openid.OpenIdLoginServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>SystemServiceServlet</servlet-name>

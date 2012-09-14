@@ -11,6 +11,8 @@
 <title>Mail Reminder</title>
 <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/css/rms.css">
+<link rel="stylesheet" href="/css/tinybox.css" />
+	<script type="text/javascript" src="/js/tinybox.js"></script>
 <c:if test="${requestScope.GAE_MODE }">
 	<script type="text/javascript">
 	

@@ -20,7 +20,7 @@
 						if ( request.getUserPrincipal() != null ){
 							out.print("<a href=\"" + userService.createLogoutURL(thisURL) + "\">Sign out</a>");
 						}else{
-							out.print("<a href=\"" + userService.createLoginURL(thisURL) + "\">Sign in</a>");
+							out.print("<li onclick=\"TINY.box.show({url:'loginOpenId',width:260,height:150})\"><a>Sign in</a></li>");
 						}
 					%>	
 					</li>

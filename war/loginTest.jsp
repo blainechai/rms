@@ -16,9 +16,8 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="style.css" />
-	<script type="text/javascript" src="tinybox.js"></script>
-	
+    <link rel="stylesheet" href="/css/style.css" />
+	<script type="text/javascript" src="/js/tinybox.js"></script>
 </head>
 <body>
 	<style>body {padding-top: 60px;}</style>
@@ -64,7 +63,7 @@
 					<ul class="nav">
 						<li><a href="whatsthis.jsp">What's this?</a></li>
 						<li><a href="contact.jsp">Contact</a></li>
-						<li><a class="ajax" href="/login.jsp">Open as dialog</a></li>
+						<li onclick="TINY.box.show({url:'loginOpenId',width:300,height:150})"><a>Login</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

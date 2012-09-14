@@ -18,7 +18,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 @SuppressWarnings("serial")
-public class OpenIdDemoServlet extends HttpServlet {
+public class OpenIdLoginServlet extends HttpServlet {
 
 	private static final Map<String, String> openIdProviders;
 	static {
@@ -27,7 +27,7 @@ public class OpenIdDemoServlet extends HttpServlet {
 		openIdProviders.put("Yahoo", "yahoo.com");
 		openIdProviders.put("MySpace", "myspace.com");
 		openIdProviders.put("AOL", "aol.com");
-		openIdProviders.put("MyOpenId.com", "myopenid.com");
+		openIdProviders.put("MyOpenId", "myopenid.com");
 	}
 
 	public void test(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -50,7 +50,7 @@ public class OpenIdDemoServlet extends HttpServlet {
 				req.setAttribute(providerName, loginUrl);
 			}
 		}
-		RequestDispatcher rd = req.getRequestDispatcher("loginTest.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
 		try {
 			rd.include(req, resp);
 		} catch (ServletException e) {
@@ -71,7 +71,7 @@ public class OpenIdDemoServlet extends HttpServlet {
 			req.setAttribute(providerName, loginUrl);
 		}
 
-		RequestDispatcher rd = req.getRequestDispatcher("loginTest.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
 		try {
 			rd.include(req, resp);
 		} catch (ServletException e) {
