@@ -50,11 +50,10 @@ public class OpenIdDemoServlet extends HttpServlet {
 				req.setAttribute(providerName, loginUrl);
 			}
 		}
-		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("loginTest.jsp");
 		try {
 			rd.include(req, resp);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -72,7 +71,7 @@ public class OpenIdDemoServlet extends HttpServlet {
 			req.setAttribute(providerName, loginUrl);
 		}
 
-		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("loginTest.jsp");
 		try {
 			rd.include(req, resp);
 		} catch (ServletException e) {

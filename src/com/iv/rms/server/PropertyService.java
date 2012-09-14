@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -51,7 +52,7 @@ public class PropertyService {
 				compareValues(prop, loadValueFromPropertiesFile(key));
 			}
 			simpleCache.put(key, value);
-			
+			compareValues(prop, value);
 		}
 		value = simpleCache.get(key);
 		return value;
@@ -107,6 +108,10 @@ public class PropertyService {
 				pm.close();
 			}
 		}
+	}
+	
+	public Set<String> getKeys(){
+		return this.simpleCache.keySet();
 	}
 
 }
