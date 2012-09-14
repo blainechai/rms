@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 public class ProcessNotificationJobs extends HttpServlet{
 	
 	private static final DateFormat df = new SimpleDateFormat("mm");
+	
+	private static final NotificationServiceImpl notificationService = new NotificationServiceImpl(); 
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int minutes = Integer.parseInt(df.format(new Date()));
 		if ( minutes == 15 || minutes == 30 || minutes == 45 || minutes == 0 ){
-			NotificationServiceImpl notificationService = new NotificationServiceImpl();
 			notificationService.processPendingNotification();
 		}
-		
 	}
 
 }
