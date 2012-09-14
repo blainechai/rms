@@ -52,7 +52,9 @@ public class PropertyService {
 				//compareValues(prop, loadValueFromPropertiesFile(key));
 			}
 			simpleCache.put(key, value);
-			compareValues(prop, value);
+			if ( prop != null && value != null ){
+				compareValues(prop, value);
+			}
 		}
 		value = simpleCache.get(key);
 		return value;
