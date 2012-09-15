@@ -42,6 +42,8 @@ public class HorizontalRMS implements EntryPoint {
 	private static final String SERVER_ERROR = "An error occurred while " + "attempting to contact the server. Please check your network " + "connection and try again.";
 
 	private final NotificationServiceAsync notificationService = GWT.create(NotificationService.class);
+	
+	private SimpleNotification sn = new SimpleNotification();
 
 	/**
 	 * This is the entry point method.
@@ -182,9 +184,13 @@ public class HorizontalRMS implements EntryPoint {
 					errorLabel.setStyleName("errorLabel");
 					return;
 				}
-				
+				// check if this is not a repost of the same notification
+				if ( messageBox.getText().equals(sn.getMessage()) && hourMinutePicker.getMinutes() == sn.getMinutes() && datePicker.getValue().equals(sn.getDate()) ){
+					errorLabel.setText("You can't add the same reminder twice");
+					errorLabel.setStyleName("errorLabel");
+					return;
+				}
 				// Then, we send the input to the server.
-				SimpleNotification sn = new SimpleNotification();
 				sn.setMessage(messageBox.getText());
 				sn.setMinutes(hourMinutePicker.getMinutes());
 				sn.setDate(datePicker.getValue());
