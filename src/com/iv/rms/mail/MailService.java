@@ -35,7 +35,6 @@ public class MailService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		chatService.sendMessage(owner.getEmail(), msgBody);
 	}
 
 }
