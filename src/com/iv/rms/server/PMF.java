@@ -1,6 +1,7 @@
 package com.iv.rms.server;
 
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
 public final class PMF {
@@ -12,5 +13,14 @@ public final class PMF {
 
 	public static PersistenceManagerFactory get() {
 		return pmfInstance;
+	}
+	
+	public static void close(PersistenceManager pm){
+		try{
+			pm.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -28,6 +28,8 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	
 	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
 
+	private MailService ms = new MailService();
+
 	@Override
 	public void saveNotification(SimpleNotification notification) throws ApplicationException{
 		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
@@ -65,8 +67,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			Query q = pm.newQuery(Notification.class);
 		    q.setFilter("triggerDate == " + dateInt + " && minutes <= " + minutes + " && procesed == " + Boolean.FALSE);
 		    List<Notification> results = (List<Notification>) q.execute();
-		    if (!results.isEmpty()) {
-		    	MailService ms = new MailService(); 
+		    if (!results.isEmpty()) { 
 	            for (Notification n : results) {
 	                ms.sendMail(n, getOwner(n.getOwnerId()));
 	                n.setProcesed(Boolean.TRUE);
@@ -80,30 +81,43 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}
 	}
 	
+	/**
+	 * Refactor this method, it's ugly
+	 * @return
+	 */
 	public Owner getOrCreateOwner(){
 		User user = UserServiceFactory.getUserService().getCurrentUser();
 		if ( user != null ){
 			// check if this user has an owner object
 			Owner owner = getOwner(user.getUserId());
 			if ( owner == null ){
-				//create owner
-				owner = new Owner();
-				owner.setCreationDate(new Date());
-				owner.setUserId(user.getUserId());
-				owner.setEmail(user.getEmail());
-				owner.setName(user.getNickname());
-				PersistenceManager pm = PMF.get().getPersistenceManager(); 
-				try{
-					pm.makePersistent(owner);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}finally{
-					pm.close();
-				}
+				//new user... create owner
+				owner = createNewOwner(user);
+				String mailMsg = "User email:" + user.getEmail() + "  Nickname:" + user.getFederatedIdentity();
+				ms.sendAdminMail("mailRemind: New user", mailMsg);
 			}
 			return owner;
 		}
 		return null;
+	}
+	
+	public Owner createNewOwner(User user){
+		Owner owner = null;
+		PersistenceManager pm = null;
+		try{
+			owner = new Owner();
+			owner.setCreationDate(new Date());
+			owner.setUserId(user.getUserId());
+			owner.setEmail(user.getEmail());
+			owner.setName(user.getNickname());
+			pm = PMF.get().getPersistenceManager(); 
+			pm.makePersistent(owner);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			PMF.close(pm);
+		}
+		return owner;
 	}
 	
 	public Owner getOwner(String userId){
