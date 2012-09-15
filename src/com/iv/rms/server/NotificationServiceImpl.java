@@ -2,9 +2,7 @@ package com.iv.rms.server;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
@@ -16,7 +14,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.iv.rms.client.NotificationService;
 import com.iv.rms.client.SimpleNotification;
-import com.iv.rms.client.Timezones;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.Owner;
 import com.iv.rms.entity.UserContactMessage;
@@ -26,6 +23,8 @@ import com.iv.rms.shared.Util;
 
 @SuppressWarnings("serial")
 public class NotificationServiceImpl extends RemoteServiceServlet implements NotificationService {
+	
+	private static final String DEFAULT_TIMEZONE = PropertyService.getInstance().getValue("defaultTimeZoneId");
 	
 	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
 
@@ -59,9 +58,9 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	public void processPendingNotification(){
 		PersistenceManager pm = null;
 		try{
-			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), "GMT");
-			Integer dateInt = Util.formatDate(currentDate);// TODO: don't use this method
-			Integer minutes = Util.getMinutesSinceMidnight(currentDate);
+			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), DEFAULT_TIMEZONE);
+			Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));// TODO: don't use this method
+			Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));
 			pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(Notification.class);
 		    q.setFilter("triggerDate == " + dateInt + " && minutes <= " + minutes + " && procesed == " + Boolean.FALSE);
@@ -92,6 +91,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 				owner.setCreationDate(new Date());
 				owner.setUserId(user.getUserId());
 				owner.setEmail(user.getEmail());
+				owner.setName(user.getNickname());
 				PersistenceManager pm = PMF.get().getPersistenceManager(); 
 				try{
 					pm.makePersistent(owner);
@@ -126,20 +126,6 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		return null;
 	}
 	
-	public Timezones getTimeZones(Date date){
-		Map<String,String> timeZones = new HashMap<String, String>();
-		String[] ids = TimeZone.getAvailableIDs();
-		for (int i = 0; i < ids.length; i++) {
-		        String tz = TimeZone.getTimeZone(ids[i]).getDisplayName();
-		        TimeZone.getTimeZone(ids[i]);
-		        if (!timeZones.containsKey(ids[i])) {
-		        	timeZones.put(ids[i], tz);
-		        }       
-		}
-		
-		return new Timezones(timeZones, guessClientTimeZone(date));
-	}
-	
 	public Boolean hasUserTimeZone(){
 		User user = UserServiceFactory.getUserService().getCurrentUser();
 		if ( user != null ){
@@ -164,7 +150,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
         if (timeZone >= 0) {  
             strFromJavaScript = "+" + timeZone;  
         }
-        TimeZone tz = TimeZone.getTimeZone("GMT" + strFromJavaScript);  
+        TimeZone tz = TimeZone.getTimeZone(DEFAULT_TIMEZONE + strFromJavaScript);  
         return tz;
 	}
 	
@@ -173,7 +159,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		cal.setTime(sn.getDate());
 		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
 		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
-		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), "GMT");
+		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), DEFAULT_TIMEZONE);
 	}
 
 	@Override

@@ -8,20 +8,20 @@ import java.util.TimeZone;
 
 public class Util {
 
-	public static Integer formatDate(Date date) {
+	public static Integer formatDate(Date date, TimeZone timeZone) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		sdf.setTimeZone(timeZone);
 		String str = sdf.format(date);
 		return Integer.parseInt(str);
 	}
 
-	public static Integer getMinutesSinceMidnight(Date date) {
+	public static Integer getMinutesSinceMidnight(Date date, TimeZone timeZone) {
 		Integer minutes = 0;
 		SimpleDateFormat sdf = new SimpleDateFormat("HH");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		sdf.setTimeZone(timeZone);
 		minutes = Integer.parseInt(sdf.format(date)) * 60;
 		sdf = new SimpleDateFormat("mm");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		sdf.setTimeZone(timeZone);
 		minutes += Integer.parseInt(sdf.format(date));
 		return minutes;
 	}

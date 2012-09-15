@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -48,10 +49,12 @@ public class PropertyService {
 				}
 			}else{
 				value = prop.getValue();
-				compareValues(prop, loadValueFromPropertiesFile(key));
+				//compareValues(prop, loadValueFromPropertiesFile(key));
 			}
 			simpleCache.put(key, value);
-			
+			if ( prop != null && value != null ){
+				compareValues(prop, value);
+			}
 		}
 		value = simpleCache.get(key);
 		return value;
@@ -64,6 +67,7 @@ public class PropertyService {
 			pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(Property.class);
 		    q.setFilter(" propertyKey == keyParam");
+		    q.declareParameters("String keyParam");
 		    List<Property> result = (List<Property>) q.execute(key);
 		    if ( !result.isEmpty() ){
 		    	p = result.get(0);
@@ -107,6 +111,10 @@ public class PropertyService {
 				pm.close();
 			}
 		}
+	}
+	
+	public Set<String> getKeys(){
+		return this.simpleCache.keySet();
 	}
 
 }
