@@ -4,15 +4,13 @@
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar">Menu 1</span>
-				<span class="icon-bar">Menu 2</span> 
-				<span class="icon-bar">Menu 3</span>
+				
 			</a> 
 			<a class="brand" href="/">Mail reminder</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li><a href="whatsthis.jsp">What's this?</a></li>
-					<li><a href="contact.jsp">Contact</a></li>
+					<li><a href="whatsthis">What's this?</a></li>
+					<li><a href="contact">Contact</a></li>
 					<li>
 					<% 
 						UserService userService = UserServiceFactory.getUserService();
