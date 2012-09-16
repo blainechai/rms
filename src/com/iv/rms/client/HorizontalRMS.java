@@ -42,6 +42,8 @@ public class HorizontalRMS implements EntryPoint {
 	private static final String SERVER_ERROR = "An error occurred while " + "attempting to contact the server. Please check your network " + "connection and try again.";
 
 	private final NotificationServiceAsync notificationService = GWT.create(NotificationService.class);
+	
+	private SimpleNotification sn = new SimpleNotification();
 
 	/**
 	 * This is the entry point method.
@@ -83,16 +85,22 @@ public class HorizontalRMS implements EntryPoint {
 														final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
 														whenPanel.add(hourMinutePicker);
 														
+														DateTimeFormat sdf = DateTimeFormat.getFormat("HH");
+														Date  date = new Date();
+														int hour = Integer.parseInt(sdf.format(date));
+														sdf = DateTimeFormat.getFormat("mm");
+														int minutes = roundMinutes(Integer.parseInt(sdf.format(date)));
 														
-																hourMinutePicker.setTime("", 00, 00);
+																hourMinutePicker.setTime("", hour, minutes);
+																
 																
 																		VerticalPanel whatPanel = new VerticalPanel();
 																		whatPanel.setSpacing(20);
 																		horizontalPanel_1.add(whatPanel);
 																		
-																				InlineLabel nlnlblWhat = new InlineLabel("What");
-																				nlnlblWhat.setStyleName("whatLbl");
-																				whatPanel.add(nlnlblWhat);
+																				InlineLabel whatLabel = new InlineLabel("What");
+																				whatLabel.setStyleName("whatLbl");
+																				whatPanel.add(whatLabel);
 																				
 																						final TextArea messageBox = new TextArea();
 																						whatPanel.add(messageBox);
@@ -108,7 +116,6 @@ public class HorizontalRMS implements EntryPoint {
 																										lblHow.setStyleName("howLbl");
 																										howPanel.add(lblHow);
 																										lblHow.setWidth("50px");
-																												//horizontalPanel.setWidth("297px");
 																												
 																														final CheckBox mailCheckBox = new CheckBox("Mail");
 																														mailCheckBox.setWordWrap(false);
@@ -182,9 +189,13 @@ public class HorizontalRMS implements EntryPoint {
 					errorLabel.setStyleName("errorLabel");
 					return;
 				}
-				
+				// check if this is not a repost of the same notification
+				if ( messageBox.getText().equals(sn.getMessage()) && hourMinutePicker.getMinutes().equals(sn.getMinutes()) && datePicker.getValue().equals(sn.getDate()) ){
+					errorLabel.setText("You can't add the same reminder twice");
+					errorLabel.setStyleName("errorLabel");
+					return;
+				}
 				// Then, we send the input to the server.
-				SimpleNotification sn = new SimpleNotification();
 				sn.setMessage(messageBox.getText());
 				sn.setMinutes(hourMinutePicker.getMinutes());
 				sn.setDate(datePicker.getValue());
@@ -213,6 +224,7 @@ public class HorizontalRMS implements EntryPoint {
 						sendButton.setEnabled(true);
 						if ( caught  instanceof ApplicationException){
 							errorLabel.setText(caught.getMessage());
+							errorLabel.setStyleName("errorLabel");
 						}else{
 							dialogBox.setText("Operation failed");
 							serverResponseLabel.addStyleName("serverResponseLabelError");
@@ -234,5 +246,12 @@ public class HorizontalRMS implements EntryPoint {
 	 private native int callGetClientTimeZone() /*-{
      	return $wnd.getClientTimeZone();
    	}-*/;
+	 
+	 private int roundMinutes(int minutes){
+		 if ( minutes % 15 > 0 ){
+			 return (( minutes / 15) + 1)  * 15; 
+		 }
+		 return ( minutes / 15)  * 15;
+	 }
 	
 }
