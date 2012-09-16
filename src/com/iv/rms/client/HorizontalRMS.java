@@ -85,8 +85,14 @@ public class HorizontalRMS implements EntryPoint {
 														final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
 														whenPanel.add(hourMinutePicker);
 														
+														DateTimeFormat sdf = DateTimeFormat.getFormat("HH");
+														Date  date = new Date();
+														int hour = Integer.parseInt(sdf.format(date));
+														sdf = DateTimeFormat.getFormat("mm");
+														int minutes = Integer.parseInt(sdf.format(date));
 														
-																hourMinutePicker.setTime("", 00, 00);
+																hourMinutePicker.setTime("", hour, minutes);
+																
 																
 																		VerticalPanel whatPanel = new VerticalPanel();
 																		whatPanel.setSpacing(20);
