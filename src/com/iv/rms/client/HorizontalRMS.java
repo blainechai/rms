@@ -89,7 +89,7 @@ public class HorizontalRMS implements EntryPoint {
 														Date  date = new Date();
 														int hour = Integer.parseInt(sdf.format(date));
 														sdf = DateTimeFormat.getFormat("mm");
-														int minutes = Integer.parseInt(sdf.format(date));
+														int minutes = roundMinutes(Integer.parseInt(sdf.format(date)));
 														
 																hourMinutePicker.setTime("", hour, minutes);
 																
@@ -98,9 +98,9 @@ public class HorizontalRMS implements EntryPoint {
 																		whatPanel.setSpacing(20);
 																		horizontalPanel_1.add(whatPanel);
 																		
-																				InlineLabel nlnlblWhat = new InlineLabel("What");
-																				nlnlblWhat.setStyleName("whatLbl");
-																				whatPanel.add(nlnlblWhat);
+																				InlineLabel whatLabel = new InlineLabel("What");
+																				whatLabel.setStyleName("whatLbl");
+																				whatPanel.add(whatLabel);
 																				
 																						final TextArea messageBox = new TextArea();
 																						whatPanel.add(messageBox);
@@ -116,7 +116,6 @@ public class HorizontalRMS implements EntryPoint {
 																										lblHow.setStyleName("howLbl");
 																										howPanel.add(lblHow);
 																										lblHow.setWidth("50px");
-																												//horizontalPanel.setWidth("297px");
 																												
 																														final CheckBox mailCheckBox = new CheckBox("Mail");
 																														mailCheckBox.setWordWrap(false);
@@ -191,7 +190,7 @@ public class HorizontalRMS implements EntryPoint {
 					return;
 				}
 				// check if this is not a repost of the same notification
-				if ( messageBox.getText().equals(sn.getMessage()) && hourMinutePicker.getMinutes() == sn.getMinutes() && datePicker.getValue().equals(sn.getDate()) ){
+				if ( messageBox.getText().equals(sn.getMessage()) && hourMinutePicker.getMinutes().equals(sn.getMinutes()) && datePicker.getValue().equals(sn.getDate()) ){
 					errorLabel.setText("You can't add the same reminder twice");
 					errorLabel.setStyleName("errorLabel");
 					return;
@@ -225,6 +224,7 @@ public class HorizontalRMS implements EntryPoint {
 						sendButton.setEnabled(true);
 						if ( caught  instanceof ApplicationException){
 							errorLabel.setText(caught.getMessage());
+							errorLabel.setStyleName("errorLabel");
 						}else{
 							dialogBox.setText("Operation failed");
 							serverResponseLabel.addStyleName("serverResponseLabelError");
@@ -246,5 +246,12 @@ public class HorizontalRMS implements EntryPoint {
 	 private native int callGetClientTimeZone() /*-{
      	return $wnd.getClientTimeZone();
    	}-*/;
+	 
+	 private int roundMinutes(int minutes){
+		 if ( minutes % 15 > 0 ){
+			 return (( minutes / 15) + 1)  * 15; 
+		 }
+		 return ( minutes / 15)  * 15;
+	 }
 	
 }

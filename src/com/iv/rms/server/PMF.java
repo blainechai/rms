@@ -17,7 +17,9 @@ public final class PMF {
 	
 	public static void close(PersistenceManager pm){
 		try{
-			pm.close();
+			if ( pm != null ){
+				pm.close();
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

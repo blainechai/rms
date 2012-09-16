@@ -47,16 +47,41 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			n.setMinutes(Util.formatMinutes(fullTriggerDate));
 			n.setOwnerId(getOrCreateOwner().getUserId());
 			getTimeZone(notification.getTimeZone());
-			pm = PMF.get().getPersistenceManager();
-			pm.makePersistent(n);
+			if  ( !isDuplicate(n) ){
+				pm = PMF.get().getPersistenceManager();
+				pm.makePersistent(n);
+			}else{
+				throw new ApplicationException("You can't add the same reminder twice");
+			}
+		}catch (ApplicationException e) {
+			throw e;
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			pm.close();
+			PMF.close(pm);
 		}
 		
 	}
 	
+	private boolean isDuplicate(Notification notification) {
+		PersistenceManager pm = null;
+		boolean result = false;
+		try{
+			pm = PMF.get().getPersistenceManager();
+			Query q = pm.newQuery(Notification.class);
+		    q.setFilter("triggerDate == " + notification.getTriggerDate() + " && minutes == " + notification.getMinutes() + " && procesed == " + Boolean.FALSE + " && message =='" + notification.getMessage() + "'");
+		    List<Notification> results = (List<Notification>) q.execute();
+		    if (!results.isEmpty()) { 
+	            result = true;
+	        }
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			PMF.close(pm);
+		}
+		return result;
+	}
+
 	public void processPendingNotification(){
 		PersistenceManager pm = null;
 		try{
@@ -77,7 +102,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			pm.close();
+			PMF.close(pm);
 		}
 	}
 	
@@ -135,7 +160,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			pm.close();
+			PMF.close(pm);
 		}
 		return null;
 	}
@@ -193,7 +218,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			pm.close();
+			PMF.close(pm);
 		}
 		
 	}
