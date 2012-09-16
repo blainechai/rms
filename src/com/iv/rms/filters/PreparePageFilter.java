@@ -44,7 +44,6 @@ public class PreparePageFilter implements Filter {
 		}else{
 			request.setAttribute(Constants.GAE_MODE, false);
 		}
-		System.out.println(((HttpServletRequest)request).getRequestURI());
 		String target = mappings.get(((HttpServletRequest)request).getRequestURI());
 		if ( target != null ){
 			RequestDispatcher rd = request.getRequestDispatcher(target);

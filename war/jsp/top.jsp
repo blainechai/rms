@@ -3,10 +3,9 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">	
 			</a> 
-			<a class="brand" href="/">Mail reminder</a>
+			<a class="brand" href="/"><h1>Mail reminder</h1></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="whatsthis">What's this?</a></li>
