@@ -225,6 +225,7 @@ public class HorizontalRMS implements EntryPoint {
 						if ( caught  instanceof ApplicationException){
 							errorLabel.setText(caught.getMessage());
 							errorLabel.setStyleName("errorLabel");
+							sn = null;
 						}else{
 							dialogBox.setText("Operation failed");
 							serverResponseLabel.addStyleName("serverResponseLabelError");
@@ -248,10 +249,15 @@ public class HorizontalRMS implements EntryPoint {
    	}-*/;
 	 
 	 private int roundMinutes(int minutes){
-		 if ( minutes % 15 > 0 ){
-			 return (( minutes / 15) + 1)  * 15; 
+		 int result = 0;
+		 if ( minutes > 45 ){
+			 result = 0 ;
+		 }else if ( minutes % 15 > 0 ){
+			 result = (( minutes / 15) + 1)  * 15; 
+		 }else{
+			 result = ( minutes / 15)  * 15;
 		 }
-		 return ( minutes / 15)  * 15;
+		 return result;
 	 }
 	
 }
