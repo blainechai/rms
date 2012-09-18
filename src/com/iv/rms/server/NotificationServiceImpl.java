@@ -220,7 +220,8 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}finally{
 			PMF.close(pm);
 		}
-		
+		// send email
+		ms.sendAdminMail("New contact message", "Message from " + UserServiceFactory.getUserService().getCurrentUser().getEmail() + " Content:" + message);
 	}
 
 }
