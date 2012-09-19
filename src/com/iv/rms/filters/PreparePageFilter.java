@@ -49,7 +49,7 @@ public class PreparePageFilter implements Filter {
 		User user = UserServiceFactory.getUserService().getCurrentUser();
 		request.setAttribute("user", user);
 		if ( user == null ){
-			request.setAttribute("loginURL", UserServiceFactory.getUserService().createLoginURL("/"));
+			request.setAttribute("loginURL", UserServiceFactory.getUserService().createLoginURL(((HttpServletRequest)request).getRequestURI()));
 		}else{
 			request.setAttribute("email", user.getEmail());
 			request.setAttribute("logoutURL", UserServiceFactory.getUserService().createLogoutURL("/"));
