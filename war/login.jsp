@@ -4,7 +4,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <link rel="stylesheet" type="text/css" media="screen" href="/css/openid.css" />
-<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery.openid.js"></script>
 	
 		<h4>Login using your OpenId</h4>
