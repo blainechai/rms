@@ -17,11 +17,12 @@
 					<ul class="nav">
 						<li><a href="whatsthis">What's this?</a></li>
 						<li><a href="contact">Contact</a></li>
+					</ul>
+					<ul class="nav">
 						<c:if test="${requestScope.user != null}">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${requestScope.email} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Profile</a></li>
 								<li><a href="${requestScope.logoutURL}">Sign out</a></li>
 							</ul>
 						</li>
