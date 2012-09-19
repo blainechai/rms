@@ -1,4 +1,4 @@
-<footer style="width:100%;position: absolute; bottom: 0;">
+<footer style="position: absolute; bottom: 0;">
 	<p>&copy; ivEleven 2012</p>
 </footer>
 <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
