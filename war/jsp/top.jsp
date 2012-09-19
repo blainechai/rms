@@ -28,7 +28,7 @@
 						</li>
 						</c:if>
 						<c:if test="${requestScope.user == null}">
-							<li><a href="${requestScope.loginURL}">Sign in</a></li>
+							<li onclick="TINY.box.show({url:'loginOpenId',width:260,height:150})"><a>Sign in</a></li>
 						</c:if>
 					</ul>
 				</div>
