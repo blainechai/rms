@@ -267,9 +267,7 @@ public class HorizontalRMS implements EntryPoint {
 	 }
 	 
 	 private boolean isLoggedIn(){
-		 DOM.getElementById("authenticationState");
-		 System.out.println(DOM.getElementById("authenticationState").getPropertyBoolean("value"));
-		 return Boolean.valueOf("false");
+		 return DOM.getElementById("authenticationState").getPropertyBoolean("value");
 	 }
 	
 }
