@@ -13,6 +13,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -189,6 +190,11 @@ public class HorizontalRMS implements EntryPoint {
 					errorLabel.setStyleName("errorLabel");
 					return;
 				}
+				if ( !isLoggedIn() ){
+					errorLabel.setText("You are not logged in. this is from the page");
+					errorLabel.setStyleName("errorLabel");
+					return;
+				}
 				// check if this is not a repost of the same notification
 				if ( messageBox.getText().equals(sn.getMessage()) && hourMinutePicker.getMinutes().equals(sn.getMinutes()) && datePicker.getValue().equals(sn.getDate()) ){
 					errorLabel.setText("You can't add the same reminder twice");
@@ -258,6 +264,12 @@ public class HorizontalRMS implements EntryPoint {
 			 result = ( minutes / 15)  * 15;
 		 }
 		 return result;
+	 }
+	 
+	 private boolean isLoggedIn(){
+		 DOM.getElementById("authenticationState");
+		 System.out.println(DOM.getElementById("authenticationState").getPropertyBoolean("value"));
+		 return Boolean.valueOf("false");
 	 }
 	
 }
