@@ -16,12 +16,12 @@
 				of the things and events that are important to you.</p>
 			<p>So you need to remember to brush your teeth thoroughly because
 				tomorrow you have a dentist appointment, or you need to remember to
-				water the succulets every two weeks, or you need to remember that two
+				water the succulents every two weeks, or you need to remember that two
 				months ago you've made a bet and a free beer is coming your way, or
 				that you'd better start chucking down that glass of water or you
 				won't meet your daily quota. If e-mail is something you're
 				comfortable with and you keep what's important in your inbox, then
-				mailRemaind is what you need.</p>
+				mailRemind is what you need.</p>
 		</div>
 		<h2>How does it work?</h2>
 		<div class="container">
