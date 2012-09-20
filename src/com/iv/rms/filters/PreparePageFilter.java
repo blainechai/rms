@@ -13,6 +13,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.utils.SystemProperty;
 import com.iv.rms.Constants;
 
@@ -44,7 +46,14 @@ public class PreparePageFilter implements Filter {
 		}else{
 			request.setAttribute(Constants.GAE_MODE, false);
 		}
-		System.out.println(((HttpServletRequest)request).getRequestURI());
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+		request.setAttribute("user", user);
+		if ( user == null ){
+			request.setAttribute("loginURL", UserServiceFactory.getUserService().createLoginURL(((HttpServletRequest)request).getRequestURI()));
+		}else{
+			request.setAttribute("email", user.getEmail());
+			request.setAttribute("logoutURL", UserServiceFactory.getUserService().createLogoutURL(((HttpServletRequest)request).getRequestURI()));
+		}
 		String target = mappings.get(((HttpServletRequest)request).getRequestURI());
 		if ( target != null ){
 			RequestDispatcher rd = request.getRequestDispatcher(target);

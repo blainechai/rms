@@ -8,3 +8,5 @@
 	</div>
 </noscript>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
