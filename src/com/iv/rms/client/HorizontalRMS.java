@@ -89,11 +89,12 @@ public class HorizontalRMS implements EntryPoint {
 														final HourMinutePicker hourMinutePicker = new HourMinutePicker(PickerFormat._24_HOUR);
 														whenPanel.add(hourMinutePicker);
 														
-														DateTimeFormat sdf = DateTimeFormat.getFormat("HH");
+														DateTimeFormat sdf = DateTimeFormat.getFormat("mm");
 														Date  date = new Date();
-														int hour = Integer.parseInt(sdf.format(date));
-														sdf = DateTimeFormat.getFormat("mm");
 														int minutes = roundMinutes(Integer.parseInt(sdf.format(date)));
+														int realMin = Integer.parseInt(sdf.format(date));
+														sdf = DateTimeFormat.getFormat("HH");
+														int hour = getHour(Integer.parseInt(sdf.format(date)), realMin);
 														
 																hourMinutePicker.setTime("", hour, minutes);
 																
@@ -307,6 +308,17 @@ public class HorizontalRMS implements EntryPoint {
 			 result = ( minutes / 15)  * 15;
 		 }
 		 return result;
+	 }
+	 
+	 private int getHour(int hour, int minutes){
+		 if ( minutes > 45){
+			 if ( hour == 23){
+				 hour = 0;
+			 }else{
+				 hour++;
+			 }
+		 }
+		 return hour;
 	 }
 	 
 	 private boolean isUserLoggedIn(){
