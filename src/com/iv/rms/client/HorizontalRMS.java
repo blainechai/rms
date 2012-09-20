@@ -13,13 +13,14 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
@@ -50,10 +51,12 @@ public class HorizontalRMS implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel rootPanel = RootPanel.get("workspace");
+		final Hidden hidden = new Hidden("tempNotificationId", "0");
+		hidden.setID("tempNotification");
+		rootPanel.add(hidden);
 		rootPanel.getElement().getStyle().setPosition(Position.RELATIVE);
 						
 						VerticalPanel verticalPanel = new VerticalPanel();
@@ -190,9 +193,27 @@ public class HorizontalRMS implements EntryPoint {
 					errorLabel.setStyleName("errorLabel");
 					return;
 				}
-				if ( !isLoggedIn() ){
-					errorLabel.setText("You are not logged in. this is from the page");
+				if ( !isUserLoggedIn() ){
+					errorLabel.setText("Please login first. You can use you Open Id(Google, Yahoo, AOL or MyOpenId)");
 					errorLabel.setStyleName("errorLabel");
+					SimpleNotification sn = new SimpleNotification();
+					sn.setMessage(messageBox.getText());
+					sn.setMinutes(hourMinutePicker.getMinutes());
+					sn.setDate(datePicker.getValue());
+					notificationService.saveTempNotification(sn, new AsyncCallback<Long>() {
+						
+						@Override
+						public void onSuccess(Long result) {
+							hidden.setValue(String.valueOf(result));
+							callSetTempNotificationCookie();
+						}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
 					return;
 				}
 				// check if this is not a repost of the same notification
@@ -248,11 +269,33 @@ public class HorizontalRMS implements EntryPoint {
 		NewNotificationHandler handler = new NewNotificationHandler();
 		sendButton.addClickHandler(handler);
 		
+		String tempNotificationCookieValue = Cookies.getCookie("tempNotification");
+		if ( tempNotificationCookieValue != null ){
+			Long tempNotificationId = Long.parseLong(tempNotificationCookieValue);
+			if ( tempNotificationId != 0 ){
+				// load object
+				notificationService.getTempNotification(tempNotificationId, new AsyncCallback<SimpleNotification>() {
+					
+					@Override
+					public void onSuccess(SimpleNotification result) {
+						Cookies.removeCookie("tempNotification");
+						datePicker.setValue(result.getDate());
+						int hour = result.getMinutes() / 60;
+						int minutes = result.getMinutes() - hour * 60;
+						hourMinutePicker.setTime("", hour , minutes);
+						messageBox.setText(result.getMessage());
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+			}
+			
+		}
 	}
-	
-	 private native int callGetClientTimeZone() /*-{
-     	return $wnd.getClientTimeZone();
-   	}-*/;
 	 
 	 private int roundMinutes(int minutes){
 		 int result = 0;
@@ -266,8 +309,22 @@ public class HorizontalRMS implements EntryPoint {
 		 return result;
 	 }
 	 
-	 private boolean isLoggedIn(){
-		 return DOM.getElementById("authenticationState").getPropertyBoolean("value");
+	 private boolean isUserLoggedIn(){
+		 return Boolean.valueOf(callIsLoggedIn());
 	 }
+	 
+	 private native int callGetClientTimeZone() /*-{
+  	return $wnd.getClientTimeZone();
+	}-*/;
+	 
+	 private native String callIsLoggedIn() /*-{
+		return $wnd.isLoggedIn();
+	}-*/;
+	 
+	 private native void callSetTempNotificationCookie() /*-{
+		$wnd.setTempNotificationCookie();
+	}-*/;
+	 
+	 
 	
 }

@@ -23,12 +23,5 @@
     </table>
     </div>
     <jsp:include page="jsp/footer.jsp"/>
-   	<script type="text/javascript">
-    	function getClientTimeZone(){
-    	    var dateVar = new Date();  
-    	    var timezone = dateVar.getTimezoneOffset()/60 * (-1);
-        	return timezone;
-        }
-    </script>
   </body>
 </html>

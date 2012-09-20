@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/css/tinybox.css" />
 <script type="text/javascript" src="/js/tinybox.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/rms.js"></script>
 <c:if test="${requestScope.GAE_MODE }">
 	<script type="text/javascript">
 	
