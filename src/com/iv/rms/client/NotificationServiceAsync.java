@@ -10,4 +10,8 @@ public interface NotificationServiceAsync {
 
 	void saveUserContactMessage(String subject, String message, AsyncCallback<Void> callback);
 
+	void saveTempNotification(SimpleNotification notification, AsyncCallback<Long> callback);
+
+	void getTempNotification(Long id, AsyncCallback<SimpleNotification> callback);
+
 }

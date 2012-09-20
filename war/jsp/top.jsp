@@ -21,6 +21,7 @@
 					<ul class="nav">
 						<c:if test="${requestScope.user != null}">
 						<li class="dropdown">
+							<input type="hidden" id="authenticationState" name="authenticationState" value="true">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${requestScope.email} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="${requestScope.logoutURL}">Sign out</a></li>
@@ -28,7 +29,7 @@
 						</li>
 						</c:if>
 						<c:if test="${requestScope.user == null}">
-							<li onclick="TINY.box.show({url:'loginOpenId',width:260,height:150})"><a>Sign in</a></li>
+							<li onclick="TINY.box.show({url:'loginOpenId',width:260,height:150})"><a>Sign in</a><input type="hidden" id="authenticationState" name="authenticationState" value="false"></li>
 						</c:if>
 					</ul>
 				</div>

@@ -16,6 +16,7 @@ import com.iv.rms.client.NotificationService;
 import com.iv.rms.client.SimpleNotification;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.Owner;
+import com.iv.rms.entity.TempNotification;
 import com.iv.rms.entity.UserContactMessage;
 import com.iv.rms.mail.MailService;
 import com.iv.rms.shared.ApplicationException;
@@ -222,6 +223,45 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		}
 		// send email
 		ms.sendAdminMail("New contact message", "Message from " + UserServiceFactory.getUserService().getCurrentUser().getEmail() + " Content:" + message);
+	}
+
+	@Override
+	public Long saveTempNotification(SimpleNotification notification) throws ApplicationException {
+		TempNotification n = new TempNotification();
+		PersistenceManager pm = null;
+		Long tempNotificationId = null;
+		try{
+			n.setMessage(notification.getMessage());
+			n.setTriggerDate(notification.getDate());
+			n.setMinutes(notification.getMinutes());
+			pm = PMF.get().getPersistenceManager();
+			pm.makePersistent(n);
+			tempNotificationId = n.getKey().getId();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			PMF.close(pm);
+		}
+		return tempNotificationId;
+	}
+
+	@Override
+	public SimpleNotification getTempNotification(Long id) {
+		PersistenceManager pm = null;
+		SimpleNotification sn = new SimpleNotification();
+		try{
+			pm = PMF.get().getPersistenceManager();
+			TempNotification tempNotification = (TempNotification) pm.getObjectById(TempNotification.class, id);
+			sn.setDate(new Date(tempNotification.getTriggerDate().getTime()));
+			sn.setMessage(tempNotification.getMessage());
+			sn.setMinutes(tempNotification.getMinutes());
+			//TODO: delete temp object
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			PMF.close(pm);
+		}
+		return sn;
 	}
 
 }
