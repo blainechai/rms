@@ -64,3 +64,22 @@ h1 {
 .timepickr-display{
 	line-height: 15px;
 }
+fooster{
+	position: absolute; 
+	bottom: 0;
+}
+#footer .upperFooter {
+	box-shadow: 0 -1px 0 #FFFFFF inset;
+	min-height: 20px;
+	overflow: hidden;
+	position:absolute;
+	bottom:0;
+}
+#footer .upperFooter ul li{
+	display: inline;
+	margin: 0px 5px 0px 0px;
+}
+#footer .upperFooter ul{
+	display: inline;
+	margin: 0px 0px 0px 0px;
+}
