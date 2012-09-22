@@ -8,6 +8,9 @@
 			<li><a href="">Terms of use</a></li>
 			<li><a href="">Privacy policy</a></li>
 		</ul>
+		<ul>
+			<li>Build BUILD_TAG</li>
+		</ul>
 	</div>
 </div>
 </footer>
