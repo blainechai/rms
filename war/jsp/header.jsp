@@ -3,11 +3,12 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="Language" content="En" />
-<meta name="Keywords" lang="En" content="Scheduling,Email Reminder Service,Mail Reminder Service, mail Remind tool,EMail Reminders,Automated Email,Automatic Email" />
-<meta name="Description" lang="En" content="Get reminders on email" />
+<meta name="language" content="en" />
+<meta name="keywords" lang="En" content="Scheduling,Email Reminder Service,Mail Reminder Service, mail Remind tool,EMail Reminders,Automated Email,Automatic Email" />
+<meta name="description" lang="En" content="Get reminders on email" />
 <meta name="Author" content="www.mail-reminder.com" />
-<meta name="Copyright" content="www.mail-reminder.com" />
+<meta http-equiv="content-language" content="en" />
+<meta lang="en" />
 <title>Mail Reminder</title>
 <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
