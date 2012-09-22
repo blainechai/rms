@@ -271,7 +271,7 @@ public class HorizontalRMS implements EntryPoint {
 		sendButton.addClickHandler(handler);
 		
 		String tempNotificationCookieValue = Cookies.getCookie("tempNotification");
-		if ( tempNotificationCookieValue != null ){
+		if ( tempNotificationCookieValue != null && !"null".equals(tempNotificationCookieValue)){
 			Long tempNotificationId = Long.parseLong(tempNotificationCookieValue);
 			if ( tempNotificationId != 0 ){
 				// load object

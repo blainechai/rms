@@ -3,7 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
-<html>
+<html lang="en">
   <head>
   	<jsp:include page="jsp/header.jsp"/>
     <script type="text/javascript" language="javascript" src="contact/contact.nocache.js"></script>
