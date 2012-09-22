@@ -104,11 +104,10 @@
 	</target>
 	
 	<target name="buildTag" description="">
-		<buildnumber file="build.properties"/>
 		<tstamp>
 			<format property="builtat" pattern="ddMMyyyyHHmm"/>
 		</tstamp> 
-		<replaceregexp match="BUILD_TAG" replace="v${version}.${build.number}-${builtat}" flags="g" byline="true">
+		<replaceregexp match="BUILD_TAG" replace="v${version}-${builtat}" flags="g" byline="true">
 			<fileset dir="${warDir}" includes="jsp/footer.jsp"/>
 		</replaceregexp>
 	</target>
