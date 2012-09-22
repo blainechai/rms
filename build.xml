@@ -1,10 +1,10 @@
 <project default="build">
-	<property name="sdk.dir" location="D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.2/appengine-java-sdk-1.7.2" />
-	<property name="gwt.sdk" location="D:\work\jbossDev\studio\plugins\com.google.gwt.eclipse.sdkbundle_2.4.0.v201208080120-rel-r37\gwt-2.4.0" />
-	<import file="${sdk.dir}/config/user/ant-macros.xml" />
-	<property name="deployDir" value="war/" />
-	<property name="warDir" value="/dist/war" />
+	<property file="build.properties"/>
+	<property environment="env"/>
+	<property name="sdk.dir" value="${env.GAE_PATH}"  />
+	<property name="gwt.sdk" value="${env.GWT_PATH}" />
 	<property name="gwt.args" value="" />
+	<import file="${sdk.dir}/config/user/ant-macros.xml" />
 
 	<path id="project.classpath">
 		<pathelement path="${warDir}/WEB-INF/classes" />
@@ -23,7 +23,7 @@
 		<fileset dir="${gwt.sdk}" includes="**/*.jar"/>
 	</path>
 
-	<target name="prepare" description="Copies the App Engine JARs to the WAR.">
+	<target name="prepare" depends="clean" description="Copies the App Engine JARs to the WAR.">
 		<copy todir="${warDir}/WEB-INF/lib" flatten="true">
 			<fileset dir="${sdk.dir}/lib/user">
 				<include name="**/appengine-api-1.0-sdk*.jar" />
@@ -86,7 +86,11 @@
 		</enhance_war>
 	</target>
 
-	<target name="build" depends="compile" description="Builds a war file for this web applicaton">
+	<target name="build" depends="compile, enhance, buildTag" description="Builds a war file for this web applicaton">
+		<echo message="Build war file"></echo>
+	</target>
+	
+	<target name="full" depends="compile, enhance, buildTag, update" description="Builds a war file for this web applicaton">
 		<echo message="Build war file"></echo>
 	</target>
 
@@ -96,6 +100,17 @@
 
 	<target name="clean" description="Clean original WAR file">
 		<delete dir="war/WEB-INF/classes/"/>
+		<delete dir="${warDir}"/>
+	</target>
+	
+	<target name="buildTag" description="">
+		<buildnumber file="build.properties"/>
+		<tstamp>
+			<format property="builtat" pattern="ddMMyyyyHHmm"/>
+		</tstamp> 
+		<replaceregexp match="BUILD_TAG" replace="v${version}.${build.number}-${builtat}" flags="g" byline="true">
+			<fileset dir="${warDir}" includes="jsp/footer.jsp"/>
+		</replaceregexp>
 	</target>
 
 </project>

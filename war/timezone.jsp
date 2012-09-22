@@ -43,5 +43,6 @@ body {
 	</div>
 <jsp:include page="/jsp/footer.jsp"/>
 <script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+TEST
 </body>
 </html>
