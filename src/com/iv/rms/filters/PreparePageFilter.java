@@ -17,9 +17,11 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.utils.SystemProperty;
 import com.iv.rms.Constants;
+import com.iv.rms.server.PropertyService;
 
 public class PreparePageFilter implements Filter {
 	
+	private static final String DOMAIN = "domain";
 	private	static Map<String, String> mappings = new HashMap<String, String>(); 
 	
 	static{
@@ -42,7 +44,12 @@ public class PreparePageFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		if ( SystemProperty.environment.value() == SystemProperty.Environment.Value.Production ){
-			request.setAttribute(Constants.GAE_MODE, true);
+			// check if it's production domain or dev domain
+			if ( request.getServerName().equals(PropertyService.getInstance().getValue(DOMAIN)) ){
+				request.setAttribute(Constants.GAE_MODE, true);
+			}else{
+				request.setAttribute(Constants.GAE_MODE, false);
+			}
 		}else{
 			request.setAttribute(Constants.GAE_MODE, false);
 		}
