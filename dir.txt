@@ -1,0 +1,23 @@
+
+D:\work\workspace\RMS>dir
+ Volume in drive D is data
+ Volume Serial Number is F41A-5503
+
+ Directory of D:\work\workspace\RMS
+
+23.09.2012  14:25    <DIR>          .
+23.09.2012  14:25    <DIR>          ..
+23.09.2012  00:53               492 .classpath
+03.09.2012  19:34                65 .gitignore
+17.09.2012  13:12    <DIR>          .gwt
+30.08.2012  18:27             1.401 .project
+23.09.2012  00:53    <DIR>          .settings
+23.09.2012  00:59                29 build.properties
+23.09.2012  00:59             4.087 build.xml
+23.09.2012  14:25                 0 dir.txt
+22.09.2012  23:31    <DIR>          gwt-unitCache
+21.09.2012  17:02    <DIR>          src
+21.09.2012  23:04    <DIR>          test-classes
+22.09.2012  23:35    <DIR>          war
+               6 File(s)          6.074 bytes
+               8 Dir(s)  39.354.335.232 bytes free
