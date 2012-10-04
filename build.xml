@@ -69,8 +69,8 @@
 			<arg value="-war" />
 			<arg value="${warDir}" />
 			<arg line="${gwt.args}" />
-			<arg value="com.iv.rms.RMS" />
-			<arg value="com.iv.rms.Contact" />
+			<arg value="com.iv.rms.notification.RMS" />
+			<arg value="com.iv.rms.contact.Contact" />
 		</java>
 	</target>
 

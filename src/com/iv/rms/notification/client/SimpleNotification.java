@@ -1,4 +1,4 @@
-package com.iv.rms.client;
+package com.iv.rms.notification.client;
 
 import java.io.Serializable;
 import java.util.Date;

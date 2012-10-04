@@ -1,4 +1,4 @@
-package com.iv.rms.server;
+package com.iv.rms.notification;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -8,36 +8,29 @@ import java.util.TimeZone;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.iv.rms.client.NotificationService;
-import com.iv.rms.client.SimpleNotification;
+import com.iv.rms.core.AbstractService;
+import com.iv.rms.core.PMF;
+import com.iv.rms.core.PropertyServiceImpl;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.Owner;
 import com.iv.rms.entity.TempNotification;
-import com.iv.rms.entity.UserContactMessage;
-import com.iv.rms.mail.MailService;
-import com.iv.rms.shared.ApplicationException;
-import com.iv.rms.shared.Util;
+import com.iv.rms.notification.client.SimpleNotification;
+import com.iv.rms.notification.shared.ApplicationException;
+import com.iv.rms.notification.shared.Util;
 
-@SuppressWarnings("serial")
-public class NotificationServiceImpl extends RemoteServiceServlet implements NotificationService {
+public class NotificationServiceImpl extends AbstractService implements NotificationService{
 	
-	private static final String DEFAULT_TIMEZONE = PropertyService.getInstance().getValue("defaultTimeZoneId");
+	private static final String DEFAULT_TIMEZONE = PropertyServiceImpl.getInstance().getValue("defaultTimeZoneId");
 	
 	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
-
-	private MailService ms = new MailService();
-
+	
 	@Override
 	public void saveNotification(SimpleNotification notification) throws ApplicationException{
 		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
-			throw new ApplicationException(PropertyService.getInstance().getValue(PLEASE_LOGIN_MSG));
-		}		
-		Calendar cal = Calendar.getInstance();
-		log(cal.getTimeZone().getDisplayName());
+			throw new ApplicationException(getProperty(PLEASE_LOGIN_MSG));
+		}
 		Notification n = new Notification();
 		PersistenceManager pm = null;
 		Date fullTriggerDate = composeFullTriggerDate(notification);
@@ -49,7 +42,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			n.setOwnerId(getOrCreateOwner().getUserId());
 			getTimeZone(notification.getTimeZone());
 			if  ( !isDuplicate(n) ){
-				pm = PMF.get().getPersistenceManager();
+				pm = getPersistenceManager();
 				pm.makePersistent(n);
 			}else{
 				throw new ApplicationException("You can't add the same reminder twice");
@@ -68,7 +61,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		PersistenceManager pm = null;
 		boolean result = false;
 		try{
-			pm = PMF.get().getPersistenceManager();
+			pm = getPersistenceManager();
 			Query q = pm.newQuery(Notification.class);
 		    q.setFilter("triggerDate == " + notification.getTriggerDate() + " && minutes == " + notification.getMinutes() + " && procesed == " + Boolean.FALSE + " && message =='" + notification.getMessage() + "'");
 		    List<Notification> results = (List<Notification>) q.execute();
@@ -89,13 +82,13 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), DEFAULT_TIMEZONE);
 			Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));// TODO: don't use this method
 			Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));
-			pm = PMF.get().getPersistenceManager();
+			pm = getPersistenceManager();
 			Query q = pm.newQuery(Notification.class);
 		    q.setFilter("triggerDate == " + dateInt + " && minutes <= " + minutes + " && procesed == " + Boolean.FALSE);
 		    List<Notification> results = (List<Notification>) q.execute();
 		    if (!results.isEmpty()) { 
 	            for (Notification n : results) {
-	                ms.sendMail(n, getOwner(n.getOwnerId()));
+	                getServiceLocator().getMailService().sendMail(n, getOwner(n.getOwnerId()));
 	                n.setProcesed(Boolean.TRUE);
 	                n.setSentDate(currentDate);
 	            }
@@ -120,7 +113,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 				//new user... create owner
 				owner = createNewOwner(user);
 				String mailMsg = "User email:" + user.getEmail() + "  Nickname:" + user.getFederatedIdentity();
-				ms.sendAdminMail("mailRemind: New user", mailMsg);
+				getServiceLocator().getMailService().sendAdminMail("mailRemind: New user", mailMsg);
 			}
 			return owner;
 		}
@@ -136,7 +129,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			owner.setUserId(user.getUserId());
 			owner.setEmail(user.getEmail());
 			owner.setName(user.getNickname());
-			pm = PMF.get().getPersistenceManager(); 
+			pm = getPersistenceManager(); 
 			pm.makePersistent(owner);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -149,7 +142,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	public Owner getOwner(String userId){
 		PersistenceManager pm = null;
 		try{
-			pm = PMF.get().getPersistenceManager();
+			pm = getPersistenceManager();
 			Query q = pm.newQuery(Owner.class);
 		    q.setFilter("userId == userIdParam");
 		    q.declareParameters("String userIdParam");
@@ -203,29 +196,6 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 	}
 
 	@Override
-	public void saveUserContactMessage(String subject, String message) throws ApplicationException{
-		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
-			throw new ApplicationException(PropertyService.getInstance().getValue(PLEASE_LOGIN_MSG));
-		}
-		UserContactMessage m = new UserContactMessage();
-		m.setSubject(subject);
-		m.setMessage(new Text(message));
-		m.setCreationDate(new Date());
-		m.setUserId(UserServiceFactory.getUserService().getCurrentUser().getUserId());
-		PersistenceManager pm = null;
-		try{
-			pm = PMF.get().getPersistenceManager();
-			pm.makePersistent(m);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			PMF.close(pm);
-		}
-		// send email
-		ms.sendAdminMail("New contact message", "Message from " + UserServiceFactory.getUserService().getCurrentUser().getEmail() + " Content:" + message);
-	}
-
-	@Override
 	public Long saveTempNotification(SimpleNotification notification) throws ApplicationException {
 		TempNotification n = new TempNotification();
 		PersistenceManager pm = null;
@@ -234,7 +204,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			n.setMessage(notification.getMessage());
 			n.setTriggerDate(notification.getDate());
 			n.setMinutes(notification.getMinutes());
-			pm = PMF.get().getPersistenceManager();
+			pm = getPersistenceManager();
 			pm.makePersistent(n);
 			tempNotificationId = n.getKey().getId();
 		}catch (Exception e) {
@@ -250,7 +220,7 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 		PersistenceManager pm = null;
 		SimpleNotification sn = new SimpleNotification();
 		try{
-			pm = PMF.get().getPersistenceManager();
+			pm = getPersistenceManager();
 			TempNotification tempNotification = (TempNotification) pm.getObjectById(TempNotification.class, id);
 			sn.setDate(new Date(tempNotification.getTriggerDate().getTime()));
 			sn.setMessage(tempNotification.getMessage());
@@ -262,6 +232,11 @@ public class NotificationServiceImpl extends RemoteServiceServlet implements Not
 			PMF.close(pm);
 		}
 		return sn;
+	}
+
+	@Override
+	public String getName() {
+		return "NotificationService";
 	}
 
 }

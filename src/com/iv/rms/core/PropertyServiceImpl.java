@@ -1,4 +1,4 @@
-package com.iv.rms.server;
+package com.iv.rms.core;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,15 +12,15 @@ import javax.jdo.Query;
 import com.iv.rms.entity.Property;
 
 
-public class PropertyService {
+public class PropertyServiceImpl extends AbstractService implements PropertyService {
 	
 	private static final Map<String, String> simpleCache = new HashMap<String, String>();
 	
-	private static final PropertyService instance = new PropertyService();
+	private static final PropertyService instance = new PropertyServiceImpl();
 	
 	private static Properties prop;
 	
-	private PropertyService(){
+	private PropertyServiceImpl(){
 		loadApplicationPropertiesFile();
 	}
 	
@@ -37,6 +37,10 @@ public class PropertyService {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.iv.rms.server.PropertyService#getValue(java.lang.String)
+	 */
+	@Override
 	public String getValue(String key){
 		String value = null;
 		if ( !simpleCache.containsKey(key)){
@@ -87,6 +91,10 @@ public class PropertyService {
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.iv.rms.server.PropertyService#saveProperty(com.iv.rms.entity.Property)
+	 */
+	@Override
 	public void saveProperty(Property prop){
 		PersistenceManager pm = null;
 		try{
@@ -113,8 +121,17 @@ public class PropertyService {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.iv.rms.server.PropertyService#getKeys()
+	 */
+	@Override
 	public Set<String> getKeys(){
 		return this.simpleCache.keySet();
+	}
+
+	@Override
+	public String getName() {
+		return "PropertyName";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.iv.rms.client;
+package com.iv.rms.notification.client;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,8 +28,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.iv.rms.shared.ApplicationException;
-import com.iv.rms.shared.FieldVerifier;
+import com.iv.rms.notification.shared.ApplicationException;
+import com.iv.rms.notification.shared.FieldVerifier;
 import com.summatech.gwt.client.HourMinutePicker;
 import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
 
@@ -43,7 +43,7 @@ public class HorizontalRMS implements EntryPoint {
 	 */
 	private static final String SERVER_ERROR = "An error occurred while " + "attempting to contact the server. Please check your network " + "connection and try again.";
 
-	private final NotificationServiceAsync notificationService = GWT.create(NotificationService.class);
+	private final NotificationServiceServletAdapterAsync notificationService = GWT.create(NotificationServiceServletAdapter.class);
 	
 	private SimpleNotification sn = new SimpleNotification();
 

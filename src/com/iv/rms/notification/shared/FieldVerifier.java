@@ -1,4 +1,4 @@
-package com.iv.rms.shared;
+package com.iv.rms.notification.shared;
 
 /**
  * <p>

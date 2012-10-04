@@ -1,11 +1,11 @@
-package com.iv.rms.client;
+package com.iv.rms.notification.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.iv.rms.shared.ApplicationException;
+import com.iv.rms.notification.shared.ApplicationException;
 
 @RemoteServiceRelativePath("notification")
-public interface NotificationService extends RemoteService {
+public interface NotificationServiceServletAdapter extends RemoteService {
 
 	public void saveNotification(SimpleNotification notification) throws ApplicationException;
 	
@@ -13,9 +13,9 @@ public interface NotificationService extends RemoteService {
 	
 	public Boolean hasUserTimeZone();
 	
-	public void saveUserContactMessage(String subject, String message) throws ApplicationException;
-	
 	public SimpleNotification getTempNotification(Long id);
+
+	public void processPendingNotification();
 	
 }
 

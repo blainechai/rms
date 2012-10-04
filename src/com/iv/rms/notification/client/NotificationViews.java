@@ -1,4 +1,4 @@
-package com.iv.rms.client;
+package com.iv.rms.notification.client;
 
 public enum NotificationViews {
 	

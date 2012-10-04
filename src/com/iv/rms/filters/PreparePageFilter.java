@@ -13,11 +13,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.ApplicationContext;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.utils.SystemProperty;
 import com.iv.rms.Constants;
-import com.iv.rms.server.PropertyService;
+import com.iv.rms.core.PropertyServiceImpl;
 
 public class PreparePageFilter implements Filter {
 	
@@ -45,7 +47,7 @@ public class PreparePageFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		if ( SystemProperty.environment.value() == SystemProperty.Environment.Value.Production ){
 			// check if it's production domain or dev domain
-			if ( request.getServerName().equals(PropertyService.getInstance().getValue(DOMAIN)) ){
+			if ( request.getServerName().equals(PropertyServiceImpl.getInstance().getValue(DOMAIN)) ){
 				request.setAttribute(Constants.GAE_MODE, true);
 			}else{
 				request.setAttribute(Constants.GAE_MODE, false);
@@ -62,6 +64,8 @@ public class PreparePageFilter implements Filter {
 			request.setAttribute("logoutURL", UserServiceFactory.getUserService().createLogoutURL(((HttpServletRequest)request).getRequestURI()));
 		}
 		String target = mappings.get(((HttpServletRequest)request).getRequestURI());
+//		ApplicationContext beanFactory = (ApplicationContext) ((HttpServletRequest)request).getSession().getServletContext().getAttribute("beanFactory");
+//		request.setAttribute("serviceLocator", beanFactory.getBean("serviceLocator"));
 		if ( target != null ){
 			RequestDispatcher rd = request.getRequestDispatcher(target);
 			rd.include(request, response);
