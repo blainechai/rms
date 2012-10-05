@@ -1,8 +1,8 @@
 package com.iv.rms.mail;
 
 import com.iv.rms.core.Service;
-import com.iv.rms.entity.Notification;
-import com.iv.rms.entity.Owner;
+import com.iv.rms.notification.Notification;
+import com.iv.rms.user.Owner;
 
 public interface MailService extends Service{
 

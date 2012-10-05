@@ -1,4 +1,4 @@
-package com.iv.rms.entity;
+package com.iv.rms.user;
 
 import java.util.Date;
 

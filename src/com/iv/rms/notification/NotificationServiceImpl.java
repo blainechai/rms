@@ -11,13 +11,11 @@ import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
 import com.iv.rms.core.PMF;
-import com.iv.rms.core.PropertyServiceImpl;
-import com.iv.rms.entity.Notification;
-import com.iv.rms.entity.Owner;
-import com.iv.rms.entity.TempNotification;
+import com.iv.rms.core.impl.PropertyServiceImpl;
 import com.iv.rms.notification.client.SimpleNotification;
-import com.iv.rms.notification.shared.ApplicationException;
+import com.iv.rms.notification.shared.NotificationException;
 import com.iv.rms.notification.shared.Util;
+import com.iv.rms.user.Owner;
 import com.iv.rms.user.User;
 
 @Component
@@ -26,7 +24,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	private static final String DEFAULT_TIMEZONE = PropertyServiceImpl.getInstance().getValue("defaultTimeZoneId");
 	
 	@Override
-	public void saveNotification(SimpleNotification notification, User user) throws ApplicationException{
+	public void saveNotification(SimpleNotification notification, User user) throws NotificationException{
 		Notification n = new Notification();
 		PersistenceManager pm = null;
 		Date fullTriggerDate = Util.composeFullTriggerDate(notification, DEFAULT_TIMEZONE);
@@ -41,9 +39,9 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 				pm = getPersistenceManager();
 				pm.makePersistent(n);
 			}else{
-				throw new ApplicationException("You can't add the same reminder twice");
+				throw new NotificationException("You can't add the same reminder twice");
 			}
-		}catch (ApplicationException e) {
+		}catch (NotificationException e) {
 			throw e;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -104,7 +102,6 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	public Owner getOrCreateOwner(User user) {
 		Owner owner = getOwner(user.getUserId());
 		if (owner == null) {
-			// new user... create owner
 			owner = createNewOwner(user);
 			String mailMsg = "User email:" + user.getEmail() + "  Nickname:" + user.getNickName();
 			getServiceLocator().getMailService().sendAdminMail("mailRemind: New user", mailMsg);
@@ -161,7 +158,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	}
 
 	@Override
-	public Long saveTempNotification(SimpleNotification notification) throws ApplicationException {
+	public Long saveTempNotification(SimpleNotification notification) throws NotificationException {
 		TempNotification n = new TempNotification();
 		PersistenceManager pm = null;
 		Long tempNotificationId = null;

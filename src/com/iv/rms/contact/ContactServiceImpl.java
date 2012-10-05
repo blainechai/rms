@@ -11,7 +11,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.iv.rms.contact.shared.ContactException;
 import com.iv.rms.core.AbstractService;
 import com.iv.rms.core.PMF;
-import com.iv.rms.entity.UserContactMessage;
 
 @Component
 public class ContactServiceImpl extends AbstractService implements ContactService{

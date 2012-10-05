@@ -11,8 +11,8 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
-import com.iv.rms.entity.Notification;
-import com.iv.rms.entity.Owner;
+import com.iv.rms.notification.Notification;
+import com.iv.rms.user.Owner;
 
 @Component
 public class MailServiceImpl extends AbstractService implements MailService {

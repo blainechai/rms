@@ -1,18 +1,18 @@
 package com.iv.rms.notification.server;
 
 import com.google.appengine.api.users.UserServiceFactory;
-import com.iv.rms.core.AbstractServlet;
+import com.iv.rms.core.GWTAbstractRemoteServiceServlet;
 import com.iv.rms.notification.client.NotificationServiceServletAdapter;
 import com.iv.rms.notification.client.SimpleNotification;
-import com.iv.rms.notification.shared.ApplicationException;
+import com.iv.rms.notification.shared.NotificationException;
 
 @SuppressWarnings("serial")
-public class NotificationServiceServletAdapterImpl extends AbstractServlet implements NotificationServiceServletAdapter{
+public class NotificationServiceServletAdapterImpl extends GWTAbstractRemoteServiceServlet implements NotificationServiceServletAdapter{
 	
 	@Override
-	public void saveNotification(SimpleNotification notification) throws ApplicationException{
+	public void saveNotification(SimpleNotification notification) throws NotificationException{
 		if (UserServiceFactory.getUserService().getCurrentUser() == null ){
-			throw new ApplicationException(getServiceLocator().getPropertyService().getValue(""));
+			throw new NotificationException(getServiceLocator().getPropertyService().getValue(""));
 		}else{
 			getServiceLocator().getNotificationService().saveNotification(notification, getServiceLocator().getUserService().getCurrentUser());
 		}
@@ -23,7 +23,7 @@ public class NotificationServiceServletAdapterImpl extends AbstractServlet imple
 	}
 	
 	@Override
-	public Long saveTempNotification(SimpleNotification notification) throws ApplicationException {
+	public Long saveTempNotification(SimpleNotification notification) throws NotificationException {
 		return getServiceLocator().getNotificationService().saveTempNotification(notification);
 	}
 

@@ -1,4 +1,4 @@
-package com.iv.rms.filters;
+package com.iv.rms.core.server.filters;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.utils.SystemProperty;
-import com.iv.rms.Constants;
-import com.iv.rms.core.PropertyServiceImpl;
+import com.iv.rms.core.Constants;
+import com.iv.rms.core.impl.PropertyServiceImpl;
 
 public class PreparePageFilter implements Filter {
 	

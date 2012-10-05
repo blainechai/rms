@@ -3,7 +3,7 @@
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="com.summatech.gwt.GwtTimepicker" />
   <inherits name='com.google.gwt.user.theme.clean.Clean'/>
-  <entry-point class='com.iv.rms.notification.client.HorizontalRMS'/>
+  <entry-point class='com.iv.rms.notification.client.HorizontalRMSEntryPoint'/>
   <source path='client'/>
   <source path='shared'/>
   

@@ -1,4 +1,4 @@
-package com.iv.rms.entity;
+package com.iv.rms.contact;
 
 import java.io.Serializable;
 import java.util.Date;

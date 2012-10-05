@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.iv.rms.contact.shared.ContactException;
 
-public class Contact implements EntryPoint {
+public class ContactEntryPoint implements EntryPoint {
 
 	private static final String YOUR_MESSAGE_HAS_BEEN_SENT_THANK_YOU = "Your message has been sent. Thank you.";
 

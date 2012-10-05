@@ -1,4 +1,4 @@
-package com.iv.rms;
+package com.iv.rms.core;
 
 public class Constants {
 	

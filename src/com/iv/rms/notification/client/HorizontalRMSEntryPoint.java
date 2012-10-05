@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.iv.rms.notification.shared.ApplicationException;
+import com.iv.rms.notification.shared.NotificationException;
 import com.iv.rms.notification.shared.FieldVerifier;
 import com.summatech.gwt.client.HourMinutePicker;
 import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
@@ -36,7 +36,7 @@ import com.summatech.gwt.client.HourMinutePicker.PickerFormat;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class HorizontalRMS implements EntryPoint {
+public class HorizontalRMSEntryPoint implements EntryPoint {
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -250,7 +250,7 @@ public class HorizontalRMS implements EntryPoint {
 					@Override
 					public void onFailure(Throwable caught) {
 						sendButton.setEnabled(true);
-						if ( caught  instanceof ApplicationException){
+						if ( caught  instanceof NotificationException){
 							errorLabel.setText(caught.getMessage());
 							errorLabel.setStyleName("errorLabel");
 							sn = null;

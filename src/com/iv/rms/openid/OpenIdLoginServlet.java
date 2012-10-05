@@ -61,7 +61,6 @@ public class OpenIdLoginServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser(); // or req.getUserPrincipal()
 		Set<String> attributes = new HashSet<String>();
 
 		for (String providerName : openIdProviders.keySet()) {

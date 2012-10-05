@@ -2,7 +2,7 @@ package com.iv.rms.core;
 
 import java.util.Set;
 
-import com.iv.rms.entity.Property;
+import com.iv.rms.core.impl.Property;
 
 public interface PropertyService extends Service{
 

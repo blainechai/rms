@@ -1,4 +1,4 @@
-package com.iv.rms.server;
+package com.iv.rms.core.server;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

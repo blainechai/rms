@@ -1,4 +1,4 @@
-package com.iv.rms.core;
+package com.iv.rms.core.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,9 @@ import javax.jdo.Query;
 
 import org.springframework.stereotype.Component;
 
-import com.iv.rms.entity.Property;
+import com.iv.rms.core.AbstractService;
+import com.iv.rms.core.PMF;
+import com.iv.rms.core.PropertyService;
 
 @Component
 public class PropertyServiceImpl extends AbstractService implements PropertyService {
@@ -128,7 +130,7 @@ public class PropertyServiceImpl extends AbstractService implements PropertyServ
 	 */
 	@Override
 	public Set<String> getKeys(){
-		return this.simpleCache.keySet();
+		return simpleCache.keySet();
 	}
 
 }

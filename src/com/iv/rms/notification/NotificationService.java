@@ -1,14 +1,14 @@
 package com.iv.rms.notification;
 
 import com.iv.rms.notification.client.SimpleNotification;
-import com.iv.rms.notification.shared.ApplicationException;
+import com.iv.rms.notification.shared.NotificationException;
 import com.iv.rms.user.User;
 
 public interface NotificationService   {
 
-	public void saveNotification(SimpleNotification notification, User user) throws ApplicationException;
+	public void saveNotification(SimpleNotification notification, User user) throws NotificationException;
 	
-	public Long saveTempNotification(SimpleNotification notification) throws ApplicationException;
+	public Long saveTempNotification(SimpleNotification notification) throws NotificationException;
 	
 	public Boolean hasUserTimeZone(User user);
 	

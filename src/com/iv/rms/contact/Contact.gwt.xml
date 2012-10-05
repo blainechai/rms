@@ -2,7 +2,7 @@
 <module rename-to='contact'>
   <inherits name='com.google.gwt.user.User'/>
   <inherits name='com.google.gwt.user.theme.clean.Clean'/>
-  <entry-point class='com.iv.rms.contact.client.Contact'/>
+  <entry-point class='com.iv.rms.contact.client.ContactEntryPoint'/>
   <source path='client'/>
   <source path='shared'/>
   

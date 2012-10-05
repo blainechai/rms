@@ -1,4 +1,4 @@
-package com.iv.rms.entity;
+package com.iv.rms.notification;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;

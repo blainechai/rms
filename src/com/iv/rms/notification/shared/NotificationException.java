@@ -1,23 +1,23 @@
 package com.iv.rms.notification.shared;
 
-public class ApplicationException extends Exception {
+public class NotificationException extends Exception {
 
-	public ApplicationException() {
+	public NotificationException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicationException(String message, Throwable cause) {
+	public NotificationException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicationException(String message) {
+	public NotificationException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicationException(Throwable cause) {
+	public NotificationException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
