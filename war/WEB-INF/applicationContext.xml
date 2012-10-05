@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:util="http://www.springframework.org/schema/util"
- xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-  <bean id="serviceLocator" class="com.iv.rms.core.ServiceLocator" autowire="byType" />
-  
-  <bean id="mailService" class="com.iv.rms.mail.MailServiceImpl" autowire="byType"/>
-  <bean id="propertyService" class="com.iv.rms.core.PropertyServiceImpl" autowire="byType"/>
-  
-  <bean id="notificationService" class="com.iv.rms.notification.NotificationServiceImpl" autowire="byType"/>
-  <bean id="contactService" class="com.iv.rms.contact.ContactServiceImpl" autowire="byType"/>
-  
+	<bean id="serviceLocator" class="com.iv.rms.core.ServiceLocator" autowire="byType" />
+
+	<bean id="mailService"  class="com.iv.rms.mail.MailServiceImpl" autowire="byType" init-method="initService" />
+	<bean id="propertyService" class="com.iv.rms.core.PropertyServiceImpl" autowire="byType" init-method="initService" />
+
+	<bean id="notificationService" class="com.iv.rms.notification.NotificationServiceImpl" autowire="byType" init-method="initService" />
+	<bean id="contactService" class="com.iv.rms.contact.ContactServiceImpl" autowire="byType" init-method="initService" />
+
+	<bean id="userService" class="com.iv.rms.user.GAEUserServiceImpl" autowire="byType" init-method="initService" scope="prototype" />
+
 </beans>

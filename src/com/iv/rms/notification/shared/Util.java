@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import com.iv.rms.notification.client.SimpleNotification;
+
 public class Util {
 
 	public static Integer formatDate(Date date, TimeZone timeZone) {
@@ -24,6 +26,16 @@ public class Util {
 		sdf.setTimeZone(timeZone);
 		minutes += Integer.parseInt(sdf.format(date));
 		return minutes;
+	}
+	
+	public static TimeZone getTimeZone(String strTz, String defaultTimeZone){
+		String strFromJavaScript = strTz; 
+        int timeZone = Integer.parseInt(strFromJavaScript);  
+        if (timeZone >= 0) {  
+            strFromJavaScript = "+" + timeZone;  
+        }
+        TimeZone tz = TimeZone.getTimeZone(defaultTimeZone + strFromJavaScript);  
+        return tz;
 	}
 
 	public static Date getDateInTimeZone(Date currentDate, String currentTimeZoneId, String timeZoneId) {
@@ -55,6 +67,14 @@ public class Util {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String str = sdf.format(date);
 		return Integer.parseInt(str);
+	}
+	
+	public static Date composeFullTriggerDate(SimpleNotification sn, String defaultTimeZone){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sn.getDate());
+		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
+		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
+		return Util.getDateInTimeZone(cal.getTime(),Util.getTimeZone(sn.getTimeZone(), defaultTimeZone).getID(), defaultTimeZone);
 	}
 	
 }

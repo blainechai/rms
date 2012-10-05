@@ -8,10 +8,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.stereotype.Component;
+
 import com.iv.rms.core.AbstractService;
 import com.iv.rms.entity.Notification;
 import com.iv.rms.entity.Owner;
 
+@Component
 public class MailServiceImpl extends AbstractService implements MailService {
 
 	private static final String ADMIN_EMAIL = "adminEmail";
@@ -56,11 +59,6 @@ public class MailServiceImpl extends AbstractService implements MailService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public String getName() {
-		return "MailService";
 	}
 
 }

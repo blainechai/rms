@@ -1,6 +1,5 @@
 package com.iv.rms.notification;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -8,8 +7,8 @@ import java.util.TimeZone;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserServiceFactory;
+import org.springframework.stereotype.Component;
+
 import com.iv.rms.core.AbstractService;
 import com.iv.rms.core.PMF;
 import com.iv.rms.core.PropertyServiceImpl;
@@ -19,28 +18,25 @@ import com.iv.rms.entity.TempNotification;
 import com.iv.rms.notification.client.SimpleNotification;
 import com.iv.rms.notification.shared.ApplicationException;
 import com.iv.rms.notification.shared.Util;
+import com.iv.rms.user.User;
 
+@Component
 public class NotificationServiceImpl extends AbstractService implements NotificationService{
 	
 	private static final String DEFAULT_TIMEZONE = PropertyServiceImpl.getInstance().getValue("defaultTimeZoneId");
 	
-	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
-	
 	@Override
-	public void saveNotification(SimpleNotification notification) throws ApplicationException{
-		if ( UserServiceFactory.getUserService().getCurrentUser() == null ){
-			throw new ApplicationException(getProperty(PLEASE_LOGIN_MSG));
-		}
+	public void saveNotification(SimpleNotification notification, User user) throws ApplicationException{
 		Notification n = new Notification();
 		PersistenceManager pm = null;
-		Date fullTriggerDate = composeFullTriggerDate(notification);
+		Date fullTriggerDate = Util.composeFullTriggerDate(notification, DEFAULT_TIMEZONE);
 		try{
 			n.setCreationDate(new Date());
 			n.setMessage(notification.getMessage());
 			n.setTriggerDate(Util.extractTriggerDate(fullTriggerDate));
 			n.setMinutes(Util.formatMinutes(fullTriggerDate));
-			n.setOwnerId(getOrCreateOwner().getUserId());
-			getTimeZone(notification.getTimeZone());
+			n.setOwnerId(getOrCreateOwner(user).getUserId());
+			Util.getTimeZone(notification.getTimeZone(), DEFAULT_TIMEZONE);
 			if  ( !isDuplicate(n) ){
 				pm = getPersistenceManager();
 				pm.makePersistent(n);
@@ -102,22 +98,18 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	
 	/**
 	 * Refactor this method, it's ugly
+	 * 
 	 * @return
 	 */
-	public Owner getOrCreateOwner(){
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-		if ( user != null ){
-			// check if this user has an owner object
-			Owner owner = getOwner(user.getUserId());
-			if ( owner == null ){
-				//new user... create owner
-				owner = createNewOwner(user);
-				String mailMsg = "User email:" + user.getEmail() + "  Nickname:" + user.getFederatedIdentity();
-				getServiceLocator().getMailService().sendAdminMail("mailRemind: New user", mailMsg);
-			}
-			return owner;
+	public Owner getOrCreateOwner(User user) {
+		Owner owner = getOwner(user.getUserId());
+		if (owner == null) {
+			// new user... create owner
+			owner = createNewOwner(user);
+			String mailMsg = "User email:" + user.getEmail() + "  Nickname:" + user.getNickName();
+			getServiceLocator().getMailService().sendAdminMail("mailRemind: New user", mailMsg);
 		}
-		return null;
+		return owner;
 	}
 	
 	public Owner createNewOwner(User user){
@@ -128,7 +120,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 			owner.setCreationDate(new Date());
 			owner.setUserId(user.getUserId());
 			owner.setEmail(user.getEmail());
-			owner.setName(user.getNickname());
+			owner.setName(user.getNickName());
 			pm = getPersistenceManager(); 
 			pm.makePersistent(owner);
 		}catch (Exception e) {
@@ -147,10 +139,9 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 		    q.setFilter("userId == userIdParam");
 		    q.declareParameters("String userIdParam");
 		    List<Owner> result = (List<Owner>) q.execute(userId);
-		    if ( result != null ){
+		    if ( result != null && result.size() > 0){
 		    	return result.get(0);
 		    }
-		    return null;
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -159,8 +150,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 		return null;
 	}
 	
-	public Boolean hasUserTimeZone(){
-		User user = UserServiceFactory.getUserService().getCurrentUser();
+	public Boolean hasUserTimeZone(User user){
 		if ( user != null ){
 			Owner owner = getOwner(user.getUserId());
 			if ( owner.getTimeZoneId() != null ){
@@ -168,31 +158,6 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 			}
 		}
 		return false;
-	}
-	
-	public String guessClientTimeZone(Date date){
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		TimeZone timeZone = cal.getTimeZone();
-		return timeZone.getID();
-	}
-	
-	private TimeZone getTimeZone(String strTz){
-		String strFromJavaScript = strTz; 
-        int timeZone = Integer.parseInt(strFromJavaScript);  
-        if (timeZone >= 0) {  
-            strFromJavaScript = "+" + timeZone;  
-        }
-        TimeZone tz = TimeZone.getTimeZone(DEFAULT_TIMEZONE + strFromJavaScript);  
-        return tz;
-	}
-	
-	private Date composeFullTriggerDate(SimpleNotification sn){
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(sn.getDate());
-		cal.set(Calendar.HOUR_OF_DAY, sn.getMinutes() / 60);
-		cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60 ) );
-		return Util.getDateInTimeZone(cal.getTime(),getTimeZone(sn.getTimeZone()).getID(), DEFAULT_TIMEZONE);
 	}
 
 	@Override
@@ -232,11 +197,6 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 			PMF.close(pm);
 		}
 		return sn;
-	}
-
-	@Override
-	public String getName() {
-		return "NotificationService";
 	}
 
 }

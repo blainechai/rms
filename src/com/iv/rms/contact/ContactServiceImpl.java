@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.jdo.PersistenceManager;
 
+import org.springframework.stereotype.Component;
+
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.iv.rms.contact.shared.ContactException;
@@ -11,6 +13,7 @@ import com.iv.rms.core.AbstractService;
 import com.iv.rms.core.PMF;
 import com.iv.rms.entity.UserContactMessage;
 
+@Component
 public class ContactServiceImpl extends AbstractService implements ContactService{
 	
 	private static final String PLEASE_LOGIN_MSG = "pleaseLoginMsg";
@@ -36,11 +39,6 @@ public class ContactServiceImpl extends AbstractService implements ContactServic
 		}
 		// send email
 		getServiceLocator().getMailService().sendAdminMail("New contact message", "Message from " + UserServiceFactory.getUserService().getCurrentUser().getEmail() + " Content:" + message);
-	}
-
-	@Override
-	public String getName() {
-		return "ContactService";
 	}
 
 }

@@ -19,7 +19,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.iv.rms.contact.server.ContactServiceServletAdapterImpl;
 import com.iv.rms.contact.shared.ContactException;
 
 public class Contact implements EntryPoint {

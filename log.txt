@@ -1,0 +1,270 @@
+Reading application configuration data...
+Beginning server interaction for dev-rms-v3...
+0% Created staging directory at: 'C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp'
+5% Scanning for jsp files.
+8% Compiling jsp files.
+
+Error Details:
+04.10.2012 22:34:41 org.apache.jasper.JspC processFile
+INFO: Built File: \contact.jsp
+04.10.2012 22:34:44 org.apache.jasper.JspC processFile
+INFO: Built File: \index.jsp
+04.10.2012 22:34:47 org.apache.jasper.compiler.AntCompiler generateClass
+SEVERE: Error compiling file: C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java     [javac] Compiling 1 source file
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:7: package com.iv.rms.core does not exist
+    [javac] import com.iv.rms.core.PropertyServiceImpl;
+    [javac]                       ^
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:7: package com.iv.rms.core does not exist
+    [javac] import com.iv.rms.core.PropertyServiceImpl;
+    [javac]                       ^
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:61: cannot find symbol
+    [javac] symbol  : variable PropertyServiceImpl
+    [javac] location: class org.apache.jsp.listProperties_jsp
+    [javac]       	Set<String> keys = PropertyServiceImpl.getInstance().getKeys();
+    [javac]       	                   ^
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:63: cannot find symbol
+    [javac] symbol  : variable PropertyServiceImpl
+    [javac] location: class org.apache.jsp.listProperties_jsp
+    [javac]         		String value = PropertyServiceImpl.getInstance().getValue(key);
+    [javac]         		               ^
+    [javac] 3 errors
+
+04.10.2012 22:34:47 org.apache.jasper.compiler.AntCompiler generateClass
+SEVERE: Javac exception
+Compile failed; see the compiler error output for details.
+	at org.apache.tools.ant.taskdefs.Javac.compile(Javac.java:933)
+	at org.apache.tools.ant.taskdefs.Javac.execute(Javac.java:757)
+	at org.apache.jasper.compiler.AntCompiler.generateClass(AntCompiler.java:226)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:349)
+	at org.apache.jasper.JspC.processFile(JspC.java:1192)
+	at org.apache.jasper.JspC.execute(JspC.java:1341)
+	at com.google.appengine.tools.development.LocalJspC.main(LocalJspC.java:18)
+04.10.2012 22:34:47 org.apache.jasper.compiler.AntCompiler generateClass
+SEVERE: Environment: Compile: javaFileName=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java
+    classpath=/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-labs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-stubs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-local-runtime.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/google_sql.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar;;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar
+    cp=/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-labs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-stubs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-local-runtime.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/google_sql.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar;
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-api-labs.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-api-stubs.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-api.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-local-runtime.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\google_sql.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar
+    work dir=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes
+    extension dir=D:\work\jre6\lib\ext;C:\Windows\Sun\Java\lib\ext
+    srcDir=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes
+    compiler=extJavac
+   compilerTargetVM=1.5
+   compilerSourceVM=1.5
+    include=org/apache/jsp/listProperties_jsp.java
+
+
+Exception in thread "main" org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: -1 in the generated java file
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:7: package com.iv.rms.core does not exist
+    [javac] import com.iv.rms.core.PropertyServiceImpl;
+    [javac]                       ^
+
+
+An error occurred at line: -1 in the generated java file
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:7: package com.iv.rms.core does not exist
+    [javac] import com.iv.rms.core.PropertyServiceImpl;
+    [javac]                       ^
+
+
+An error occurred at line: -1 in the generated java file
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:61: cannot find symbol
+    [javac] symbol  : variable PropertyServiceImpl
+    [javac] location: class org.apache.jsp.listProperties_jsp
+    [javac]       	Set<String> keys = PropertyServiceImpl.getInstance().getKeys();
+    [javac]       	                   ^
+
+
+An error occurred at line: -1 in the generated java file
+    [javac] C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java:63: cannot find symbol
+    [javac] symbol  : variable PropertyServiceImpl
+    [javac] location: class org.apache.jsp.listProperties_jsp
+    [javac]         		String value = PropertyServiceImpl.getInstance().getValue(key);
+    [javac]         		               ^
+    [javac] 3 errors
+
+
+
+An error occurred at line: 34 in the generated java file
+04.10.2012 22:34:47 org.apache.jasper.compiler.AntCompiler generateClass
+SEVERE: Javac exception
+Compile failed; see the compiler error output for details.
+	at org.apache.tools.ant.taskdefs.Javac.compile(Javac.java:933)
+	at org.apache.tools.ant.taskdefs.Javac.execute(Javac.java:757)
+	at org.apache.jasper.compiler.AntCompiler.generateClass(AntCompiler.java:226)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:349)
+	at org.apache.jasper.JspC.processFile(JspC.java:1192)
+	at org.apache.jasper.JspC.execute(JspC.java:1341)
+	at com.google.appengine.tools.development.LocalJspC.main(LocalJspC.java:18)
+
+
+An error occurred at line: 34 in the generated java file
+04.10.2012 22:34:47 org.apache.jasper.compiler.AntCompiler generateClass
+
+
+An error occurred at line: -1 in the generated java file
+SEVERE: Environment: Compile: javaFileName=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes\org\apache\jsp\listProperties_jsp.java
+
+
+An error occurred at line: -1 in the generated java file
+    classpath=/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-labs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-stubs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-local-runtime.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/google_sql.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar;;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar
+
+
+An error occurred at line: -1 in the generated java file
+    cp=/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-labs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-stubs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-local-runtime.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/google_sql.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar;
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-api-labs.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-api-stubs.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-api.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\appengine-local-runtime.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\impl\google_sql.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar
+    cp=D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar
+    cp=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar
+    work dir=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes
+
+
+An error occurred at line: -1 in the generated java file
+    extension dir=D:\work\jre6\lib\ext;C:\Windows\Sun\Java\lib\ext
+    srcDir=C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes
+    compiler=extJavac
+   compilerTargetVM=1.5
+   compilerSourceVM=1.5
+    include=org/apache/jsp/listProperties_jsp.java
+
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:92)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:330)
+	at org.apache.jasper.compiler.AntCompiler.generateClass(AntCompiler.java:255)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:349)
+	at org.apache.jasper.JspC.processFile(JspC.java:1192)
+	at org.apache.jasper.JspC.execute(JspC.java:1341)
+	at com.google.appengine.tools.development.LocalJspC.main(LocalJspC.java:18)
+Error while executing: D:\work\jre6\bin\java.exe -classpath /D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-labs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api-stubs.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-api.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/appengine-local-runtime.jar;/D:/work/jbossDev/studio/plugins/com.google.appengine.eclipse.sdkbundle_1.7.1/appengine-java-sdk-1.7.1/lib/impl/google_sql.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\appengine-local-runtime-shared.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\el-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-ant-launcher-1.7.1.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-jasper-el-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp\repackaged-appengine-tomcat-juli-6.0.29.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\jsp-api.jar;D:\work\jbossDev\studio\plugins\com.google.appengine.eclipse.sdkbundle_1.7.1\appengine-java-sdk-1.7.1\lib\shared\servlet-api.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-1.0-sdk-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-api-labs.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-endpoints.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\appengine-jsr107cache-1.7.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\asm-4.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\commons-logging.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jdo-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-api-jpa-3.1.0-m3.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-appengine-2.1.0-final.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\datanucleus-core-3.1.0-m5.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\geronimo-jpa_2.0_spec-1.0.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-servlet.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\gwt-timepicker-0.21.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jdo-api-3.0.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jsr107cache-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\jta-1.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-ant-launcher-1.7.1.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-jstl-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jakarta-standard-1.1.2.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-el-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-jasper-jdt-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\repackaged-appengine-tomcat-juli-6.0.29.jar;C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\lib\spring.jar; com.google.appengine.tools.development.LocalJspC -uriroot C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp -p org.apache.jsp -l -v -webinc C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\generated_web.xml -d C:\Users\iv\AppData\Local\Temp\appcfg2347786209365718147.tmp\WEB-INF\classes -compile -javaEncoding UTF-8 
+
+
+com.google.appengine.tools.admin.JspCompilationException: Failed to compile jsp files.
+Unable to update app: Failed to compile jsp files.
+Please see the logs [C:\Users\iv\AppData\Local\Temp\appcfg3806409446076496653.log] for further information.

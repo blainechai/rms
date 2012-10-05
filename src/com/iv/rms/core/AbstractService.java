@@ -1,10 +1,12 @@
 package com.iv.rms.core;
 
+import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 
 
 public abstract class AbstractService implements Service{
 	
+	@Inject
 	private ServiceLocator serviceLocator;
 	
 	public AbstractService(){
@@ -32,6 +34,11 @@ public abstract class AbstractService implements Service{
 	
 	protected String getProperty(String key){
 		return serviceLocator.getPropertyService().getValue(key);
+	}
+	
+	@Override
+	public String getName() {
+		return this.getClass().getCanonicalName();
 	}
 
 }

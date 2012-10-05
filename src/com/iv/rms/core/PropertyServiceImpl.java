@@ -9,9 +9,11 @@ import java.util.Set;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import org.springframework.stereotype.Component;
+
 import com.iv.rms.entity.Property;
 
-
+@Component
 public class PropertyServiceImpl extends AbstractService implements PropertyService {
 	
 	private static final Map<String, String> simpleCache = new HashMap<String, String>();
@@ -127,11 +129,6 @@ public class PropertyServiceImpl extends AbstractService implements PropertyServ
 	@Override
 	public Set<String> getKeys(){
 		return this.simpleCache.keySet();
-	}
-
-	@Override
-	public String getName() {
-		return "PropertyName";
 	}
 
 }

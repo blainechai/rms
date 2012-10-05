@@ -1,5 +1,6 @@
 package com.iv.rms.notification.server;
 
+import com.google.appengine.api.users.UserServiceFactory;
 import com.iv.rms.core.AbstractServlet;
 import com.iv.rms.notification.client.NotificationServiceServletAdapter;
 import com.iv.rms.notification.client.SimpleNotification;
@@ -10,11 +11,15 @@ public class NotificationServiceServletAdapterImpl extends AbstractServlet imple
 	
 	@Override
 	public void saveNotification(SimpleNotification notification) throws ApplicationException{
-		getServiceLocator().getNotificationService().saveNotification(notification);
+		if (UserServiceFactory.getUserService().getCurrentUser() == null ){
+			throw new ApplicationException(getServiceLocator().getPropertyService().getValue(""));
+		}else{
+			getServiceLocator().getNotificationService().saveNotification(notification, getServiceLocator().getUserService().getCurrentUser());
+		}
 	}
 	
 	public Boolean hasUserTimeZone(){
-		return getServiceLocator().getNotificationService().hasUserTimeZone();
+		return getServiceLocator().getNotificationService().hasUserTimeZone( getServiceLocator().getUserService().getCurrentUser());
 	}
 	
 	@Override
