@@ -3,6 +3,8 @@ package com.iv.rms.core;
 import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 
+import com.iv.rms.core.jdo.PMF;
+
 
 public abstract class AbstractService implements Service{
 	
@@ -28,6 +30,7 @@ public abstract class AbstractService implements Service{
 		this.serviceLocator = serviceLocator;
 	}
 	
+	@Deprecated
 	public PersistenceManager getPersistenceManager(){
 		return PMF.get().getPersistenceManager();
 	}

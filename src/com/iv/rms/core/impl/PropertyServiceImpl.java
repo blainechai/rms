@@ -12,8 +12,8 @@ import javax.jdo.Query;
 import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
-import com.iv.rms.core.PMF;
 import com.iv.rms.core.PropertyService;
+import com.iv.rms.core.jdo.PMF;
 
 @Component
 public class PropertyServiceImpl extends AbstractService implements PropertyService {
