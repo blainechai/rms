@@ -2,7 +2,7 @@ package com.iv.rms.notification;
 
 import java.util.List;
 
-import com.iv.rms.core.jdo.DAOException;
+import com.iv.rms.core.persistence.DAOException;
 
 public interface NotificationDAO {
 

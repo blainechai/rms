@@ -1,19 +1,16 @@
 package com.iv.rms.core.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
 import com.iv.rms.core.PropertyService;
-import com.iv.rms.core.jdo.PMF;
+import com.iv.rms.core.persistence.jdo.PMF;
 
 @Component
 public class PropertyServiceImpl extends AbstractService implements PropertyService {
@@ -22,35 +19,25 @@ public class PropertyServiceImpl extends AbstractService implements PropertyServ
 	
 	private static final PropertyService instance = new PropertyServiceImpl();
 	
-	private static Properties prop;
+	private PropertyDAO propertyDAO ;
+	
+	private PropertyDAO filePropertyDAO;
 	
 	private PropertyServiceImpl(){
-		loadApplicationPropertiesFile();
+		
 	}
 	
 	public static PropertyService getInstance(){
 		return instance;
 	}
 	
-	private void loadApplicationPropertiesFile(){
-		prop  = new Properties();
-		try {
-			prop.load(this.getClass().getClassLoader().getResourceAsStream("application.properties"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.iv.rms.server.PropertyService#getValue(java.lang.String)
-	 */
 	@Override
 	public String getValue(String key){
 		String value = null;
 		if ( !simpleCache.containsKey(key)){
 			Property prop = loadValueFromDB(key);
 			if ( prop == null ){
-				value = loadValueFromPropertiesFile(key);
+				value = filePropertyDAO.getProperty(key).getValue();
 				if ( value != null ){
 					// save key-value to db
 					saveProperty(new Property(key, value));
@@ -69,46 +56,33 @@ public class PropertyServiceImpl extends AbstractService implements PropertyServ
 	}
 	
 	private Property loadValueFromDB(String key){
-		PersistenceManager pm = null;
-		Property p = null;
-		try{
-			pm = PMF.get().getPersistenceManager();
-			Query q = pm.newQuery(Property.class);
-		    q.setFilter(" propertyKey == keyParam");
-		    q.declareParameters("String keyParam");
-		    List<Property> result = (List<Property>) q.execute(key);
-		    if ( !result.isEmpty() ){
-		    	p = result.get(0);
-		    }
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			pm.close();
-		}
-		return p;
+		return propertyDAO.getProperty(key);
 	}
 	
-	private String loadValueFromPropertiesFile(String key){
-		if ( prop != null ){
-			return prop.getProperty(key);
-		}
-		return null;
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.iv.rms.server.PropertyService#saveProperty(com.iv.rms.entity.Property)
-	 */
 	@Override
 	public void saveProperty(Property prop){
-		PersistenceManager pm = null;
-		try{
-			pm = PMF.get().getPersistenceManager();
-			pm.makePersistent(prop);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			pm.close();
-		}
+		propertyDAO.save(prop);
+	}
+	
+	@Override
+	public Set<String> getKeys(){
+		return simpleCache.keySet();
+	}
+	
+	public PropertyDAO getPropertyDAO() {
+		return propertyDAO;
+	}
+
+	public void setPropertyDAO(PropertyDAO propertyDAO) {
+		this.propertyDAO = propertyDAO;
+	}
+	
+	public PropertyDAO getFilePropertyDAO() {
+		return filePropertyDAO;
+	}
+
+	public void setFilePropertyDAO(PropertyDAO filePropertyDAO) {
+		this.filePropertyDAO = filePropertyDAO;
 	}
 	
 	private void compareValues(Property dbValue, String propValue){
@@ -125,12 +99,8 @@ public class PropertyServiceImpl extends AbstractService implements PropertyServ
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.iv.rms.server.PropertyService#getKeys()
-	 */
-	@Override
-	public Set<String> getKeys(){
-		return simpleCache.keySet();
+	public void refresh(){
+		simpleCache.clear();
 	}
 
 }

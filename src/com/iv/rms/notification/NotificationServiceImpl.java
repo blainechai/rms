@@ -4,13 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import javax.jdo.PersistenceManager;
-
 import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
-import com.iv.rms.core.impl.PropertyServiceImpl;
-import com.iv.rms.core.jdo.PMF;
 import com.iv.rms.notification.client.SimpleNotification;
 import com.iv.rms.notification.shared.NotificationException;
 import com.iv.rms.notification.shared.Util;
@@ -20,10 +16,20 @@ import com.iv.rms.user.User;
 @Component
 public class NotificationServiceImpl extends AbstractService implements NotificationService{
 	
-	private static final String DEFAULT_TIMEZONE = PropertyServiceImpl.getInstance().getValue("defaultTimeZoneId");
+	private static final String DEFAULT_TIMEZONE = "defaultTimeZoneId";
 	
 	private NotificationDAO notificationDAO ;
 	
+	private TempNotificationDAO tempNotificationDAO;
+	
+	public TempNotificationDAO getTempNotificationDAO() {
+		return tempNotificationDAO;
+	}
+
+	public void setTempNotificationDAO(TempNotificationDAO tempNotificationDAO) {
+		this.tempNotificationDAO = tempNotificationDAO;
+	}
+
 	public NotificationDAO getNotificationDAO() {
 		return notificationDAO;
 	}
@@ -35,14 +41,14 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	@Override
 	public void saveNotification(SimpleNotification notification, User user) throws NotificationException{
 		Notification n = new Notification();
-		Date fullTriggerDate = Util.composeFullTriggerDate(notification, DEFAULT_TIMEZONE);
+		Date fullTriggerDate = Util.composeFullTriggerDate(notification, getDefaultTimeZone());
 		try{
 			n.setCreationDate(new Date());
 			n.setMessage(notification.getMessage());
 			n.setTriggerDate(Util.extractTriggerDate(fullTriggerDate));
 			n.setMinutes(Util.formatMinutes(fullTriggerDate));
 			n.setOwnerId(getOrCreateOwner(user).getUserId());
-			Util.getTimeZone(notification.getTimeZone(), DEFAULT_TIMEZONE);
+			Util.getTimeZone(notification.getTimeZone(), getDefaultTimeZone());
 			if  ( !notificationDAO.isDuplicate(n) ){
 				notificationDAO.save(n);
 			}else{
@@ -57,9 +63,10 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 
 	public void processPendingNotification(){
 		try{
-			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), DEFAULT_TIMEZONE);
-			Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));// TODO: don't use this method
-			Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(DEFAULT_TIMEZONE));
+			String defaultTimeZone = getDefaultTimeZone();
+			Date currentDate = Util.getDateInTimeZone(new Date(),TimeZone.getDefault().getID(), defaultTimeZone);
+			Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));// TODO: don't use this method
+			Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(defaultTimeZone));
 		    List<Notification> results = notificationDAO.getNotifications(String.valueOf(dateInt), minutes, Boolean.FALSE);
 		    if (!results.isEmpty()) { 
 	            for (Notification n : results) {
@@ -95,41 +102,37 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 
 	@Override
 	public Long saveTempNotification(SimpleNotification notification) throws NotificationException {
-		TempNotification n = new TempNotification();
-		PersistenceManager pm = null;
+		TempNotification tempNotification = new TempNotification();
 		Long tempNotificationId = null;
 		try{
-			n.setMessage(notification.getMessage());
-			n.setTriggerDate(notification.getDate());
-			n.setMinutes(notification.getMinutes());
-			pm = getPersistenceManager();
-			pm.makePersistent(n);
-			tempNotificationId = n.getKey().getId();
+			tempNotification.setMessage(notification.getMessage());
+			tempNotification.setTriggerDate(notification.getDate());
+			tempNotification.setMinutes(notification.getMinutes());
+			tempNotificationDAO.saveTempNotification(tempNotification);
+			tempNotificationId = tempNotification.getKey().getId();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			PMF.close(pm);
 		}
 		return tempNotificationId;
 	}
 
 	@Override
 	public SimpleNotification getTempNotification(Long id) {
-		PersistenceManager pm = null;
 		SimpleNotification sn = new SimpleNotification();
 		try{
-			pm = getPersistenceManager();
-			TempNotification tempNotification = (TempNotification) pm.getObjectById(TempNotification.class, id);
+			TempNotification tempNotification = tempNotificationDAO.getTempNotification(id);
 			sn.setDate(new Date(tempNotification.getTriggerDate().getTime()));
 			sn.setMessage(tempNotification.getMessage());
 			sn.setMinutes(tempNotification.getMinutes());
 			//TODO: delete temp object
 		}catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			PMF.close(pm);
 		}
 		return sn;
+	}
+	
+	private String getDefaultTimeZone(){
+		return getProperty(DEFAULT_TIMEZONE);
 	}
 
 }

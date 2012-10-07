@@ -1,4 +1,4 @@
-package com.iv.rms.core.jdo;
+package com.iv.rms.core.persistence.jdo;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;

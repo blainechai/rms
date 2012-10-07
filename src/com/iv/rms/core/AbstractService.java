@@ -3,7 +3,8 @@ package com.iv.rms.core;
 import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 
-import com.iv.rms.core.jdo.PMF;
+import com.iv.rms.core.persistence.jdo.PMF;
+import com.iv.rms.core.persistence.jdo.JDOOperation;
 
 
 public abstract class AbstractService implements Service{
@@ -32,7 +33,11 @@ public abstract class AbstractService implements Service{
 	
 	@Deprecated
 	public PersistenceManager getPersistenceManager(){
-		return PMF.get().getPersistenceManager();
+		PersistenceManager pm = JDOOperation.get();
+		if ( pm == null || !pm.isClosed() ){
+			pm = PMF.get().getPersistenceManager();
+		}
+		return pm;
 	}
 	
 	protected String getProperty(String key){

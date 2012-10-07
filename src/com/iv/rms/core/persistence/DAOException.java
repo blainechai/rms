@@ -1,6 +1,7 @@
-package com.iv.rms.core.jdo;
+package com.iv.rms.core.persistence;
 
-public class DAOException extends Exception{
+@SuppressWarnings("serial")
+public class DAOException extends RuntimeException{
 
 	public DAOException() {
 		super();
