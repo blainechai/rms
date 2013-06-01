@@ -1,0 +1,85 @@
+h1 {
+  font-size: 18px;
+  line-height: 0px;
+  font-weight: normal;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+#workspace{
+	position:relative;
+	left:20px;
+}
+.verticalContainer{
+	line-height: 15px;
+}
+.howCheckbox label{
+	display: inline;
+	vertical-align: middle;
+}
+.howCheckbox input{
+	display: inline;
+	margin: 6px 6px;
+}
+.gwt-InlineLabel{
+	font-size: 15px;
+	font-weight: bold
+}
+.errorLabel{
+	color: red;
+}
+.whatLbl, .whenLbl, .howLbl{
+	font-size: 15px;
+	font-weight: bold;
+}
+.whatsThisHeader{
+	font-size: 15px;
+	font-weight: bold;
+}
+#messsageLabel{
+	display:block;
+	height:20px;
+}
+.timepickr-display{
+	line-height: 15px;
+}
+fooster{
+	position: absolute; 
+	bottom: 0;
+}
+#footer .upperFooter {
+	box-shadow: 0 -1px 0 #FFFFFF inset;
+	min-height: 20px;
+	overflow: hidden;
+	position:absolute;
+	bottom:0;
+}
+#footer .upperFooter ul li{
+	display: inline;
+	margin: 0px 5px 0px 0px;
+}
+#footer .upperFooter ul{
+	display: inline;
+	margin: 0px 0px 0px 0px;
+}

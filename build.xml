@@ -1,7 +1,7 @@
 <project default="build">
 	<property file="build.properties"/>
 	<property environment="env"/>
-	<property name="sdk.dir" value="${env.GAE_PATH}"  />
+	<property name="sdk.dir" value="${env.GAE_PATH}" />
 	<property name="gwt.sdk" value="${env.GWT_PATH}" />
 	<property name="gwt.args" value="" />
 	<import file="${sdk.dir}/config/user/ant-macros.xml" />
@@ -95,7 +95,8 @@
 	</target>
 
 	<target name="update" description="Uploads the application to App Engine.">
-		<appcfg action="update" war="${warDir}" />
+		<appcfg action="update" war="${warDir}">
+		</appcfg>
 	</target>
 
 	<target name="clean" description="Clean original WAR file">
