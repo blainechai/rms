@@ -9,7 +9,7 @@
 			<li><a href="">Privacy policy</a></li>
 		</ul>
 		<ul>
-			<li>Build v3-010620132231</li>
+			<li>Build BUILD_TAG</li>
 		</ul>
 	</div>
 </div>
