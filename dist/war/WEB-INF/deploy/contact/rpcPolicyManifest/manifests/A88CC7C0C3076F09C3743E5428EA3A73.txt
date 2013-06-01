@@ -1,2 +1,0 @@
-serviceClass: com.iv.rms.contact.client.ContactServiceServletAdapter
-path: 081A2E7FF73BFBCECB0377C9AB9399D4.gwt.rpc
