@@ -10,4 +10,6 @@ public interface MailService extends Service {
 
     public void sendAdminMail(String subject, String messsage);
 
+    void sendHtmlMail(String msgBody, Owner owner);
+
 }

@@ -44,6 +44,29 @@ public class MailServiceImpl extends AbstractService implements MailService {
 	    e.printStackTrace();
 	}
     }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iv.rms.mail.MailService#sendMail(com.iv.rms.entity.Notification,
+     * com.iv.rms.entity.Owner)
+     */
+    @Override
+    public void sendHtmlMail(String msgBody, Owner owner) {
+	Properties props = new Properties();
+	Session session = Session.getDefaultInstance(props, null);
+	try {
+	    MimeMessage msg = new MimeMessage(session);
+	    msg.setFrom(new InternetAddress(getProperty(SENDER_EMAIL_ADDRESS), getProperty(SENDER_EMAIL_NAME)));
+	    msg.addRecipient(Message.RecipientType.TO, new InternetAddress(owner.getEmail(), owner.getName()));
+	    msg.setSubject(getProperty(DEFAULT_NOTIFICATION_SUBJECT));
+	    msg.setText(msgBody, "utf-8", "html");
+	    Transport.send(msg);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
+
 
     /*
      * (non-Javadoc)

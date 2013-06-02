@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
+import com.iv.rms.core.SimpleStringCipher;
 import com.iv.rms.notification.client.SimpleNotification;
 import com.iv.rms.notification.shared.NotificationException;
 import com.iv.rms.notification.shared.Util;
@@ -69,15 +70,12 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	try {
 	    String defaultTimeZone = getDefaultTimeZone();
 	    Date currentDate = Util.getDateInTimeZone(new Date(), TimeZone.getDefault().getID(), defaultTimeZone);
-	    Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));// TODO:don't
-												  // use
-												  // this
-												  // method
+	    Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));
 	    Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(defaultTimeZone));
 	    List<Notification> results = notificationDAO.getNotifications(String.valueOf(dateInt), minutes, Boolean.FALSE);
 	    if (!results.isEmpty()) {
 		for (Notification n : results) {
-		    getServiceLocator().getMailService().sendMail(n, getServiceLocator().getUserService().getOwner(n.getOwnerId()));
+		    getServiceLocator().getMailService().sendHtmlMail(getHtmlView(n), getServiceLocator().getUserService().getOwner(n.getOwnerId()));
 		    n.setProcesed(Boolean.TRUE);
 		    n.setSentDate(currentDate);
 		    notificationDAO.save(n);
@@ -141,6 +139,38 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 
     private String getDefaultTimeZone() {
 	return getProperty(DEFAULT_TIMEZONE);
+    }
+    
+    @Override
+    public Notification postponeNotification(Long id, int days){
+	Notification notification = getNotificationDAO().load(id);
+	Notification newNotification = notification.clone();
+	newNotification.setTriggerDate(Util.incrementDate(notification.getTriggerDate(), days));
+	notificationDAO.save(newNotification);
+	return newNotification;
+    }
+    
+    public String getPostponeLink(Long id, int days){
+	String link = getServiceLocator().getPropertyService().getValue("domain") + "/postpone?token=";
+	try {
+	    link += SimpleStringCipher.encrypt(id + "-" + days);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	} 
+	return link;
+    }
+    
+    public String getHtmlView(Notification notification){
+	String tomorrowLink = getPostponeLink(notification.getKey().getId(), 1);
+	String nextWeekLink = getPostponeLink(notification.getKey().getId(), 7);
+	String nextMonthLink = getPostponeLink(notification.getKey().getId(), 30);
+	StringBuilder sb = new StringBuilder();
+	sb.append("<html><head></head><body>");
+	sb.append("<h3>").append(notification.getMessage()).append("</h3>");
+	sb.append("<table><tr><td>Remind me  <a href=\"").append(tomorrowLink).append("\">tomorrow</a>, <a href=\"")
+	.append(nextWeekLink).append("\">next week</a> or <a href=\"").append(nextMonthLink).append("\">next month</a></tr>");
+	sb.append("</table></body></html>");
+	return sb.toString();
     }
 
 }

@@ -16,4 +16,6 @@ public interface NotificationService {
 
     public void processPendingNotification();
 
+    Notification postponeNotification(Long id, int days);
+
 }

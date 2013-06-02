@@ -44,6 +44,12 @@
 		<servlet-name>test</servlet-name>
 		<servlet-class>com.iv.rms.core.server.TestServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>postpone</servlet-name>
+		<servlet-class>com.iv.rms.notification.PostponeNotificationServlet</servlet-class>
+	</servlet>
+	
 	<servlet>
 		<servlet-name>SystemServiceServlet</servlet-name>
 		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
@@ -80,6 +86,11 @@
 	<servlet-mapping>
 		<servlet-name>test</servlet-name>
 		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>postpone</servlet-name>
+		<url-pattern>/postpone</url-pattern>
 	</servlet-mapping>
 	<!-- Default page to serve -->
 	<welcome-file-list>

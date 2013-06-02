@@ -127,5 +127,18 @@ public class Notification implements Serializable {
     public void setSentDate(Date sentDate) {
 	this.sentDate = sentDate;
     }
+    
+    @Override
+    public Notification clone() {
+	Notification dolly = new Notification();
+	dolly.setMinutes(getMinutes());
+	dolly.setMessage(getMessage());
+	dolly.setCreationDate(getCreationDate());
+	dolly.setOwner(getOwner());
+	dolly.setOwnerId(getOwnerId());
+	dolly.setProcesed(getProcesed());
+	dolly.setTriggerDate(getTriggerDate());
+	return dolly;
+    }
 
 }

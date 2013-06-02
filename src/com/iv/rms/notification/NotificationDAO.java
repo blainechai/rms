@@ -12,4 +12,6 @@ public interface NotificationDAO {
 
     public List<Notification> getNotifications(String triggerDate, Integer minutes, Boolean processed);
 
+    Notification load(Long id);
+
 }

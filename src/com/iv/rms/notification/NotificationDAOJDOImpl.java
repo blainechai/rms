@@ -3,9 +3,12 @@ package com.iv.rms.notification;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.iv.rms.core.persistence.DAOException;
 import com.iv.rms.core.persistence.jdo.JDODAOSupport;
+import com.iv.rms.core.persistence.jdo.PMF;
 
 @SuppressWarnings("unchecked")
 public class NotificationDAOJDOImpl extends JDODAOSupport implements NotificationDAO {
@@ -43,6 +46,21 @@ public class NotificationDAOJDOImpl extends JDODAOSupport implements Notificatio
 	results = (List<Notification>) q.execute();
 	log.info("Results:" + results.size());
 	return results;
+    }
+    
+    @Override
+    public Notification load(Long id){
+	PersistenceManager pm = null;
+	Notification notification = null;
+	try {
+	    pm = getPersistenceManager();
+	    notification = (Notification) pm.getObjectById(Notification.class, id);
+	} catch (Exception e) {
+	    throw new DAOException(e);
+	} finally {
+	    PMF.close(pm);
+	}
+	return notification;
     }
 
 }
