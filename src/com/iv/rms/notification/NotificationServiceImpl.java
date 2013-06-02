@@ -151,7 +151,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
     }
     
     public String getPostponeLink(Long id, int days){
-	String link = getServiceLocator().getPropertyService().getValue("domain") + "/postpone?token=";
+	String link = "www." + getServiceLocator().getPropertyService().getValue("domain") + "/postpone?token=";
 	try {
 	    link += SimpleStringCipher.encrypt(id + "-" + days);
 	} catch (Exception e) {
