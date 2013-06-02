@@ -3,6 +3,8 @@ package com.iv.rms.notification;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,8 @@ import com.iv.rms.user.User;
 
 @Component
 public class NotificationServiceImpl extends AbstractService implements NotificationService {
+    
+    private static final Logger log = Logger.getLogger(NotificationServiceImpl.class.getName());
 
     private static final String DEFAULT_TIMEZONE = "defaultTimeZoneId";
 
@@ -65,11 +69,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	try {
 	    String defaultTimeZone = getDefaultTimeZone();
 	    Date currentDate = Util.getDateInTimeZone(new Date(), TimeZone.getDefault().getID(), defaultTimeZone);
-	    Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));// TODO:
-												  // don't
-												  // use
-												  // this
-												  // method
+	    Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));// TODO:don't use this  method
 	    Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(defaultTimeZone));
 	    List<Notification> results = notificationDAO.getNotifications(String.valueOf(dateInt), minutes, Boolean.FALSE);
 	    if (!results.isEmpty()) {
@@ -77,10 +77,11 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 		    getServiceLocator().getMailService().sendMail(n, getServiceLocator().getUserService().getOwner(n.getOwnerId()));
 		    n.setProcesed(Boolean.TRUE);
 		    n.setSentDate(currentDate);
+		    notificationDAO.save(n);
 		}
 	    }
 	} catch (Exception e) {
-	    e.printStackTrace();
+	    log.log(Level.SEVERE, "", e);
 	}
     }
 

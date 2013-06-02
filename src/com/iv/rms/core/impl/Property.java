@@ -12,58 +12,57 @@ import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 @PersistenceCapable
-public class Property implements Serializable{
+public class Property implements Serializable {
 
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key key;
-	
-	@Persistent
-	private String value;
-	
-	@Persistent
-	private String propertyKey;
-	
-	@Persistent
-	private Date creationDate;
-	
-	public Property(String propertyKey, String value) {
-		this.value = value;
-		this.propertyKey = propertyKey;
-		this.creationDate = new Date();
-	}
+    @PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Key key;
 
-	public Key getKey() {
-		return key;
-	}
+    @Persistent
+    private String value;
 
-	public void setKey(Key key) {
-		this.key = key;
-	}
+    @Persistent
+    private String propertyKey;
 
-	public String getValue() {
-		return value;
-	}
+    @Persistent
+    private Date creationDate;
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public Property(String propertyKey, String value) {
+	this.value = value;
+	this.propertyKey = propertyKey;
+	this.creationDate = new Date();
+    }
 
-	public String getPropertyKey() {
-		return propertyKey;
-	}
+    public Key getKey() {
+	return key;
+    }
 
-	public void setPropertyKey(String propertyKey) {
-		this.propertyKey = propertyKey;
-	}
-	
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public void setKey(Key key) {
+	this.key = key;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public String getValue() {
+	return value;
+    }
 
+    public void setValue(String value) {
+	this.value = value;
+    }
+
+    public String getPropertyKey() {
+	return propertyKey;
+    }
+
+    public void setPropertyKey(String propertyKey) {
+	this.propertyKey = propertyKey;
+    }
+
+    public Date getCreationDate() {
+	return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
 }
