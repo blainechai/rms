@@ -5,3 +5,4 @@
 /.gwt
 /.settings
 dist
+war/WEB-INF/classes/*

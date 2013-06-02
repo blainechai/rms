@@ -212,7 +212,6 @@ public class HorizontalRMSEntryPoint implements EntryPoint {
 						@Override
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
-							
 						}
 					});
 					return;

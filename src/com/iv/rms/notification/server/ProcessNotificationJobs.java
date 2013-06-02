@@ -22,10 +22,10 @@ public class ProcessNotificationJobs extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int minutes = Integer.parseInt(df.format(new Date()));
-		if ( minutes == 15 || minutes == 30 || minutes == 45 || minutes == 0 ){
+//		int minutes = Integer.parseInt(df.format(new Date()));
+//		if ( minutes == 15 || minutes == 30 || minutes == 45 || minutes == 0 ){
 			getServiceLocator().getNotificationService().processPendingNotification();
-		}
+//		}
 	}
 	
 	public ServiceLocator getServiceLocator(){

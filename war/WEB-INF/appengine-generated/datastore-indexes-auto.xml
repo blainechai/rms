@@ -1,4 +1,12 @@
-<!-- Indices written at Thu, 30 May 2013 20:26:27 EEST -->
+<!-- Indices written at Sun, 2 Jun 2013 12:49:07 EEST -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 5 times in query history -->
+    <datastore-index kind="Notification" ancestor="false" source="auto">
+        <property name="procesed" direction="asc"/>
+        <property name="triggerDate" direction="asc"/>
+        <property name="minutes" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
