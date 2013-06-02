@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ 	<listener>
+  		<listener-class>com.iv.rms.core.server.ApplicationInit</listener-class>
+  	</listener>
+  	<listener>  
+  		<listener-class> org.springframework.web.context.request.RequestContextListener</listener-class>  
+	</listener>
+
+	<listener>  
+  		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+	</listener>
 	<filter>
 		<display-name>PreparePageFilter</display-name>
 		<filter-name>PreparePageFilter</filter-name>
-		<filter-class>com.iv.rms.filters.PreparePageFilter</filter-class>
+		<filter-class>com.iv.rms.core.server.filters.PreparePageFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>PreparePageFilter</filter-name>
@@ -11,11 +21,15 @@
 	<!-- Servlets -->
 	<servlet>
 		<servlet-name>processNotifications</servlet-name>
-		<servlet-class>com.iv.rms.server.ProcessNotificationJobs</servlet-class>
+		<servlet-class>com.iv.rms.notification.server.ProcessNotificationJobs</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>notification</servlet-name>
-		<servlet-class>com.iv.rms.server.NotificationServiceImpl</servlet-class>
+		<servlet-class>com.iv.rms.notification.server.NotificationServiceServletAdapterImpl</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>contact</servlet-name>
+		<servlet-class>com.iv.rms.contact.server.ContactServiceServletAdapterImpl</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>chat</servlet-name>
@@ -25,6 +39,17 @@
 		<servlet-name>loginOpenId</servlet-name>
 		<servlet-class>com.iv.rms.openid.OpenIdLoginServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>com.iv.rms.core.server.TestServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>postpone</servlet-name>
+		<servlet-class>com.iv.rms.notification.PostponeNotificationServlet</servlet-class>
+	</servlet>
+	
 	<servlet>
 		<servlet-name>SystemServiceServlet</servlet-name>
 		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
@@ -38,8 +63,8 @@
 		<url-pattern>/rms/notification</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>notification</servlet-name>
-		<url-pattern>/contact/notification</url-pattern>
+		<servlet-name>contact</servlet-name>
+		<url-pattern>/contact/contact</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SystemServiceServlet</servlet-name>
@@ -56,6 +81,16 @@
 	<servlet-mapping>
 		<servlet-name>loginOpenId</servlet-name>
 		<url-pattern>/loginOpenId</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>postpone</servlet-name>
+		<url-pattern>/postpone</url-pattern>
 	</servlet-mapping>
 	<!-- Default page to serve -->
 	<welcome-file-list>

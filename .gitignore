@@ -4,3 +4,6 @@
 *.class
 /.gwt
 /.settings
+dist
+war/WEB-INF/classes/*
+war/WEB-INF/deploy/*

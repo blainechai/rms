@@ -20,63 +20,62 @@ import com.google.appengine.api.users.UserServiceFactory;
 @SuppressWarnings("serial")
 public class OpenIdLoginServlet extends HttpServlet {
 
-	private static final Map<String, String> openIdProviders;
-	static {
-		openIdProviders = new HashMap<String, String>();
-		openIdProviders.put("Google", "https://www.google.com/accounts/o8/id");
-		openIdProviders.put("Yahoo", "yahoo.com");
-		openIdProviders.put("MySpace", "myspace.com");
-		openIdProviders.put("AOL", "aol.com");
-		openIdProviders.put("MyOpenId", "myopenid.com");
+    private static final Map<String, String> openIdProviders;
+    static {
+	openIdProviders = new HashMap<String, String>();
+	openIdProviders.put("Google", "https://www.google.com/accounts/o8/id");
+	openIdProviders.put("Yahoo", "yahoo.com");
+	openIdProviders.put("MySpace", "myspace.com");
+	openIdProviders.put("AOL", "aol.com");
+	openIdProviders.put("MyOpenId", "myopenid.com");
+    }
+
+    public void test(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	UserService userService = UserServiceFactory.getUserService();
+	User user = userService.getCurrentUser(); // or req.getUserPrincipal()
+	Set<String> attributes = new HashSet<String>();
+
+	resp.setContentType("text/html");
+	PrintWriter out = resp.getWriter();
+
+	if (user != null) {
+	    out.println("Hello <i>" + user.getNickname() + "</i>!");
+	    out.println("[<a href=\"" + userService.createLogoutURL(req.getRequestURI()) + "\">sign out</a>]");
+	} else {
+	    out.println("Hello world! Sign in at: ");
+	    for (String providerName : openIdProviders.keySet()) {
+		String providerUrl = openIdProviders.get(providerName);
+		String loginUrl = userService.createLoginURL(req.getRequestURI(), null, providerUrl, attributes);
+		out.println("[<a href=\"" + loginUrl + "\">" + providerName + "</a>] ");
+		req.setAttribute(providerName, loginUrl);
+	    }
+	}
+	RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+	try {
+	    rd.include(req, resp);
+	} catch (ServletException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	UserService userService = UserServiceFactory.getUserService();
+	Set<String> attributes = new HashSet<String>();
+
+	for (String providerName : openIdProviders.keySet()) {
+	    String providerUrl = openIdProviders.get(providerName);
+	    String loginUrl = userService.createLoginURL("/", null, providerUrl, attributes);
+
+	    req.setAttribute(providerName, loginUrl);
 	}
 
-	public void test(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser(); // or req.getUserPrincipal()
-		Set<String> attributes = new HashSet<String>();
-
-		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
-
-		if (user != null) {
-			out.println("Hello <i>" + user.getNickname() + "</i>!");
-			out.println("[<a href=\"" + userService.createLogoutURL(req.getRequestURI()) + "\">sign out</a>]");
-		} else {
-			out.println("Hello world! Sign in at: ");
-			for (String providerName : openIdProviders.keySet()) {
-				String providerUrl = openIdProviders.get(providerName);
-				String loginUrl = userService.createLoginURL(req.getRequestURI(), null, providerUrl, attributes);
-				out.println("[<a href=\"" + loginUrl + "\">" + providerName + "</a>] ");
-				req.setAttribute(providerName, loginUrl);
-			}
-		}
-		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
-		try {
-			rd.include(req, resp);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		}
+	RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+	try {
+	    rd.include(req, resp);
+	} catch (ServletException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
-
-	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser(); // or req.getUserPrincipal()
-		Set<String> attributes = new HashSet<String>();
-
-		for (String providerName : openIdProviders.keySet()) {
-			String providerUrl = openIdProviders.get(providerName);
-			String loginUrl = userService.createLoginURL("/", null, providerUrl, attributes);
-
-			req.setAttribute(providerName, loginUrl);
-		}
-
-		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
-		try {
-			rd.include(req, resp);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    }
 }

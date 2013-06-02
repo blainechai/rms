@@ -12,7 +12,7 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</a> 
-				<a class="brand" href="http://www.mail-remind.com"><h1>Mail reminder</h1></a>
+				<a class="brand" href="/"><h1>Mail reminder</h1></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="whatsthis">What's this?</a></li>
