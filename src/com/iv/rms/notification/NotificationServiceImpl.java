@@ -17,7 +17,7 @@ import com.iv.rms.user.User;
 
 @Component
 public class NotificationServiceImpl extends AbstractService implements NotificationService {
-    
+
     private static final Logger log = Logger.getLogger(NotificationServiceImpl.class.getName());
 
     private static final String DEFAULT_TIMEZONE = "defaultTimeZoneId";
@@ -69,7 +69,10 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	try {
 	    String defaultTimeZone = getDefaultTimeZone();
 	    Date currentDate = Util.getDateInTimeZone(new Date(), TimeZone.getDefault().getID(), defaultTimeZone);
-	    Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));// TODO:don't use this  method
+	    Integer dateInt = Util.formatDate(currentDate, TimeZone.getTimeZone(defaultTimeZone));// TODO:don't
+												  // use
+												  // this
+												  // method
 	    Integer minutes = Util.getMinutesSinceMidnight(currentDate, TimeZone.getTimeZone(defaultTimeZone));
 	    List<Notification> results = notificationDAO.getNotifications(String.valueOf(dateInt), minutes, Boolean.FALSE);
 	    if (!results.isEmpty()) {

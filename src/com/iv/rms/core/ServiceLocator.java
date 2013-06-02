@@ -9,25 +9,25 @@ import com.iv.rms.user.UserService;
 
 public interface ServiceLocator {
 
-	@Inject
-	public UserService getUserService();
+    @Inject
+    public UserService getUserService();
 
-	public void setUserService(UserService userService);
+    public void setUserService(UserService userService);
 
-	public ContactService getContactService();
+    public ContactService getContactService();
 
-	public void setContactService(ContactService contactService);
+    public void setContactService(ContactService contactService);
 
-	public NotificationService getNotificationService();
+    public NotificationService getNotificationService();
 
-	public void setNotificationService(NotificationService notificationService);
+    public void setNotificationService(NotificationService notificationService);
 
-	public MailService getMailService();
+    public MailService getMailService();
 
-	public void setMailService(MailService mailService);
+    public void setMailService(MailService mailService);
 
-	public PropertyService getPropertyService();
+    public PropertyService getPropertyService();
 
-	public void setPropertyService(PropertyService propertyService);
+    public void setPropertyService(PropertyService propertyService);
 
 }

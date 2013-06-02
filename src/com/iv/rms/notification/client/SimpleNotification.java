@@ -6,55 +6,55 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class SimpleNotification implements Serializable {
-	
-	private String message;
-	
-	private Date date;
-	
-	private Integer minutes;
-	
-	private List<NotificationViews> views;
-	
-	private String timeZone;
 
-	public String getTimeZone() {
-		return timeZone;
-	}
+    private String message;
 
-	public void setTimeZone(String timeZone) {
-		this.timeZone = timeZone;
-	}
+    private Date date;
 
-	public String getMessage() {
-		return message;
-	}
+    private Integer minutes;
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    private List<NotificationViews> views;
 
-	public Date getDate() {
-		return date;
-	}
+    private String timeZone;
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public String getTimeZone() {
+	return timeZone;
+    }
 
-	public Integer getMinutes() {
-		return minutes;
-	}
+    public void setTimeZone(String timeZone) {
+	this.timeZone = timeZone;
+    }
 
-	public void setMinutes(Integer minutes) {
-		this.minutes = minutes;
-	}
+    public String getMessage() {
+	return message;
+    }
 
-	public List<NotificationViews> getViews() {
-		return views;
-	}
+    public void setMessage(String message) {
+	this.message = message;
+    }
 
-	public void setViews(List<NotificationViews> views) {
-		this.views = views;
-	}
+    public Date getDate() {
+	return date;
+    }
+
+    public void setDate(Date date) {
+	this.date = date;
+    }
+
+    public Integer getMinutes() {
+	return minutes;
+    }
+
+    public void setMinutes(Integer minutes) {
+	this.minutes = minutes;
+    }
+
+    public List<NotificationViews> getViews() {
+	return views;
+    }
+
+    public void setViews(List<NotificationViews> views) {
+	this.views = views;
+    }
 
 }

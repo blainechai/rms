@@ -7,15 +7,14 @@ import com.iv.rms.notification.shared.NotificationException;
 @RemoteServiceRelativePath("notification")
 public interface NotificationServiceServletAdapter extends RemoteService {
 
-	public void saveNotification(SimpleNotification notification) throws NotificationException;
-	
-	public Long saveTempNotification(SimpleNotification notification) throws NotificationException;
-	
-	public Boolean hasUserTimeZone();
-	
-	public SimpleNotification getTempNotification(Long id);
+    public void saveNotification(SimpleNotification notification) throws NotificationException;
 
-	public void processPendingNotification();
-	
+    public Long saveTempNotification(SimpleNotification notification) throws NotificationException;
+
+    public Boolean hasUserTimeZone();
+
+    public SimpleNotification getTempNotification(Long id);
+
+    public void processPendingNotification();
+
 }
-

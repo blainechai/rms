@@ -13,62 +13,62 @@ import com.google.appengine.api.datastore.Text;
 
 @SuppressWarnings("serial")
 @PersistenceCapable
-public class UserContactMessage implements Serializable{
+public class UserContactMessage implements Serializable {
 
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key key;
-	
-	@Persistent
-	private String userId;
-	
-	@Persistent
-	private String subject;
-	
-	@Persistent
-	private Text message;
-	
-	@Persistent
-	private Date creationDate;
+    @PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Key key;
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    @Persistent
+    private String userId;
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    @Persistent
+    private String subject;
 
-	public Key getKey() {
-		return key;
-	}
+    @Persistent
+    private Text message;
 
-	public void setKey(Key key) {
-		this.key = key;
-	}
+    @Persistent
+    private Date creationDate;
 
-	public String getUserId() {
-		return userId;
-	}
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	public String getSubject() {
-		return subject;
-	}
+    public Key getKey() {
+	return key;
+    }
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+    public void setKey(Key key) {
+	this.key = key;
+    }
 
-	public Text getMessage() {
-		return message;
-	}
+    public String getUserId() {
+	return userId;
+    }
 
-	public void setMessage(Text message) {
-		this.message = message;
-	}
+    public void setUserId(String userId) {
+	this.userId = userId;
+    }
+
+    public String getSubject() {
+	return subject;
+    }
+
+    public void setSubject(String subject) {
+	this.subject = subject;
+    }
+
+    public Text getMessage() {
+	return message;
+    }
+
+    public void setMessage(Text message) {
+	this.message = message;
+    }
 
 }

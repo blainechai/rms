@@ -1,7 +1,7 @@
 package com.iv.rms.contact;
 
-public interface ContactDAO{
+public interface ContactDAO {
 
-	public abstract void save(UserContactMessage contactMessage);
+    public abstract void save(UserContactMessage contactMessage);
 
 }

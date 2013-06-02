@@ -21,6 +21,7 @@
 	<bean id="ownerDAO" class="com.iv.rms.user.OwnerDAOJDOImpl" />
 	<bean id="notificationDAO" class="com.iv.rms.notification.NotificationDAOJDOImpl" />
 	<bean id="contactDAO" class="com.iv.rms.contact.ContactJDODAOImpl" />
+	<bean id="tempNotificationDAO" class="com.iv.rms.notification.TempNotificationDAOJDOImpl" />
 
 	<bean id="jdoHandler" class="com.iv.rms.core.persistence.jdo.JDOOperation" />
 
@@ -30,10 +31,12 @@
 			<aop:pointcut id="owner" expression="execution(* com.iv.rms.user.OwnerDAOJDOImpl.*(..))" />
 			<aop:pointcut id="property" expression="execution(* com.iv.rms.core.impl.PropertyJDODAOImpl.*(..))" />
 			<aop:pointcut id="contact" expression="execution(* com.iv.rms.contact.ContactJDODAOImpl.*(..))" />
+			<aop:pointcut id="tempNotification" expression="execution(* com.iv.rms.notification.TempNotificationDAOJDOImpl.*(..))" />
 			<aop:around pointcut-ref="notification" method="perform" />
 			<aop:around pointcut-ref="owner" method="perform" />
 			<aop:around pointcut-ref="property" method="perform" />
 			<aop:around pointcut-ref="contact" method="perform" />
+			<aop:around pointcut-ref="tempNotification" method="perform" />
 		</aop:aspect>
 	</aop:config>
 

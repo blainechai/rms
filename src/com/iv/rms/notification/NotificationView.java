@@ -9,50 +9,50 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class NotificationView {
-	
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key key;
-	
-	@Persistent
-	private Long notificationId;
-	
-	@Persistent
-	private Integer viewType;
 
-	public NotificationView(Key key, Long notificationId, Integer viewType) {
-		super();
-		this.key = key;
-		this.notificationId = notificationId;
-		this.viewType = viewType;
-	}
-	
-	public NotificationView(){
-		
-	}
+    @PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Key key;
 
-	public Key getKey() {
-		return key;
-	}
+    @Persistent
+    private Long notificationId;
 
-	public void setKey(Key key) {
-		this.key = key;
-	}
+    @Persistent
+    private Integer viewType;
 
-	public Long getNotificationKey() {
-		return notificationId;
-	}
+    public NotificationView(Key key, Long notificationId, Integer viewType) {
+	super();
+	this.key = key;
+	this.notificationId = notificationId;
+	this.viewType = viewType;
+    }
 
-	public void setNotificationKey(Long notificationKey) {
-		this.notificationId = notificationKey;
-	}
+    public NotificationView() {
 
-	public Integer getViewType() {
-		return viewType;
-	}
+    }
 
-	public void setViewType(Integer viewType) {
-		this.viewType = viewType;
-	}
+    public Key getKey() {
+	return key;
+    }
+
+    public void setKey(Key key) {
+	this.key = key;
+    }
+
+    public Long getNotificationKey() {
+	return notificationId;
+    }
+
+    public void setNotificationKey(Long notificationKey) {
+	this.notificationId = notificationKey;
+    }
+
+    public Integer getViewType() {
+	return viewType;
+    }
+
+    public void setViewType(Integer viewType) {
+	this.viewType = viewType;
+    }
 
 }

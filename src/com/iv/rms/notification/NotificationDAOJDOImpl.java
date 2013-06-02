@@ -9,7 +9,7 @@ import com.iv.rms.core.persistence.jdo.JDODAOSupport;
 
 @SuppressWarnings("unchecked")
 public class NotificationDAOJDOImpl extends JDODAOSupport implements NotificationDAO {
-    
+
     private static final Logger log = Logger.getLogger(NotificationDAOJDOImpl.class.getName());
 
     @Override
@@ -41,7 +41,7 @@ public class NotificationDAOJDOImpl extends JDODAOSupport implements Notificatio
 	q.setFilter("triggerDate == " + triggerDate + " && minutes <= " + minutes + " && procesed == " + processed);
 	log.info("triggerDate == " + triggerDate + " && minutes <= " + minutes + " && procesed == " + processed);
 	results = (List<Notification>) q.execute();
-	log.info("Results:" +  results.size());
+	log.info("Results:" + results.size());
 	return results;
     }
 

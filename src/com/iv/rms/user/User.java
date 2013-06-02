@@ -1,45 +1,45 @@
 package com.iv.rms.user;
 
 public class User {
-	
-	private String userId;
-	
-	private String nickName;
-	
-	private String fullName;
-	
-	private String email;
 
-	public String getUserId() {
-		return userId;
-	}
+    private String userId;
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    private String nickName;
 
-	public String getNickName() {
-		return nickName;
-	}
+    private String fullName;
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
+    private String email;
 
-	public String getFullName() {
-		return fullName;
-	}
+    public String getUserId() {
+	return userId;
+    }
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public void setUserId(String userId) {
+	this.userId = userId;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getNickName() {
+	return nickName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setNickName(String nickName) {
+	this.nickName = nickName;
+    }
+
+    public String getFullName() {
+	return fullName;
+    }
+
+    public void setFullName(String fullName) {
+	this.fullName = fullName;
+    }
+
+    public String getEmail() {
+	return email;
+    }
+
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
 }

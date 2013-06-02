@@ -16,21 +16,22 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.iv.rms.core.ServiceLocator;
 
 @SuppressWarnings("serial")
-public class ProcessNotificationJobs extends HttpServlet{
-	
-	private static final DateFormat df = new SimpleDateFormat("mm"); 
+public class ProcessNotificationJobs extends HttpServlet {
 
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int minutes = Integer.parseInt(df.format(new Date()));
-//		if ( minutes == 15 || minutes == 30 || minutes == 45 || minutes == 0 ){
-			getServiceLocator().getNotificationService().processPendingNotification();
-//		}
-	}
-	
-	public ServiceLocator getServiceLocator(){
-		ApplicationContext beanFactory = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-		return (ServiceLocator) beanFactory.getBean("serviceLocator");
-	}
+    private static final DateFormat df = new SimpleDateFormat("mm");
+
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// int minutes = Integer.parseInt(df.format(new Date()));
+	// if ( minutes == 15 || minutes == 30 || minutes == 45 || minutes == 0
+	// ){
+	getServiceLocator().getNotificationService().processPendingNotification();
+	// }
+    }
+
+    public ServiceLocator getServiceLocator() {
+	ApplicationContext beanFactory = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+	return (ServiceLocator) beanFactory.getBean("serviceLocator");
+    }
 
 }
