@@ -127,6 +127,14 @@ public class HorizontalRMSEntryPoint implements EntryPoint {
 	mailCheckBox.setEnabled(false);
 	mailCheckBox.setChecked(true);
 	mailCheckBox.setStyleName("howCheckbox");
+	
+	CheckBox chckbxSms = new CheckBox("SMS");
+	chckbxSms.setWordWrap(false);
+	chckbxSms.setStyleName("howCheckbox");
+	chckbxSms.setEnabled(false);
+	chckbxSms.setChecked(true);
+	howPanel.add(chckbxSms);
+	chckbxSms.setWidth("60px");
 
 	final Button sendButton = new Button("Send");
 	verticalPanel.add(sendButton);
