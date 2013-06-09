@@ -12,4 +12,8 @@ public interface UserService {
 
     public Owner createOwner(User user);
 
+	public OwnerDetails getOwnerDetails(String ownerId);
+	
+	public void save(OwnerDetails details);
+
 }
