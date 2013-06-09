@@ -131,7 +131,6 @@ public class HorizontalRMSEntryPoint implements EntryPoint {
 	CheckBox chckbxSms = new CheckBox("SMS");
 	chckbxSms.setWordWrap(false);
 	chckbxSms.setStyleName("howCheckbox");
-	chckbxSms.setEnabled(false);
 	chckbxSms.setChecked(true);
 	howPanel.add(chckbxSms);
 	chckbxSms.setWidth("60px");
