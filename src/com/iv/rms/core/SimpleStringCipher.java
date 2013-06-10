@@ -44,13 +44,12 @@ public class SimpleStringCipher {
 	byte[] decrypted = cipher.doFinal(encypted);
 	return new String(decrypted);
     }
-    
-    public static void main(String argsp[]) throws Exception{
+
+    public static void main(String argsp[]) throws Exception {
 	String encrypted = SimpleStringCipher.encrypt("16-30");
 	String decrypted = SimpleStringCipher.decrypt(encrypted);
 	System.out.println(encrypted);
-	
-	
+
     }
-    
+
 }

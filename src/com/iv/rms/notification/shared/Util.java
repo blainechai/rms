@@ -77,8 +77,8 @@ public class Util {
 	cal.set(Calendar.MINUTE, sn.getMinutes() - ((sn.getMinutes() / 60) * 60));
 	return Util.getDateInTimeZone(cal.getTime(), Util.getTimeZone(sn.getTimeZone(), defaultTimeZone).getID(), defaultTimeZone);
     }
-    
-    public static Integer incrementDate(Integer date, int nrOfDays){
+
+    public static Integer incrementDate(Integer date, int nrOfDays) {
 	Calendar cal = Calendar.getInstance();
 	try {
 	    cal.setTime(dateFormater.parse(String.valueOf(date)));
@@ -88,12 +88,12 @@ public class Util {
 	}
 	return Integer.parseInt(dateFormater.format(cal.getTime()));
     }
-    
-    public static String encode(String str){
+
+    public static String encode(String str) {
 	return null;
     }
-    
-    public static String decode(String encodedString){
+
+    public static String decode(String encodedString) {
 	return null;
     }
 

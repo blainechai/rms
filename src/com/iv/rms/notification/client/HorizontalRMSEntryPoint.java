@@ -127,8 +127,8 @@ public class HorizontalRMSEntryPoint implements EntryPoint {
 	mailCheckBox.setEnabled(false);
 	mailCheckBox.setChecked(true);
 	mailCheckBox.setStyleName("howCheckbox");
-	
-	CheckBox chckbxSms = new CheckBox("SMS");
+
+	final CheckBox chckbxSms = new CheckBox("SMS");
 	chckbxSms.setWordWrap(false);
 	chckbxSms.setStyleName("howCheckbox");
 	chckbxSms.setChecked(true);
@@ -235,6 +235,9 @@ public class HorizontalRMSEntryPoint implements EntryPoint {
 		List<NotificationViews> selectedViews = new ArrayList<NotificationViews>();
 		if (mailCheckBox.getValue()) {
 		    selectedViews.add(NotificationViews.MAIL);
+		}
+		if (chckbxSms.getValue()  ){
+		    selectedViews.add(NotificationViews.SMS);
 		}
 		sn.setViews(selectedViews);
 		sendButton.setEnabled(false);

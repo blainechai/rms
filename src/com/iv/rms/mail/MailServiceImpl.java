@@ -44,7 +44,7 @@ public class MailServiceImpl extends AbstractService implements MailService {
 	    e.printStackTrace();
 	}
     }
-    
+
     /*
      * (non-Javadoc)
      * 
@@ -66,7 +66,6 @@ public class MailServiceImpl extends AbstractService implements MailService {
 	    e.printStackTrace();
 	}
     }
-
 
     /*
      * (non-Javadoc)

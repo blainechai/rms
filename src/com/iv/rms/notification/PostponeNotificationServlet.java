@@ -15,7 +15,7 @@ import com.iv.rms.core.ServiceLocator;
 import com.iv.rms.core.SimpleStringCipher;
 
 @SuppressWarnings("serial")
-public class PostponeNotificationServlet extends HttpServlet{
+public class PostponeNotificationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class PostponeNotificationServlet extends HttpServlet{
 	ServiceLocator serviceLocator = (ServiceLocator) beanFactory.getBean("serviceLocator");
 
 	String token = req.getParameter("token");
-	if ( token != null ){
+	if (token != null) {
 	    try {
 		String decryptedToken = SimpleStringCipher.decrypt(token);
 		Long id = Long.parseLong(decryptedToken.substring(0, decryptedToken.indexOf("-")));
@@ -42,7 +42,5 @@ public class PostponeNotificationServlet extends HttpServlet{
 
 	}
     }
-    
-    
 
 }

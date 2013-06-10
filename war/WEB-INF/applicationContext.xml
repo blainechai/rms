@@ -23,7 +23,7 @@
 	<bean id="notificationDAO" class="com.iv.rms.notification.NotificationDAOJDOImpl" />
 	<bean id="contactDAO" class="com.iv.rms.contact.ContactJDODAOImpl" />
 	<bean id="tempNotificationDAO" class="com.iv.rms.notification.TempNotificationDAOJDOImpl" />
-	<bean id="userDetailsDAO" class="com.iv.rms.user.OwnerDetailsDAOJDOImpl" />
+	<bean id="ownerDetailsDAO" class="com.iv.rms.user.OwnerDetailsDAOJDOImpl" />
 
 	<bean id="jdoHandler" class="com.iv.rms.core.persistence.jdo.JDOOperation" />
 

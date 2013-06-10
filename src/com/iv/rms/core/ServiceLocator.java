@@ -30,9 +30,9 @@ public interface ServiceLocator {
     public PropertyService getPropertyService();
 
     public void setPropertyService(PropertyService propertyService);
-    
+
     public SmsService getSmsService();
-    
+
     public void setSmsService(SmsService smsService);
 
 }

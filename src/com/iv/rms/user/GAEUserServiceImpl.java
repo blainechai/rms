@@ -5,75 +5,75 @@ import com.iv.rms.core.AbstractService;
 
 public class GAEUserServiceImpl extends AbstractService implements UserService {
 
-	private OwnerDAO ownerDAO;
-	
-	private OwnerDetailsDAO ownerDetailsDAO;
+    private OwnerDAO ownerDAO;
 
-	private User user;
+    private OwnerDetailsDAO ownerDetailsDAO;
 
-	public GAEUserServiceImpl() {
+    private User user;
 
+    public GAEUserServiceImpl() {
+
+    }
+
+    public User getUser() {
+	return user;
+    }
+
+    public void setUser(User user) {
+	this.user = user;
+    }
+
+    @Override
+    public User getCurrentUser() {
+	User user = new User();
+	com.google.appengine.api.users.User gwtUser = UserServiceFactory.getUserService().getCurrentUser();
+	if (gwtUser != null) {
+	    user.setEmail(gwtUser.getEmail());
+	    user.setNickName(gwtUser.getNickname());
+	    user.setUserId(gwtUser.getUserId());
 	}
+	return user;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    @Override
+    public Owner getOwner(User user) {
+	return ownerDAO.getOwner(user);
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @Override
+    public Owner createOwner(User user) {
+	return ownerDAO.createNewOwner(user);
+    }
 
-	@Override
-	public User getCurrentUser() {
-		User user = new User();
-		com.google.appengine.api.users.User gwtUser = UserServiceFactory.getUserService().getCurrentUser();
-		if (gwtUser != null) {
-			user.setEmail(gwtUser.getEmail());
-			user.setNickName(gwtUser.getNickname());
-			user.setUserId(gwtUser.getUserId());
-		}
-		return user;
-	}
+    public OwnerDAO getOwnerDAO() {
+	return ownerDAO;
+    }
 
-	@Override
-	public Owner getOwner(User user) {
-		return ownerDAO.getOwner(user);
-	}
+    public void setOwnerDAO(OwnerDAO ownerDAO) {
+	this.ownerDAO = ownerDAO;
+    }
 
-	@Override
-	public Owner createOwner(User user) {
-		return ownerDAO.createNewOwner(user);
-	}
+    @Override
+    public Owner getOwner(String userId) {
+	return ownerDAO.getOwner(userId);
+    }
 
-	public OwnerDAO getOwnerDAO() {
-		return ownerDAO;
-	}
+    public OwnerDetailsDAO getOwnerDetailsDAO() {
+	return ownerDetailsDAO;
+    }
 
-	public void setOwnerDAO(OwnerDAO ownerDAO) {
-		this.ownerDAO = ownerDAO;
-	}
+    public void setOwnerDetailsDAO(OwnerDetailsDAO ownerDetailsDAO) {
+	this.ownerDetailsDAO = ownerDetailsDAO;
+    }
 
-	@Override
-	public Owner getOwner(String userId) {
-		return ownerDAO.getOwner(userId);
-	}
-	
-	public OwnerDetailsDAO getOwnerDetailsDAO() {
-		return ownerDetailsDAO;
-	}
+    @Override
+    public OwnerDetails getOwnerDetails(String ownerId) {
+	return ownerDetailsDAO.load(ownerId);
+    }
 
-	public void setOwnerDetailsDAO(OwnerDetailsDAO ownerDetailsDAO) {
-		this.ownerDetailsDAO = ownerDetailsDAO;
-	}
-
-	@Override
-	public OwnerDetails getOwnerDetails(String ownerId) {
-		return ownerDetailsDAO.load(ownerId);
-	}
-
-	@Override
-	public void save(OwnerDetails details) {
-		ownerDetailsDAO.save(details);
-	}
+    @Override
+    public void save(OwnerDetails details) {
+	ownerDetailsDAO.save(details);
+    }
 
 }
