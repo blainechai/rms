@@ -21,10 +21,7 @@ public class PropertyServiceImpl extends AbstractService implements PropertyServ
 
     private PropertyDAO propertyDAO;
 
-    private PropertyDAO filePropertyDAO = new PropertyFileDAOImpl(); // inject
-								     // this
-								     // using
-								     // spring
+    private PropertyDAO filePropertyDAO = new PropertyFileDAOImpl(); // inject this using spring
 
     private PropertyServiceImpl() {
 
