@@ -145,6 +145,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
     public Notification postponeNotification(Long id, int days){
 	Notification notification = getNotificationDAO().load(id);
 	Notification newNotification = notification.clone();
+	newNotification.setProcesed(false);
 	newNotification.setTriggerDate(Util.incrementDate(notification.getTriggerDate(), days));
 	notificationDAO.save(newNotification);
 	return newNotification;
