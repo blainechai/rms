@@ -9,7 +9,8 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/aspectjweaver.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (1)"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/twilio-java-sdk-3.3.16-SNAPSHOT-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
