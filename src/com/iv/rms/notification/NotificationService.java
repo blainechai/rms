@@ -6,7 +6,7 @@ import com.iv.rms.user.User;
 
 public interface NotificationService {
 
-    public void saveNotification(SimpleNotification notification, User user) throws NotificationException;
+    public Notification saveNotification(SimpleNotification notification, User user) throws NotificationException;
 
     public Long saveTempNotification(SimpleNotification notification) throws NotificationException;
 

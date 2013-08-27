@@ -10,10 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.iv.rms.core.AbstractService;
 import com.iv.rms.core.SimpleStringCipher;
+import com.iv.rms.notification.client.NotificationViews;
 import com.iv.rms.notification.client.SimpleNotification;
 import com.iv.rms.notification.shared.NotificationException;
 import com.iv.rms.notification.shared.Util;
 import com.iv.rms.user.Owner;
+import com.iv.rms.user.OwnerDetails;
 import com.iv.rms.user.User;
 
 @Component
@@ -44,7 +46,7 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
     }
 
     @Override
-    public void saveNotification(SimpleNotification notification, User user) throws NotificationException {
+    public Notification saveNotification(SimpleNotification notification, User user) throws NotificationException {
 	Notification n = new Notification();
 	Date fullTriggerDate = Util.composeFullTriggerDate(notification, getDefaultTimeZone());
 	try {
@@ -59,11 +61,18 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	    } else {
 		throw new NotificationException("You can't add the same reminder twice");
 	    }
+	    for(NotificationViews  nv: notification.getViews()){
+		NotificationView view = new NotificationView();
+		view.setViewType(nv.getCode());
+		view.setNotificationKey(n.getKey().getId());
+		notificationDAO.save(view);
+	    }
 	} catch (NotificationException e) {
 	    throw e;
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	return n;
     }
 
     public void processPendingNotification() {
@@ -75,7 +84,25 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	    List<Notification> results = notificationDAO.getNotifications(String.valueOf(dateInt), minutes, Boolean.FALSE);
 	    if (!results.isEmpty()) {
 		for (Notification n : results) {
-		    getServiceLocator().getMailService().sendHtmlMail(getHtmlView(n), getServiceLocator().getUserService().getOwner(n.getOwnerId()));
+		    List<NotificationView> views = notificationDAO.loadNotificationView(n.getKey().getId());
+		    for(NotificationView view : views){
+			if ( view.getViewType().equals(NotificationViews.MAIL.getCode())){
+			    getServiceLocator().getMailService().sendHtmlMail(getHtmlView(n), getServiceLocator().getUserService().getOwner(n.getOwnerId()));
+			}
+			if ( view.getViewType().equals(NotificationViews.SMS.getCode())){
+			    OwnerDetails ownerDetails = getServiceLocator().getUserService().getOwnerDetails(n.getOwnerId());
+			    
+			    if (ownerDetails != null) {
+				getServiceLocator().getSmsService().send(ownerDetails.getPhone(), n.getMessage());
+			    } else {
+				// create dummy OwnerDetails
+				ownerDetails = new OwnerDetails();
+				ownerDetails.setUserId(n.getOwnerId());
+				ownerDetails.setPhone("");
+				getServiceLocator().getUserService().save(ownerDetails);
+			    }
+			}
+		    }
 		    n.setProcesed(Boolean.TRUE);
 		    n.setSentDate(currentDate);
 		    notificationDAO.save(n);
@@ -140,9 +167,9 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
     private String getDefaultTimeZone() {
 	return getProperty(DEFAULT_TIMEZONE);
     }
-    
+
     @Override
-    public Notification postponeNotification(Long id, int days){
+    public Notification postponeNotification(Long id, int days) {
 	Notification notification = getNotificationDAO().load(id);
 	Notification newNotification = notification.clone();
 	newNotification.setProcesed(false);
@@ -150,26 +177,26 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	notificationDAO.save(newNotification);
 	return newNotification;
     }
-    
-    public String getPostponeLink(Long id, int days){
+
+    public String getPostponeLink(Long id, int days) {
 	String link = "www." + getServiceLocator().getPropertyService().getValue("domain") + "/postpone?token=";
 	try {
 	    link += SimpleStringCipher.encrypt(id + "-" + days);
 	} catch (Exception e) {
 	    e.printStackTrace();
-	} 
+	}
 	return link;
     }
-    
-    public String getHtmlView(Notification notification){
+
+    public String getHtmlView(Notification notification) {
 	String tomorrowLink = getPostponeLink(notification.getKey().getId(), 1);
 	String nextWeekLink = getPostponeLink(notification.getKey().getId(), 7);
 	String nextMonthLink = getPostponeLink(notification.getKey().getId(), 30);
 	StringBuilder sb = new StringBuilder();
 	sb.append("<html><head></head><body>");
 	sb.append("<h3>").append(notification.getMessage()).append("</h3>");
-	sb.append("<table><tr><td>Remind me  <a href=\"").append(tomorrowLink).append("\">tomorrow</a>, <a href=\"")
-	.append(nextWeekLink).append("\">next week</a> or <a href=\"").append(nextMonthLink).append("\">next month</a></tr>");
+	sb.append("<table><tr><td>Remind me  <a href=\"").append(tomorrowLink).append("\">tomorrow</a>, <a href=\"").append(nextWeekLink).append("\">next week</a> or <a href=\"")
+		.append(nextMonthLink).append("\">next month</a></tr>");
 	sb.append("</table></body></html>");
 	return sb.toString();
     }

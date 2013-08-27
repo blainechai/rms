@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import com.iv.rms.contact.ContactService;
 import com.iv.rms.mail.MailService;
 import com.iv.rms.notification.NotificationService;
+import com.iv.rms.sms.SmsService;
 import com.iv.rms.user.UserService;
 
 public interface ServiceLocator {
@@ -29,5 +30,9 @@ public interface ServiceLocator {
     public PropertyService getPropertyService();
 
     public void setPropertyService(PropertyService propertyService);
+
+    public SmsService getSmsService();
+
+    public void setSmsService(SmsService smsService);
 
 }

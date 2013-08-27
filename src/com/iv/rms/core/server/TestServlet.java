@@ -20,7 +20,7 @@ public class TestServlet extends HttpServlet {
 	ServiceLocator serviceLocator = (ServiceLocator) beanFactory.getBean("serviceLocator");
 	System.out.println(serviceLocator.getMailService().getServiceLocator());
 	String daysStr = request.getParameter("days");
-	if ( daysStr != null ){
+	if (daysStr != null) {
 	    Long id = Long.parseLong(request.getParameter("id"));
 	    serviceLocator.getNotificationService().postponeNotification(id, Integer.parseInt(daysStr));
 	}

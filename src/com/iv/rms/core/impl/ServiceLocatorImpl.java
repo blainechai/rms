@@ -9,6 +9,7 @@ import com.iv.rms.core.ServiceLocator;
 import com.iv.rms.core.PropertyService;
 import com.iv.rms.mail.MailService;
 import com.iv.rms.notification.NotificationService;
+import com.iv.rms.sms.SmsService;
 import com.iv.rms.user.UserService;
 
 @Component
@@ -27,6 +28,9 @@ public class ServiceLocatorImpl implements ServiceLocator {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private SmsService smsService;
 
     /*
      * (non-Javadoc)
@@ -135,6 +139,16 @@ public class ServiceLocatorImpl implements ServiceLocator {
     @Override
     public void setPropertyService(PropertyService propertyService) {
 	this.propertyService = propertyService;
+    }
+
+    @Override
+    public SmsService getSmsService() {
+	return smsService;
+    }
+
+    @Override
+    public void setSmsService(SmsService smsService) {
+	this.smsService = smsService;
     }
 
 }

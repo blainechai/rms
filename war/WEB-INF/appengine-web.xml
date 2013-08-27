@@ -32,4 +32,5 @@
 	<inbound-services>
 		<service>xmpp_message</service>
 	</inbound-services>
+	<precompilation-enabled>false</precompilation-enabled>
 </appengine-web-app>

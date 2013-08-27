@@ -6,12 +6,16 @@ import com.iv.rms.core.persistence.DAOException;
 
 public interface NotificationDAO {
 
-    public boolean isDuplicate(Notification notification) throws DAOException;
+    boolean isDuplicate(Notification notification) throws DAOException;
 
-    public void save(Notification notification) throws DAOException;
+    void save(Notification notification) throws DAOException;
 
-    public List<Notification> getNotifications(String triggerDate, Integer minutes, Boolean processed);
+    List<Notification> getNotifications(String triggerDate, Integer minutes, Boolean processed);
 
     Notification load(Long id);
+
+    void save(NotificationView notificationView);
+
+    List<NotificationView> loadNotificationView(Long notificationId);
 
 }

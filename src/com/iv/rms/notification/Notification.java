@@ -11,6 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
 import com.iv.rms.user.Owner;
 
+@SuppressWarnings("serial")
 @PersistenceCapable
 public class Notification implements Serializable {
 
@@ -127,7 +128,7 @@ public class Notification implements Serializable {
     public void setSentDate(Date sentDate) {
 	this.sentDate = sentDate;
     }
-    
+
     @Override
     public Notification clone() {
 	Notification dolly = new Notification();

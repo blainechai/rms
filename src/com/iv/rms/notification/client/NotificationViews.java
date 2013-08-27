@@ -2,7 +2,7 @@ package com.iv.rms.notification.client;
 
 public enum NotificationViews {
 
-    MAIL(1), INSTANT_MESSAGING(2);
+    MAIL(1), INSTANT_MESSAGING(2), SMS(3);
 
     private int code;
 

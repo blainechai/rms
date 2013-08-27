@@ -47,9 +47,9 @@ public class NotificationDAOJDOImpl extends JDODAOSupport implements Notificatio
 	log.info("Results:" + results.size());
 	return results;
     }
-    
+
     @Override
-    public Notification load(Long id){
+    public Notification load(Long id) {
 	PersistenceManager pm = null;
 	Notification notification = null;
 	try {
@@ -62,5 +62,27 @@ public class NotificationDAOJDOImpl extends JDODAOSupport implements Notificatio
 	}
 	return notification;
     }
+    
+    @Override
+    public void save(NotificationView notificationView){
+	getPersistenceManager().makePersistent(notificationView);
+    }
+    
+    @Override
+    public List<NotificationView> loadNotificationView(Long notificationId) {
+	PersistenceManager pm = null;
+	List<NotificationView> views = null;
+	try {
+	    Query q = getPersistenceManager().newQuery(NotificationView.class);
+	    q.setFilter("notificationId == " + notificationId );
+	    views = (List<NotificationView>) q.execute();
+	} catch (Exception e) {
+	    throw new DAOException(e);
+	} finally {
+	    PMF.close(pm);
+	}
+	return views;
+    }
+    
 
 }

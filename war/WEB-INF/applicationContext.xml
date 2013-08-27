@@ -17,11 +17,13 @@
 	<bean id="notificationService" class="com.iv.rms.notification.NotificationServiceImpl" autowire="byType" init-method="initService" />
 	<bean id="contactService" class="com.iv.rms.contact.ContactServiceImpl" autowire="byType" init-method="initService" />
 	<bean id="userService" class="com.iv.rms.user.GAEUserServiceImpl" autowire="byType" init-method="initService" />
+	<bean id="smsService" class="com.iv.rms.sms.SmsServiceImpl" autowire="byType" />
 	
 	<bean id="ownerDAO" class="com.iv.rms.user.OwnerDAOJDOImpl" />
 	<bean id="notificationDAO" class="com.iv.rms.notification.NotificationDAOJDOImpl" />
 	<bean id="contactDAO" class="com.iv.rms.contact.ContactJDODAOImpl" />
 	<bean id="tempNotificationDAO" class="com.iv.rms.notification.TempNotificationDAOJDOImpl" />
+	<bean id="ownerDetailsDAO" class="com.iv.rms.user.OwnerDetailsDAOJDOImpl" />
 
 	<bean id="jdoHandler" class="com.iv.rms.core.persistence.jdo.JDOOperation" />
 
@@ -29,6 +31,7 @@
 		<aop:aspect ref="jdoHandler">
 			<aop:pointcut id="notification" expression="execution(* com.iv.rms.notification.NotificationDAOJDOImpl.*(..))" />
 			<aop:pointcut id="owner" expression="execution(* com.iv.rms.user.OwnerDAOJDOImpl.*(..))" />
+			<aop:pointcut id="ownerDetails" expression="execution(* com.iv.rms.user.OwnerDetailsDAOJDOImpl.*(..))" />
 			<aop:pointcut id="property" expression="execution(* com.iv.rms.core.impl.PropertyJDODAOImpl.*(..))" />
 			<aop:pointcut id="contact" expression="execution(* com.iv.rms.contact.ContactJDODAOImpl.*(..))" />
 			<aop:pointcut id="tempNotification" expression="execution(* com.iv.rms.notification.TempNotificationDAOJDOImpl.*(..))" />
@@ -37,6 +40,7 @@
 			<aop:around pointcut-ref="property" method="perform" />
 			<aop:around pointcut-ref="contact" method="perform" />
 			<aop:around pointcut-ref="tempNotification" method="perform" />
+			<aop:around pointcut-ref="ownerDetails" method="perform" />
 		</aop:aspect>
 	</aop:config>
 

@@ -7,6 +7,8 @@ public class GAEUserServiceImpl extends AbstractService implements UserService {
 
     private OwnerDAO ownerDAO;
 
+    private OwnerDetailsDAO ownerDetailsDAO;
+
     private User user;
 
     public GAEUserServiceImpl() {
@@ -54,6 +56,24 @@ public class GAEUserServiceImpl extends AbstractService implements UserService {
     @Override
     public Owner getOwner(String userId) {
 	return ownerDAO.getOwner(userId);
+    }
+
+    public OwnerDetailsDAO getOwnerDetailsDAO() {
+	return ownerDetailsDAO;
+    }
+
+    public void setOwnerDetailsDAO(OwnerDetailsDAO ownerDetailsDAO) {
+	this.ownerDetailsDAO = ownerDetailsDAO;
+    }
+
+    @Override
+    public OwnerDetails getOwnerDetails(String ownerId) {
+	return ownerDetailsDAO.load(ownerId);
+    }
+
+    @Override
+    public void save(OwnerDetails details) {
+	ownerDetailsDAO.save(details);
     }
 
 }
